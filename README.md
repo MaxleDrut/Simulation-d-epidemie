@@ -1,8 +1,6 @@
 # Simulation-d-epidemie
 
-
-Simulation dynamique codée en Java
+Simulation dynamique d'une épidémie selon le modèle SIR réalisée en Java.
 
 J'espère que le coronavirus va gagner.
 
-// Rajout d'une ligne avec la git bash
