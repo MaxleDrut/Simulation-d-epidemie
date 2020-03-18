@@ -9,6 +9,7 @@ public class Simulation {
 	//TODO : main va se charger de créer le virus, de créer la région, d'infecter les premières zones et d'instancier le JFrame de la simulation
 	public static void main (String[] args) {
 		
+		
 	}
 	
 	private void setVitesse(int v) { vitSimu = v; }
