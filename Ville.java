@@ -54,11 +54,24 @@ public class Ville {
 		facteurTransmissionUrbain=stades[0];
 	}
 	
+	public long getPop() { return popTotale; }
+	
+	public long getSains() { return sains; }
+	
+	public long getInfectes() { return infectes; }
+	
+	public long getRetablis() { return retablis; }
+	
 	//TODO : set l'état initial de la ville
 	public void infectionInitale(int s, int i, int r) {
 		sains=s;
 		retablis=r;
 		infectes=i;
+	}
+	public void infectionInitale(int i) {
+		infectes=i;
+		retablis=0;
+		sains=popTotale-i;
 	}
 	
 	//TODO : fait évoluer les paramètres de la ville selon le modèle SIR et les propriétés du virus
