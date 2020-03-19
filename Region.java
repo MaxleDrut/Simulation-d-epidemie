@@ -52,25 +52,34 @@ public class Region {
 		
 		//-> ce que je veux : Modifier la population -> Popu actuel - population + popu entrante  
 		
+		// 0 : sains 1 : infectés 2 : rétablis 
 		
-		long[] SortiePopu = new long[listeVilles.size()];
-		long[] EntreePopu = new long[listeVilles.size()];
+		long[][] SortiePopu = new long[listeVilles.size()][3];
+		long[][] EntreePopu = new long[listeVilles.size()][3];
 
 		for(int i = 0; i < SortiePopu.length ; i++){ // initialisation des tableaux a zero
-			SortiePopu[i] = 0;
-			EntreePopu[i] = 0 ;		
+			for(int j = 0; j < SortiePopu.length ; j++){ // initialisation des tableaux a zero
+				SortiePopu[i][j] = 0;
+				EntreePopu[i][j] = 0;		
 			}
+		}
 			
 		//-> Comptabiliser tout les entrants et sortants de chaques villes 
 		
 		for(int i = 0; i < liaisonVilles.length ; i++){ 
 			
-			long popuVille = listeVilles.get(i).getPop();  
-			
+			long popuSains    = listeVilles.get(i).getSains();  
+			long popuInfectes = listeVilles.get(i).getInfectes();  
+			long popuRetablis = listeVilles.get(i).getRetablis();  
+		
 			for(int j = 0; j < liaisonVilles[0].length; j++){
 				
-				long Mouvement = (long) ( popuVille * liaisonVilles[i][j]); 
-				SortiePopu[i] = SortiePopu[i] - Mouvement; 
+				long MvtSains = (long)    ( popuSains    * liaisonVilles[i][j]); 
+				long MvtInfectes = (long) ( popuInfectes * liaisonVilles[i][j]); 
+				long MvtRetablis = (long) ( popuRetablis * liaisonVilles[i][j]); 
+				
+				
+				SortiePopu[i] = SortiePopu[i] + Mouvement; 
 				EntreePopu[j] = EntreePopu[j] + Mouvement;
 			}
 		}
@@ -79,7 +88,7 @@ public class Region {
 		
 		int i = 0;
 		for(Ville V : listeVilles){
-			V.setPopulation(V.getPop() + EntreePopu[i] + SortiePopu[i]);
+			V.setPopulation(V.getPop() + EntreePopu[i] - SortiePopu[i]);
 			i++; 
 			}
 	}

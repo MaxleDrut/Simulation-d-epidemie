@@ -62,19 +62,20 @@ public class Ville {
 
 	public long getRetablis() { return retablis; }
 	
-	public long setSains(long s){
+	public void setSains(long s){
 		sains=s;
-		return sains;
 	}
 	
-	public long setInfectes(long i){
+	public void setInfectes(long i){
 		infectes=i;
-		return infectes;
 	}
 	
-	public long setRetablis(long r){
+	public void setRetablis(long r){
 		retablis=r;
-		return retablis;
+	}
+	
+	public void setPopulation(long total){
+		popTotale=total;
 	}
 
 	//TODO : set l'état initial de la ville
@@ -87,10 +88,6 @@ public class Ville {
 		infectes=i;
 		retablis=0;
 		sains=popTotale-i;
-	}
-	
-	public void setPopulation(long total){
-		popTotale=total;
 	}
 	
 
