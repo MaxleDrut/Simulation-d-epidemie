@@ -20,25 +20,28 @@ public class Region {
 		listeVilles.add(new Ville("Bordeaux", 240000));
 		listeVilles.add(new Ville("Lille", 2300000));
 		
-		liaisonVilles = {{0, , , , , , , , , },
+	/*	liaisonVilles = {{0, , , , , , , , , },
 						 { ,0, , , , , , , , },
 						 { , ,0, , , , , , , },
-						 {,,,0,,,,,,},
-						 {,,,,0,,,,,},
-						 {,,,,,0,,,,},
-						 {,,,,,,0,,,},
-						 {,,,,,,,0,,},
-						 {,,,,,,,,0,},
-						 {,,,,,,,,,0},
+						 { , , ,0, , , , , , },
+						 { , , , ,0, , , , , },
+						 { , , , , ,0, , , , },
+						 { , , , , , ,0, , , },
+						 { , , , , , , ,0, , },
+						 { , , , , , , , ,0, },
+						 { , , , , , , , , ,0},
 						};
-		
+		*/
 		// convention d'écriture : liaisonVilles[X][Y] => De la ville X vers la ville Y. donc non commutatif. 
  
 	}
 	
 	//TODO : lorsqu'elle est exécutée, cette méthode réalise fait se propager le virus en interne dans chaque ville 
-	public void infection() {
-		
+	public void infection(Virus virus) {
+		//-> appel de propagation pour chaque villes. 
+		for(Ville V : listeVilles){
+				V.propagation(virus);
+			}
 	}
 	
 	//TODO : lorsqu'elle est exécutée, cette population fait transiter les populations entre les villes
