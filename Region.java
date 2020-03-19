@@ -32,7 +32,7 @@ public class Region {
 						 { , , , , , , , , ,0},
 						};
 		*/
-		// convention d'écriture : liaisonVilles[X][Y] => De la ville X vers la ville Y. donc non commutatif. 
+		// convention d'écriture : liaisonVilles[X][Y] => De la ville X vers la ville Y. donc non commutatif. Sortie négatives. Entrée positive
  
 	}
 	
@@ -46,7 +46,15 @@ public class Region {
 	
 	//TODO : lorsqu'elle est exécutée, cette population fait transiter les populations entre les villes
 	public void deplacements() {
-		
+			//-> ce que je veux : Modifier la population -> Popu actuel - population + popu entrante  
+			
+		for(int i = 0; i < liaisonVilles.length ; i++){
+			for(int j = 0; j < liaisonVilles[0].length; j++){
+					
+					
+				//setPopulation(NouvellePopu);
+			}
+		}		
 	}
 	
 	
