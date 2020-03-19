@@ -73,6 +73,10 @@ public class Ville {
 		retablis=0;
 		sains=popTotale-i;
 	}
+	
+	public void setPopulation(int total){
+		popTotale=total;
+	}
 
 	//TODO : fait évoluer les paramètres de la ville selon le modèle SIR et les propriétés du virus
 	public void propagation(Virus v) {
