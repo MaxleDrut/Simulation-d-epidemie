@@ -43,6 +43,8 @@ public class Simulation {
 	 */
 	 
 	public static void jourSuivant() {
+		
+		
 		tempsSimu++;
 		System.out.println(tempsSimu);
 		
