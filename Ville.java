@@ -61,6 +61,21 @@ public class Ville {
 	public long getInfectes() { return infectes; }
 
 	public long getRetablis() { return retablis; }
+	
+	public long setSains(long s){
+		sains=s;
+		return sains;
+	}
+	
+	public long setInfectes(long i){
+		infectes=i;
+		return infectes;
+	}
+	
+	public long setRetablis(long r){
+		retablis=r;
+		return retablis;
+	}
 
 	//TODO : set l'état initial de la ville
 	public void infectionInitale(int s, int i, int r) {
@@ -77,6 +92,7 @@ public class Ville {
 	public void setPopulation(long total){
 		popTotale=total;
 	}
+	
 
 	//TODO : fait évoluer les paramètres de la ville selon le modèle SIR et les propriétés du virus
 	public void propagation(Virus v) {
