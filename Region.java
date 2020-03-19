@@ -20,6 +20,9 @@ public class Region {
 		listeVilles.add(new Ville("Bordeaux", 240000));
 		listeVilles.add(new Ville("Lille", 2300000));
 		
+		// Liaison des villes est en pourcentage de population qui se déplace dans une autre ville.
+		// convention d'écriture : liaisonVilles[X][Y] => De la ville X vers la ville Y. donc non commutatif. Sortie négatives. Entrée positive
+
 	/*	liaisonVilles = {{0, , , , , , , , , },
 						 { ,0, , , , , , , , },
 						 { , ,0, , , , , , , },
@@ -32,7 +35,6 @@ public class Region {
 						 { , , , , , , , , ,0},
 						};
 		*/
-		// convention d'écriture : liaisonVilles[X][Y] => De la ville X vers la ville Y. donc non commutatif. Sortie négatives. Entrée positive
  
 	}
 	
@@ -44,17 +46,42 @@ public class Region {
 			}
 	}
 	
-	//TODO : lorsqu'elle est exécutée, cette population fait transiter les populations entre les villes
+	//TODO : lorsqu'elle est exécutée, cette population fait transiter les populations entre les villes 
+	//TODO : Mouvement infecté.
 	public void deplacements() {
-			//-> ce que je veux : Modifier la population -> Popu actuel - population + popu entrante  
-			
-		for(int i = 0; i < liaisonVilles.length ; i++){
-			for(int j = 0; j < liaisonVilles[0].length; j++){
-					
-					
-				//setPopulation(NouvellePopu);
+		
+		//-> ce que je veux : Modifier la population -> Popu actuel - population + popu entrante  
+		
+		
+		long[] SortiePopu = new long[listeVilles.size()];
+		long[] EntreePopu = new long[listeVilles.size()];
+
+		for(int i = 0; i < SortiePopu.length ; i++){ // initialisation des tableaux a zero
+			SortiePopu[i] = 0;
+			EntreePopu[i] = 0 ;		
 			}
-		}		
+			
+		//-> Comptabiliser tout les entrants et sortants de chaques villes 
+		
+		for(int i = 0; i < liaisonVilles.length ; i++){ 
+			
+			long popuVille = listeVilles.get(i).getPop();  
+			
+			for(int j = 0; j < liaisonVilles[0].length; j++){
+				
+				long Mouvement = (long) ( popuVille * liaisonVilles[i][j]); 
+				SortiePopu[i] = SortiePopu[i] - Mouvement; 
+				EntreePopu[j] = EntreePopu[j] + Mouvement;
+			}
+		}
+		
+		//-> Set la nouvelle population
+		
+		int i = 0;
+		for(Ville V : listeVilles){
+			V.setPopulation(V.getPop() + EntreePopu[i] + SortiePopu[i]);
+			i++; 
+			}
 	}
 	
 	

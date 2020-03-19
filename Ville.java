@@ -74,7 +74,7 @@ public class Ville {
 		sains=popTotale-i;
 	}
 	
-	public void setPopulation(int total){
+	public void setPopulation(long total){
 		popTotale=total;
 	}
 
