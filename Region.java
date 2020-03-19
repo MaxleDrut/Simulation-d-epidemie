@@ -9,30 +9,30 @@ public class Region {
 	//TODO : crée la région avec ses villes et les débits de population entre chaque ville
 	public Region() {
 		
-		listeVilles.add(new Ville("Paris", 2200000));
-		listeVilles.add(new Ville("Marseill", 860000));
-		listeVilles.add(new Ville("Lyon", 510000));
-		listeVilles.add(new Ville("Toulouse", 470000));
-		listeVilles.add(new Ville("Nice", 340000));
-		listeVilles.add(new Ville("Nantes", 300000));
-		listeVilles.add(new Ville("Montpellier", 270000));
+		listeVilles.add(new Ville("Paris",      2200000));
+		listeVilles.add(new Ville("Marseille",  860000));
+		listeVilles.add(new Ville("Lyon",       510000));
+		listeVilles.add(new Ville("Toulouse",   470000));
+		listeVilles.add(new Ville("Nice",       340000));
+		listeVilles.add(new Ville("Nantes",     300000));
+		listeVilles.add(new Ville("Montpellier",270000));
 		listeVilles.add(new Ville("Strasbourg", 270000));
-		listeVilles.add(new Ville("Bordeaux", 240000));
-		listeVilles.add(new Ville("Lille", 2300000));
+		listeVilles.add(new Ville("Bordeaux",   240000));
+		listeVilles.add(new Ville("Lille",      2300000));
 		
 		// Liaison des villes est en pourcentage de population qui se déplace dans une autre ville.
 		// convention d'écriture : liaisonVilles[X][Y] => De la ville X vers la ville Y. donc non commutatif. Sortie négatives. Entrée positive
 
-	/*	liaisonVilles = {{0, , , , , , , , , },
-						 { ,0, , , , , , , , },
-						 { , ,0, , , , , , , },
-						 { , , ,0, , , , , , },
-						 { , , , ,0, , , , , },
-						 { , , , , ,0, , , , },
-						 { , , , , , ,0, , , },
-						 { , , , , , , ,0, , },
-						 { , , , , , , , ,0, },
-						 { , , , , , , , , ,0},
+	/*	liaisonVilles = {{0     ,0.02   ,0.01  ,0.015  ,0.005 ,0.012 ,0.009 ,0.008 ,0.013 ,0.01   },
+						 {0.015 ,0      ,0.02  ,0.002  ,0.012 ,0.006 ,0     ,0.005 ,0.008 ,0.019    },
+						 {0.008 ,0.015  ,0     ,0.006  ,0.02  ,0.012 ,0.015 ,0.005 ,0.01  ,0.002      },
+						 {0.01  ,0.008  ,0.003 ,0      ,0.01  ,0.006 ,0.015 ,0.002 ,      ,0.02   },
+						 {0.003 ,0      ,0     ,0.008  ,0     ,0.006 ,0.01  ,0.012 ,0.015 ,0.003  },
+						 {0.02  ,0.008  ,0.01  ,0.02   ,0.002 ,0     ,0.006 ,0.008 ,0.01  ,0.005  },
+						 {0.005 ,0.002  ,0.012 ,0.015  ,0.01  ,0.006 ,0     ,0.005 ,0.008 ,       },
+						 {0.002 ,0.006  ,0.02  ,0.015  ,0.01  ,0.008 ,0.005 ,0     ,0.003 ,0.01   },
+						 {0.006 ,0.01   ,0.003 ,0.012  ,0.02  ,0.015 ,0.003 ,0.005 ,0     ,0.006  },
+						 {0     ,0.006  ,0.01  ,0.008  ,0.012 ,0.02  ,0.005 ,0.002 ,0.02  ,0      },
 						};
 		*/
  
@@ -47,18 +47,16 @@ public class Region {
 	}
 	
 	//TODO : lorsqu'elle est exécutée, cette population fait transiter les populations entre les villes 
-	//TODO : Mouvement infecté.
+	//Modifier la population -> Popu actuel - population + popu entrante  
+
 	public void deplacements() {
-		
-		//-> ce que je veux : Modifier la population -> Popu actuel - population + popu entrante  
-		
+
 		// 0 : sains 1 : infectés 2 : rétablis 
-		
 		long[][] SortiePopu = new long[listeVilles.size()][3];
 		long[][] EntreePopu = new long[listeVilles.size()][3];
 
 		for(int i = 0; i < SortiePopu.length ; i++){ // initialisation des tableaux a zero
-			for(int j = 0; j < SortiePopu.length ; j++){ // initialisation des tableaux a zero
+			for(int j = 0; j < SortiePopu[i].length ; j++){ // initialisation des tableaux a zero
 				SortiePopu[i][j] = 0;
 				EntreePopu[i][j] = 0;		
 			}
@@ -68,29 +66,53 @@ public class Region {
 		
 		for(int i = 0; i < liaisonVilles.length ; i++){ 
 			
-			long popuSains    = listeVilles.get(i).getSains();  
+			long popuVille 	  = listeVilles.get(i).getPop();  
+			long popuSains 	  = listeVilles.get(i).getSains();  
 			long popuInfectes = listeVilles.get(i).getInfectes();  
 			long popuRetablis = listeVilles.get(i).getRetablis();  
+			
+			//proportion pour aléatoire. 
+			double propSains    = popuSains/(double)popuVille;
+			double propInfectes = popuInfectes/(double)popuVille;
+			double propRetablis = popuRetablis/(double)popuVille;
 		
 			for(int j = 0; j < liaisonVilles[0].length; j++){
 				
-				long MvtSains = (long)    ( popuSains    * liaisonVilles[i][j]); 
-				long MvtInfectes = (long) ( popuInfectes * liaisonVilles[i][j]); 
-				long MvtRetablis = (long) ( popuRetablis * liaisonVilles[i][j]); 
+				long MvtPopu = (long) ( popuVille * liaisonVilles[i][j]); 
 				
-				
-				SortiePopu[i] = SortiePopu[i] + Mouvement; 
-				EntreePopu[j] = EntreePopu[j] + Mouvement;
+				for(int k = 0; k < MvtPopu; k++){ 
+					
+				//gestion d'une répartion aléatoire de l'état de santé de la population sortante/entrante en correspondance avec les proportions d dans la ville. 
+					double tirage = Math.random();
+					
+					if(tirage <= propSains){ //tirage sains 
+						SortiePopu[i][0]++; 
+						EntreePopu[j][0]++;
+					}
+					if(tirage > propSains && tirage <= propSains + propInfectes){ //tirage infectes
+						SortiePopu[i][1]++; 
+						EntreePopu[j][1]++;
+					}
+					if(tirage > propSains + propInfectes && tirage <= propSains + propInfectes + propRetablis){ //tirage retablis
+						SortiePopu[i][2]++; 
+						EntreePopu[j][2]++;
+					}
+				}
 			}
 		}
 		
 		//-> Set la nouvelle population
-		
 		int i = 0;
 		for(Ville V : listeVilles){
-			V.setPopulation(V.getPop() + EntreePopu[i] - SortiePopu[i]);
+			
+			V.setSains(   V.getSains()    + EntreePopu[i][0] - SortiePopu[i][0]);
+			V.setInfectes(V.getInfectes() + EntreePopu[i][1] - SortiePopu[i][1]);
+			V.setRetablis(V.getRetablis() + EntreePopu[i][2] - SortiePopu[i][2]);
+			
+			V.setPopulation(V.getSains() + V.getInfectes() + V.getRetablis());
+			
 			i++; 
-			}
+		}
 	}
 	
 	
