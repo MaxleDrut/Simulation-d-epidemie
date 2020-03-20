@@ -1,16 +1,16 @@
 public class Virus {
 
-	private double infectuo;
+	private double virulence;
 	private int tMaladie;
 	private double lethalite;
 
-	public Virus(double i, int tM, double l) {
-		infectuo = i;
+	public Virus(double v, int tM, double l) {
+		virulence = v;
 		tMaladie = tM;
 		lethalite = l;
 	}
 
-	public double getInfectuo() { return infectuo; }
+	public double getVirulence() { return virulence; }
 
 	public int getTMaladie() { return tMaladie; }
 
