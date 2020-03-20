@@ -1,6 +1,7 @@
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.util.Date;
 
 public class Simulation extends JFrame implements ActionListener {
 	
@@ -14,9 +15,9 @@ public class Simulation extends JFrame implements ActionListener {
 	private int delaiRef;
 	private Timer temps;
 	
-	private JPanel pHaut,pBas;
+	private JPanel pCommande, pBoutons;
 	private JButton bPause, bAcc, bRal;
-	private TextField afficheurVit;
+	private TextField afficheurVit, afficheurDate;
 	
 	public Simulation(int x, int y) {
 		super("Simulation d'epidemie");
@@ -26,32 +27,32 @@ public class Simulation extends JFrame implements ActionListener {
 		delaiRef = delais[delaiActuel];
 		temps.setDelay(delaiRef);
 		timerOn = false;
+		tempsSimu = 0;
 		
-		//Panel du haut
-		pHaut = new JPanel();
-		afficheurVit = new TextField(50);
+		//Panel de commande (en haut pour l'instant)
+		pCommande = new JPanel(new Bord);
+		afficheurVit = new TextField();
 		afficheurVit.setEditable(false);
 		afficherVitesse();
-		pHaut.add(afficheurVit);
+		afficheurDate = new TextField();
+		afficheurDate.setEditable(false);
+		afficherDate();
 		
-		
-		//Panel du bas
-		pBas = new JPanel();
 		bPause = new JButton("Start");
 		bAcc = new JButton("Accelerer");
 		bRal = new JButton("Ralentir");
-		
 		bPause.addActionListener(new EcouteurVitesse(this, "pause"));
 		bAcc.addActionListener(new EcouteurVitesse(this,"acc"));
 		bRal.addActionListener(new EcouteurVitesse(this,"ral"));
 		
-		pBas.add(bRal);
-		pBas.add(bPause);
-		pBas.add(bAcc);
+		pCommande.add(afficheurVit);
+		pCommande.add(bRal);
+		pCommande.add(bPause);
+		pCommande.add(bAcc);
+		pCommande.add(afficheurDate);
 		
 		//Ajout des panels
-		add(pHaut, BorderLayout.NORTH);
-		add(pBas, BorderLayout.SOUTH);
+		add(pCommande, BorderLayout.NORTH);
 		
 		this.setSize(x,y);
 		this.setVisible(true);
@@ -98,6 +99,13 @@ public class Simulation extends JFrame implements ActionListener {
 		afficheurVit.setText("Vitesse actuelle : x"+rapportVitesse);
 		this.validate();
 		this.repaint();
+	}
+	
+	public void afficherDate() {
+		afficheurDate.setText("Jour "+tempsSimu);
+		this.validate();
+		this.repaint();
+		
 	}
 	
 	public static void main (String[] args) {
