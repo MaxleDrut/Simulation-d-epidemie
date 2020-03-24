@@ -32,7 +32,7 @@ public class Region {
 		listeVilles.add(new Ville("Montpellier",270000));
 		listeVilles.add(new Ville("Strasbourg", 270000));
 		listeVilles.add(new Ville("Bordeaux",   240000));
-		listeVilles.add(new Ville("Lille",      2300000));
+		listeVilles.add(new Ville("Lille",      230000));
 		
 	}
 	
@@ -116,10 +116,9 @@ public class Region {
 	
 	//TODO : quand on fait appel dans la simu à cette méthode, on lui renseigne un nom de ville et le nombre d'infecté et ça l'infecte.
 	// pas utile
-	public void PremierInfectionVille(String nom, int i) {
-		
-		
-	}
+	public ArrayList<Ville> getVilles(){
+		return listeVilles;
+		}
 	//Simu ne connait que région et veux x malades a Y 
 	//> get liste ville.
 }
