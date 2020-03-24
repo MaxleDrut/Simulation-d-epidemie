@@ -6,7 +6,7 @@ public class Simulation extends JFrame implements ActionListener {
 	
 	private Virus maladie;
 	private Region zone;
-	protected int tempsSimu;
+	protected int jourSimu;
 	
 	private boolean timerOn;
 	private int[] delais = {50,100,200,500,1000,2000,5000};
@@ -26,7 +26,7 @@ public class Simulation extends JFrame implements ActionListener {
 		delaiRef = delais[posActuelle];
 		temps.setDelay(delaiRef);
 		timerOn = false;
-		tempsSimu = 0;
+		jourSimu = 0;
 		
 		//Panel de commande (en haut pour l'instant)
 		pCommande = new JPanel(new BorderLayout());
@@ -72,7 +72,7 @@ public class Simulation extends JFrame implements ActionListener {
 	}
 	
 	public void actionPerformed(ActionEvent ae) { //Chaque incrémentation fait passer au jour suivant.
-		tempsSimu++;
+		jourSimu++;
 		afficherDate();
 	}
 	
@@ -112,7 +112,7 @@ public class Simulation extends JFrame implements ActionListener {
 	}
 	
 	public void afficherDate() {
-		afficheurDate.setText("Jour "+tempsSimu);
+		afficheurDate.setText("Jour "+jourSimu);
 		this.validate();
 		this.repaint();
 		
