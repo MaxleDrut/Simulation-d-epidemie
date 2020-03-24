@@ -8,6 +8,7 @@ public class Ville {
 	private long infectes;
 	private long retablis;
 	private float[] stades;
+	private int nStade;
 
 	// Ici est créée la variable facteurTransmissionUrbain. Sa valeur prend une des valeurs de stades.
 	// Elle est à différencier de l'infectiosité du virus dans la mesure où elle est relative à l'organisation
@@ -23,6 +24,7 @@ public class Ville {
 
 	//Par défaut, une ville crée est vierge de l'épidémie en cours
 	public Ville(String n, int pT,String fTU) {
+		nStade=0;
 		nom = n;
 		popTotale = pT;
 		sains = pT;
@@ -42,6 +44,7 @@ public class Ville {
 		facteurTransmissionUrbain=stades[0];
 	}
 	public Ville(String n, int pT) {
+		nStade=0;
 		nom = n;
 		popTotale = pT;
 		sains = pT;
@@ -89,35 +92,25 @@ public class Ville {
 		retablis=0;
 		sains=popTotale-i;
 	}
+	public void stadeSuivant(){
+		if(nStade<stades.length){
+			nStade++;
+			facteurTransmissionUrbain=stades[nStade];
+		}
+	}
 	
 
 	//TODO : fait évoluer les paramètres de la ville selon le modèle SIR et les propriétés du virus
 	public void propagation(Virus v) {
 
-		long nouveauxCas=(long)((v.getInfectuo()*facteurTransmissionUrbain)*sains*infectes);
+		long nouveauxCas=(long)((v.getVirulence()*facteurTransmissionUrbain)*sains*infectes);
 		long nouveauxRetablissements= (long)((1/(v.getTMaladie()))*infectes);
 		long nMorts=(long)(v.getLethalite()*infectes);
-
 		sains=sains-nouveauxCas;
 		infectes= infectes+nouveauxCas-nouveauxRetablissements-nMorts;
 		retablis= retablis+nouveauxRetablissements;
 		popTotale= popTotale-nMorts;
-
-		if(infectes>(popTotale/1000)){
-			facteurTransmissionUrbain=stades[1];
-		}
-		if(infectes>(popTotale/200)){
-			facteurTransmissionUrbain=stades[2];
-		}
-		if(infectes>(popTotale/100)){
-			facteurTransmissionUrbain=stades[3];
-		}
-		if(infectes>(popTotale/50)){
-			facteurTransmissionUrbain=stades[4];
-		}
-		if(infectes>(popTotale/20)){
-			facteurTransmissionUrbain=stades[5];
-		}
+		
 
 	}
 
