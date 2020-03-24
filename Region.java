@@ -1,9 +1,10 @@
 import java.util.*;
+import java.util.ArrayList;
 
 public class Region {
 	
-	private ArrayList<Ville> listeVilles;
-	
+	private ArrayList<Ville> listeVilles = new ArrayList<Ville>();
+
 	// convention d'écriture : liaisonVilles[X][Y] => De la ville X vers la ville Y. donc non commutatif. Sortie négatives. Entrée positive		
 	// Liaison des villes est en pourcentage de population qui se déplace dans une autre ville.
 
@@ -33,6 +34,11 @@ public class Region {
 		listeVilles.add(new Ville("Strasbourg", 270000));
 		listeVilles.add(new Ville("Bordeaux",   240000));
 		listeVilles.add(new Ville("Lille",      230000));
+	
+		listeVilles.get(1).infectionInitale(5000);
+		for(Ville V : listeVilles){
+			System.out.println(V.getNomVille() + " Sains  : " + V.getSains() + " Infectes : " +  V.getInfectes() + " Rétablis : " + V.getRetablis() + " Population Total : " + V.getPop());
+			}
 		
 	}
 	
@@ -54,6 +60,7 @@ public class Region {
 		long[][] EntreePopu = new long[listeVilles.size()][3];
 
 		for(int i = 0; i < SortiePopu.length ; i++){ // initialisation des tableaux a zero
+			
 			for(int j = 0; j < SortiePopu[i].length ; j++){ // initialisation des tableaux a zero
 				SortiePopu[i][j] = 0;
 				EntreePopu[i][j] = 0;		
@@ -103,12 +110,34 @@ public class Region {
 		int i = 0;
 		for(Ville V : listeVilles){
 			
-			V.setSains(   V.getSains()    + EntreePopu[i][0] - SortiePopu[i][0]);
-			V.setInfectes(V.getInfectes() + EntreePopu[i][1] - SortiePopu[i][1]);
-			V.setRetablis(V.getRetablis() + EntreePopu[i][2] - SortiePopu[i][2]);
+			long S = (V.getSains()    + EntreePopu[i][0] - SortiePopu[i][0]);
+			long I = (V.getInfectes() + EntreePopu[i][1] - SortiePopu[i][1]);
+			long R = (V.getRetablis() + EntreePopu[i][2] - SortiePopu[i][2]);
+			
+			if ( S > 0){
+				V.setSains(S);
+				}
+			else{
+				V.setSains(0);
+				}
+			
+			if ( I > 0){
+				V.setInfectes(I);
+				}
+			else{
+				V.setInfectes(0);
+				}
+
+			if ( R > 0){
+				V.setRetablis(R);
+				}
+			else{
+				V.setRetablis(0);
+				}
+
 			
 			V.setPopulation(V.getSains() + V.getInfectes() + V.getRetablis());
-			System.out.println(V.getNomVille() + " Sains  : " + V.getSains() + " Infectes : " +  V.getInfectes() + " Rétablis : " + V.getRetablis() + " Population Total" + V.getPop());
+			System.out.println(V.getNomVille() + " Sains  : " + V.getSains() + " Infectes : " +  V.getInfectes() + " Rétablis : " + V.getRetablis() + " Population Total : " + V.getPop());
 			i++; 
 		}
 	}
@@ -119,14 +148,6 @@ public class Region {
 		return listeVilles;
 		}
 		
-	public static void main (String[] args) {
-		
-		Region R = new Region();
-		ArrayList<Ville> tabVille = R.getVilles(); 
-		//R.deplacements();
-		//tabVille.get(2).infectionInitale(200); 	
-		R.deplacements();
 
-	}
 }
 
