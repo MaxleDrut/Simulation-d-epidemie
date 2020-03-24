@@ -37,7 +37,7 @@ public class Region {
 	}
 	
 	//TODO : lorsqu'elle est exécutée, cette méthode réalise fait se propager le virus en interne dans chaque ville 
-	public void infection(Virus virus) {
+	public void majPropaVille(Virus virus) {
 		//-> appel de propagation pour chaque villes. 
 		for(Ville V : listeVilles){
 				V.propagation(virus);
@@ -108,7 +108,7 @@ public class Region {
 			V.setRetablis(V.getRetablis() + EntreePopu[i][2] - SortiePopu[i][2]);
 			
 			V.setPopulation(V.getSains() + V.getInfectes() + V.getRetablis());
-			System.out.println(V.getNomVille());
+			System.out.println(V.getNomVille() + " Sains  : " + V.getSains() + " Infectes : " +  V.getInfectes() + " Rétablis : " + V.getRetablis() + " Population Total" + V.getPop());
 			i++; 
 		}
 	}
@@ -122,9 +122,11 @@ public class Region {
 	public static void main (String[] args) {
 		
 		Region R = new Region();
+		ArrayList<Ville> tabVille = R.getVilles(); 
+		//R.deplacements();
+		//tabVille.get(2).infectionInitale(200); 	
 		R.deplacements();
-		
-		
+
 	}
 }
 
