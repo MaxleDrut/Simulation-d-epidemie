@@ -108,18 +108,23 @@ public class Region {
 			V.setRetablis(V.getRetablis() + EntreePopu[i][2] - SortiePopu[i][2]);
 			
 			V.setPopulation(V.getSains() + V.getInfectes() + V.getRetablis());
-			
+			System.out.println(V.getNomVille());
 			i++; 
 		}
 	}
 	
 	
-	//TODO : quand on fait appel dans la simu à cette méthode, on lui renseigne un nom de ville et le nombre d'infecté et ça l'infecte.
-	// pas utile
+	
 	public ArrayList<Ville> getVilles(){
 		return listeVilles;
 		}
-	//Simu ne connait que région et veux x malades a Y 
-	//> get liste ville.
+		
+	public static void main (String[] args) {
+		
+		Region R = new Region();
+		R.deplacements();
+		
+		
+	}
 }
 

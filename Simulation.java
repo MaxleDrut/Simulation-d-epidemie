@@ -1,11 +1,13 @@
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.util.ArrayList;
 
 public class Simulation extends JFrame implements ActionListener {
 	
 	private Virus maladie;
 	private Region zone;
+	private ArrayList<Ville> listeVilles;
 	protected int jourSimu;
 	
 	private boolean timerOn;
@@ -24,7 +26,7 @@ public class Simulation extends JFrame implements ActionListener {
 		posActuelle = delais.length-3;
 		temps = new Timer(1, this); //1 correspond ici au délai par défaut pour les changement de vitesse, et non le délai initial
 		delaiRef = delais[posActuelle];
-		temps.setDelay(delaiRef);
+		temps.setDelay(delaiRef);	
 		timerOn = false;
 		jourSimu = 0;
 		
@@ -74,6 +76,7 @@ public class Simulation extends JFrame implements ActionListener {
 	public void actionPerformed(ActionEvent ae) { //Chaque incrémentation fait passer au jour suivant.
 		jourSimu++;
 		afficherDate();
+		
 	}
 	
 	public void pauseTimer() {

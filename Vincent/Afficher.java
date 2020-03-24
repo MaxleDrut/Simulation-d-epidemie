@@ -167,7 +167,7 @@ public void mousePressed(MouseEvent e) {
 			J.repaint();
 			JPanel p = new JPanel(new FlowLayout());
 			
-			J.add(new JButton("CA MARCHE"));
+			J.add(new JButton("Bouh"));
 			//J.add(p);
 			J.validate();
 			J.repaint();
