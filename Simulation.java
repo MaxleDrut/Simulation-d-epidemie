@@ -7,7 +7,6 @@ public class Simulation extends JFrame implements ActionListener {
 	
 	private Virus maladie;
 	private Region zone;
-	private ArrayList<Ville> listeVilles;
 	protected int jourSimu;
 	
 	private boolean timerOn;
