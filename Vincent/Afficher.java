@@ -41,6 +41,7 @@ private Polygon CAmerica;
 private Polygon Mexico;
 private Polygon USA;
 private Polygon Brazil;
+private Polygon Argentina;
 
 public Afficher( FenetreJeu f , String s) {
 	super(new FlowLayout() );
@@ -78,6 +79,7 @@ int w = getWidth()/25;
                 g.fillPolygon(Brazil);
                 g.fillPolygon(CAmerica);
                 g.fillPolygon(USA);
+                g.fillPolygon(Argentina);
   
    if(compteurPeintre>1){
                 g.fillPolygon(PeintureEnCours);
@@ -120,6 +122,7 @@ int w = getWidth()/25;
         int xUSA [] = {128,124,124,123,121,119,120,119,117,116,118,119,119,121,125,126,128,129,137,342,334,331,326,325,319,315,312,311,306,299,293,290,288,287,290,288,283,280,281,279,276,273,268,259,255,252,249,241,238,128};
         int yUSA [] = {323,323,318,315,312,307,303,300,295,289,286,280,274,269,265,256,249,242,244,295,295,295,298,303,306,312,321,327,331,333,336,341,345,358,366,371,373,368,362,356,353,353,350,348,349,352,354,353,353,323};
         Africa = new Polygon(xAfrica, yAfrica, yAfrica.length);
+        Argentina = new Polygon(xArgentina,yArgentina, xArgentina.length);
         SAmerica = new Polygon(xSAmerica, ySAmerica, ySAmerica.length);
        CAmerica = new Polygon(xCAmerica, yCAmerica, yCAmerica.length);
        Mexico = new Polygon(xMexico, yMexico, xMexico.length);
@@ -158,7 +161,7 @@ public void mousePressed(MouseEvent e) {
     validate();
     this.repaint();
     fen.repeindre();
-    if(Brazil.contains(me)){
+   /* if(Brazil.contains(me)){
 		System.out.println("Je suis là");
 		JFrame J = new JFrame("corona");
 			//J.removeAll();
@@ -173,7 +176,7 @@ public void mousePressed(MouseEvent e) {
 			J.repaint();
 		
 		
-	}
+	}*/
     }
 
 }
