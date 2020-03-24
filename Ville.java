@@ -96,7 +96,7 @@ public class Ville {
 	//TODO : fait évoluer les paramètres de la ville selon le modèle SIR et les propriétés du virus
 	public void propagation(Virus v) {
 
-		long nouveauxCas=(long)((v.getInfectuo()*facteurTransmissionUrbain)*sains*infectes);
+		long nouveauxCas=(long)((v.getVirulence()*facteurTransmissionUrbain)*sains*infectes);
 		long nouveauxRetablissements= (long)((1/(v.getTMaladie()))*infectes);
 		long nMorts=(long)(v.getLethalite()*infectes);
 
