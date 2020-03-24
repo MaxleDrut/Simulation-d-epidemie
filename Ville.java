@@ -62,7 +62,7 @@ public class Ville {
 
 	public long getRetablis() { return retablis; }
 	
-	public String getNomVille() { return nom; };
+	public String getNomVille(){ return nom; };
 	
 	public void setSains(long s){
 		sains=s;
