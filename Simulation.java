@@ -1,4 +1,5 @@
 import javax.swing.*;
+import javax.swing.event.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.util.ArrayList;
@@ -18,6 +19,8 @@ public class Simulation extends JFrame implements ActionListener {
 	private JButton bPause, bAcc, bRal;
 	private JSlider sVirulence,sDuree,sLethalite;
 	private TextField afficheurVit, afficheurDate;
+	private Label valVirulence, valDuree, valLethalite;
+	
 	
 	public Simulation(int x, int y) {
 		super("Simulation d'epidemie");
@@ -54,11 +57,25 @@ public class Simulation extends JFrame implements ActionListener {
 		pCommande.add(afficheurDate, BorderLayout.EAST);
 		
 		//Panel de création du virus :
-		pCreationVirus = new JPanel(new GridLayout(3,1));
+		pCreationVirus = new JPanel(new GridLayout(6,1));
+		valVirulence = new Label("Virulence : ");
+		valDuree = new Label();
+		valLethalite = new Label();
 		sVirulence = new JSlider(0,100,50);
-		sDuree = new JSlider(1,30, 10);
-		sLethalite = new JSlider(0,1000,10);
+		sVirulence.setPaintTicks(true);
+		sVirulence.setMinorTickSpacing(10);
+		sVirulence.setMajorTickSpacing(20);
+		sVirulence.addChangeListener(new ChangeListener() {
+			public void stateChanged(ChangeEvent event) {
+				double viru =((JSlider)event.getSource()).getValue()/100.0;
+				valVirulence.setText("Virulence : "+viru);
+			}
+		});
+		
+		sDuree = new JSlider(1,30,10);
+		sLethalite = new JSlider(0,1000,5);
 		pCreationVirus.add(sVirulence);
+		pCreationVirus.add(valVirulence);
 		pCreationVirus.add(sDuree);
 		pCreationVirus.add(sLethalite);
 		
