@@ -15,11 +15,14 @@ public class Simulation extends JFrame implements ActionListener {
 	private int posActuelle;
 	private int delaiRef;
 	private Timer temps;
-	private JPanel pCommande, pBoutons, pCreationVirus;
+	private JPanel pCommande, pBoutonsCommande;
+	private JPanel pCreationVirus, pSliders, pPresets;
 	private JButton bPause, bAcc, bRal;
+	private JButton bCorona, bGrippeEspa, bPesteNoire;
 	private JSlider sVirulence,sDuree,sLethalite;
 	private TextField afficheurVit, afficheurDate;
 	private Label valVirulence, valDuree, valLethalite;
+	private Label titSliders, titPresets;
 	
 	
 	public Simulation(int x, int y) {
@@ -34,7 +37,7 @@ public class Simulation extends JFrame implements ActionListener {
 		
 		//Panel de commande (en haut pour l'instant)
 		pCommande = new JPanel(new BorderLayout());
-		pBoutons = new JPanel();
+		pBoutonsCommande = new JPanel();
 		afficheurVit = new TextField();
 		afficheurVit.setEditable(false);
 		afficherVitesse();
@@ -49,38 +52,85 @@ public class Simulation extends JFrame implements ActionListener {
 		bAcc.addActionListener(new EcouteurVitesse(this,"acc"));
 		bRal.addActionListener(new EcouteurVitesse(this,"ral"));
 		
-		pBoutons.add(bRal);
-		pBoutons.add(bPause);
-		pBoutons.add(bAcc);
-		pCommande.add(pBoutons, BorderLayout.CENTER);
+		pBoutonsCommande.add(bRal);
+		pBoutonsCommande.add(bPause);
+		pBoutonsCommande.add(bAcc);
+		pCommande.add(pBoutonsCommande, BorderLayout.CENTER);
 		pCommande.add(afficheurVit, BorderLayout.WEST);
 		pCommande.add(afficheurDate, BorderLayout.EAST);
 		
 		//Panel de création du virus :
-		pCreationVirus = new JPanel(new GridLayout(6,1));
-		valVirulence = new Label("Virulence : ");
-		valDuree = new Label();
-		valLethalite = new Label();
+		pCreationVirus = new JPanel(new GridLayout(1,2));
+		
+		//Sous panel des sliders :
+		pSliders = new JPanel(new GridLayout(7,1));
+		titSliders = new Label("Definition des parametres du virus");
+
 		sVirulence = new JSlider(0,100,50);
+		valVirulence = new Label("Indice de virulence : "+sVirulence.getValue()/100.0);
 		sVirulence.setPaintTicks(true);
 		sVirulence.setMinorTickSpacing(10);
 		sVirulence.setMajorTickSpacing(20);
 		sVirulence.addChangeListener(new ChangeListener() {
 			public void stateChanged(ChangeEvent event) {
 				double viru =((JSlider)event.getSource()).getValue()/100.0;
-				valVirulence.setText("Virulence : "+viru);
+				valVirulence.setText("Incidce de virulence : "+viru);
 			}
 		});
 		
 		sDuree = new JSlider(1,30,10);
+		valDuree = new Label("Duree de la maladie : "+sDuree.getValue()+" jour(s)");
+		sDuree.setPaintTicks(true);
+		sDuree.setMinorTickSpacing(5);
+		sDuree.setMajorTickSpacing(10);
+		sDuree.addChangeListener(new ChangeListener() {
+			public void stateChanged(ChangeEvent event) {
+				valDuree.setText("Duree de la maladie : "+((JSlider)event.getSource()).getValue()+" jour(s)");
+			}
+		});
+		
 		sLethalite = new JSlider(0,1000,5);
-		pCreationVirus.add(sVirulence);
-		pCreationVirus.add(valVirulence);
-		pCreationVirus.add(sDuree);
-		pCreationVirus.add(sLethalite);
+		valLethalite = new Label("Taux de lethalite : "+sLethalite.getValue()/10.0+"%");
+		sLethalite.setPaintTicks(true);
+		sLethalite.setMinorTickSpacing(50);
+		sLethalite.setMajorTickSpacing(100);
+		sLethalite.addChangeListener(new ChangeListener() {
+			public void stateChanged(ChangeEvent event) {
+				valLethalite.setText("Taux de lethalite : "+((JSlider)event.getSource()).getValue()/10.0+"%");
+			}
+		});
+		
+		pSliders.add(titSliders);
+		pSliders.add(valVirulence);		
+		pSliders.add(sVirulence);
+		pSliders.add(valDuree);
+		pSliders.add(sDuree);
+		pSliders.add(valLethalite);
+		pSliders.add(sLethalite);
+
+		
+		//Sous-panel des presets :
+		
+		pPresets = new JPanel();
+		titPresets = new Label("Choix d'un virus deja existant");
+		
+		bCorona = new JButton("Covid-19");
+		bGrippeEspa = new JButton("Grippe espagnole");
+		bPesteNoire = new JButton("Peste bubonique");
+		
+		pPresets.add(titPresets);
+		pPresets.add(Box.createVerticalGlue());
+		pPresets.add(bCorona);
+		pPresets.add(Box.createVerticalGlue());
+		pPresets.add(bGrippeEspa);
+		pPresets.add(bPesteNoire);
+		
+		//Ajout des sous-panels au panel de création : 
+		pCreationVirus.add(pSliders);
+		pCreationVirus.add(pPresets);
 		
 		//Ajout des panels
-		add(pCommande, BorderLayout.NORTH);
+		//add(pCommande, BorderLayout.NORTH);
 		add(pCreationVirus, BorderLayout.CENTER);
 		
 		this.setSize(x,y);
