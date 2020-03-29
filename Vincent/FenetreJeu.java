@@ -98,7 +98,8 @@ public class FenetreJeu extends JFrame implements MouseListener{
           
         //Effets des boutons
         
-        //boutonLancement.addActionListener( new EcouteurClic(this, 1));
+        //
+        boutonLancement.addActionListener( new EcouteurClic(this, 1));
 		boutonLancement.addMouseListener(this);
 		titre.addMouseListener(this);
 		titre.setHighlighter(null);
