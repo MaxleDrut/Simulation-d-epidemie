@@ -7,6 +7,7 @@ public class Ville {
 	private long sains;
 	private long infectes;
 	private long retablis;
+	private long morts;
 	private float[] stades;
 	private int nStade;
 
@@ -23,7 +24,7 @@ public class Ville {
 
 
 	//Par défaut, une ville crée est vierge de l'épidémie en cours
-	public Ville(String n, int pT,String fTU) {
+	public Ville(String n, long pT,String fTU) {
 		nStade=0;
 		nom = n;
 		popTotale = pT;
@@ -43,7 +44,7 @@ public class Ville {
 		}
 		facteurTransmissionUrbain=stades[0];
 	}
-	public Ville(String n, int pT) {
+	public Ville(String n, long pT) {
 		nStade=0;
 		nom = n;
 		popTotale = pT;
@@ -102,16 +103,23 @@ public class Ville {
 
 	//TODO : fait évoluer les paramètres de la ville selon le modèle SIR et les propriétés du virus
 	public void propagation(Virus v) {
-
-		long nouveauxCas=(long)((v.getVirulence()*facteurTransmissionUrbain)*sains*infectes);
-		long nouveauxRetablissements= (long)((1/(v.getTMaladie()))*infectes);
+		long nouveauxCas=(long)((v.getVirulence()*facteurTransmissionUrbain)*infectes*8.0*(double)sains/popTotale);
+		long nouveauxRetablissements= (long)(1.0/(v.getTMaladie())*infectes);	
 		long nMorts=(long)(v.getLethalite()*infectes);
+		System.out.println("nCas"+nouveauxCas);
+		System.out.println("nSains"+sains);
+		System.out.println("ninfect"+infectes);
+		System.out.println("nretablis"+nouveauxRetablissements);
 		sains=sains-nouveauxCas;
 		infectes= infectes+nouveauxCas-nouveauxRetablissements-nMorts;
 		retablis= retablis+nouveauxRetablissements;
+		morts=morts+nMorts;
 		popTotale= popTotale-nMorts;
-		
-
+	}
+	
+	public String toString(){
+		String message= "La ville de "+nom+" a ces statistiques là: \n PopulationTotale:"+popTotale+"\n Sains:"+sains+" \n Infectés:"+infectes+"\n Retablis:"+retablis+"\n Morts:"+morts;
+		return message;
 	}
 
 }
