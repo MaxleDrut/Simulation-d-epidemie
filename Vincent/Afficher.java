@@ -25,7 +25,6 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
-import java.awt.Toolkit;
 
 public class Afficher extends JPanel implements MouseListener{
 private BufferedImage im;
@@ -54,6 +53,7 @@ private int hauteurEcran = (int)Toolkit.getDefaultToolkit().getScreenSize().getH
 private int onAClique =-1;												// Ce compteur permet de savoir à quelle étape on est de l'affichage -1 signifie qu'on est à l'initialisation
 
 
+
 public Afficher( FenetreJeu f , String s) {
 	super(new FlowLayout() );
 //im = Toolkit.getDefaultToolkit().getImage(s);
@@ -72,55 +72,39 @@ addMouseListener(this);
  //tailleFen = this.getSize();
 }
 
-///*
+
 public void paintComponent(Graphics g) {
 int h = getHeight()/20;
 int w = getWidth()/25;
-if(onAClique == -1){
+
 			g.drawImage(im, 0, 0, getWidth(), getHeight(), this);
 			g.setColor(Color.GREEN);
                 
 				g.fillPolygon(Mexico);
-                g.fillPolygon(Africa);
                 g.fillPolygon(Brazil);
                 g.fillPolygon(CAmerica);
                 g.fillPolygon(USA);
                 g.fillPolygon(Argentina);
-				g.fillPolygon(Madagascar);
-				g.fillPolygon(Equateur);
-				g.fillPolygon(Canada);
-				
+                g.fillPolygon(Equateur);
+                
+  
    if(compteurPeintre>1){
                 g.fillPolygon(PeintureEnCours);
 			}
 			
            g.setColor(Color.BLACK);
+
 				g.drawPolygon(Equateur);
 				g.drawPolygon(Argentina);
 				g.drawPolygon(Madagascar);
 				g.drawPolygon(Mexico);
-                g.drawPolygon(Africa);
                 g.drawPolygon(Brazil);
                 g.drawPolygon(CAmerica);
                 g.drawPolygon(USA);
-                g.drawPolygon(Canada);
-}else if(onAClique == 0){
-	g.setColor(Color.BLUE);
-	g.fillPolygon(USA);
-	
-}else if ( onAClique == 1 ){
-	g.setColor(Color.RED);
-	g.fillPolygon(Brazil);
-} else if( onAClique == 2){
-	g.setColor(Color.PINK);
-	g.fillPolygon(Argentina);
-} else if ( onAClique == 3){
-	g.setColor(Color.ORANGE);
-	g.fillPolygon(Mexico);
-}
+                
 
 }
-   private void initComponents() {                                       // initialisation des différents polygones qui vont composer la carte
+   private void initComponents() {
 
 		int xBrazil [] = {383,380,380,380,379,368,360,347,337,344,347,354,376,382,387,391,394,401,406,408,410,406,407,411,414,416,419,421,424,427,430,435,436,441,447,453,455,460,467,472,474,475,475,472,467,461,461,461,459,455,452,447,440,432,422,422,420,416,411,404,397};
 		diviserTableauX( xBrazil);
@@ -162,14 +146,14 @@ if(onAClique == -1){
   
        Argentina = new Polygon(xArgentina,yArgentina, xArgentina.length);
        CAmerica = new Polygon(xCAmerica, yCAmerica, yCAmerica.length);
-       Canada = new Polygon(xCanada, yCanada, yCanada.length);
        Mexico = new Polygon(xMexico, yMexico, xMexico.length);
        USA = new Polygon(xUSA, yUSA, xUSA.length);
        Brazil = new Polygon(xBrazil, yBrazil, xBrazil.length);
-       Madagascar = new Polygon(xMadagascar, yMadagascar, yMadagascar.length);
-       Equateur = new Polygon(xEquateur, yEquateur, yEquateur.length);
-
+       Equateur = new Polygon(xEquateur, yEquateur, xEquateur.length);
+       Madagascar = new Polygon(xMadagascar, yMadagascar, xMadagascar.length);
+		Canada = new Polygon(xCanada, yCanada, xCanada.length);
     }
+
     
     public void diviserTableauX( int [] t){                             //permet d'adapter le dessin des polygones à la taille de l'écran utilisé	
 		int width =1366;
@@ -205,12 +189,12 @@ public void mousePressed(MouseEvent e) {
 		  onAClique = 3;
 	  }
 	  repaint();
-      
+
     }
      
     public void mouseReleased(MouseEvent e) {
-       onAClique =-1;
-       repaint();
+       onAClique = -1;
+       
     }
      
     public void mouseEntered(MouseEvent e) {
@@ -221,7 +205,7 @@ public void mousePressed(MouseEvent e) {
      
     }
      
-    public void mouseClicked(MouseEvent e) {							//Permet d'effectuer une action au clic de la souris sur un objet
+    public void mouseClicked(MouseEvent e) {
     Point me =e.getPoint();
     fen.setCoordonateX(me.getX());
     fen.setCoordonateY(me.getY());
@@ -234,7 +218,7 @@ public void mousePressed(MouseEvent e) {
     validate();
     this.repaint();
     fen.repeindre();
-   /* if(Brazil.contains(me)){
+    if(Brazil.contains(me)){
 		System.out.println("Je suis là");
 		JFrame J = new JFrame("corona");
 			//J.removeAll();
@@ -243,13 +227,13 @@ public void mousePressed(MouseEvent e) {
 			J.repaint();
 			JPanel p = new JPanel(new FlowLayout());
 			
-			J.add(new JButton("Bouh"));
+			J.add(new JButton("CA MARCHE"));
 			//J.add(p);
 			J.validate();
 			J.repaint();
 		
 		
-	}*/
+	}
     }
 
 }
