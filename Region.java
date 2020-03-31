@@ -33,17 +33,38 @@ public class Region {
 		listeVilles.add(new Ville("Mexico",       340000));
 		listeVilles.add(new Ville("USA",     300000));
 		listeVilles.add(new Ville("Equateur", 270000));
-		//Afrique
-		listeVilles.add(new Ville("Afrique du nord",       510000));
-		listeVilles.add(new Ville("Africa",       510000));
-		listeVilles.add(new Ville("Africa",       510000));
-		listeVilles.add(new Ville("Africa",       510000));
-		listeVilles.add(new Ville("Africa",       510000));
-
-		listeVilles.add(new Ville("Madagascar",270000));
-		listeVilles.add(new Ville("Bordeaux",   240000));
 		listeVilles.add(new Ville("Canada",      230000));
-	
+
+		//Afrique
+		listeVilles.add(new Ville("North Africa",       510000));
+		listeVilles.add(new Ville("Sahel",       510000));
+		listeVilles.add(new Ville("Ethiopia",       510000));
+		listeVilles.add(new Ville("Congo",       510000));
+		listeVilles.add(new Ville("South Africa",       510000));
+		listeVilles.add(new Ville("Madagascar",270000));
+
+		//Asie 
+		listeVilles.add(new Ville("Arabia",       510000));
+		listeVilles.add(new Ville("India",       510000));
+		listeVilles.add(new Ville("Kazakstan",       510000));
+		listeVilles.add(new Ville("China",       510000));
+		listeVilles.add(new Ville("S.E Asia",       510000));
+		
+		//oceanie
+		listeVilles.add(new Ville("Indonesia",       510000));
+		listeVilles.add(new Ville("New Zealand",       510000));
+		listeVilles.add(new Ville("Australia",       510000));
+		
+		// Europe
+		listeVilles.add(new Ville("Independant Nation of Reunion Island",  510000));
+		listeVilles.add(new Ville("Russia",       510000));
+		listeVilles.add(new Ville("Northen Lands",       510000));
+		listeVilles.add(new Ville("Center Europe",       510000));
+		listeVilles.add(new Ville("France",       510000));
+		listeVilles.add(new Ville("Spain",       510000));
+		listeVilles.add(new Ville("Italy",       510000));
+		listeVilles.add(new Ville("UK",       510000));
+
 		listeVilles.get(1).infectionInitale(5000);
 		for(Ville V : listeVilles){
 			System.out.println(V.getNomVille() + " Sains  : " + V.getSains() + " Infectes : " +  V.getInfectes() + " Rétablis : " + V.getRetablis() + " Population Total : " + V.getPop());
