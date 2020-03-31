@@ -30,7 +30,7 @@ public class FenetreJeu extends JFrame implements MouseListener{
     private JLabel img4 = new JLabel("");
     private JPanel imgW = new JPanel( new FlowLayout());
 	private int compteur = 0;
-	
+
 	private JTextArea xZone = new JTextArea("ici les coordonées en x");
 	private JTextArea yZone = new JTextArea("ici les coordonées en y");
 	
@@ -46,6 +46,7 @@ public class FenetreJeu extends JFrame implements MouseListener{
         //this.setSize(lg,larg);
         this.setExtendedState(Frame.MAXIMIZED_BOTH);
         //this.setResizable(false);
+        
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setContentPane( new Afficher(this ,"carte.jpg"));
 		
@@ -168,7 +169,8 @@ public void changeFenetre(){
 		validate();
 		repaint();
 	}
-				
+	
+		
 }
 
 
