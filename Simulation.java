@@ -1,6 +1,8 @@
 import javax.swing.*;
+import javax.swing.event.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.util.ArrayList;
 
 public class Simulation extends JFrame implements ActionListener {
 	
@@ -13,10 +15,23 @@ public class Simulation extends JFrame implements ActionListener {
 	private int posActuelle;
 	private int delaiRef;
 	private Timer temps;
-	private JPanel pCommande, pBoutons, pCreationVirus;
+	
+	private JPanel pCommande, pBoutonsCommande;
+	private JPanel pCreationVirus, pSliders, pPresets, pLancerSimu;
+	
 	private JButton bPause, bAcc, bRal;
+	private JButton bCorona, bGrippeEspa, bPesteNoire;
+	private JButton bCreerVirus;
+	
 	private JSlider sVirulence,sDuree,sLethalite;
+	
 	private TextField afficheurVit, afficheurDate;
+	private TextField nomDuVirus;
+	
+	private Label valVirulence, valDuree, valLethalite;
+	private Label titSliders, titPresets;
+	private Label rensNom;
+	
 	
 	public Simulation(int x, int y) {
 		super("Simulation d'epidemie");
@@ -24,13 +39,13 @@ public class Simulation extends JFrame implements ActionListener {
 		posActuelle = delais.length-3;
 		temps = new Timer(1, this); //1 correspond ici au délai par défaut pour les changement de vitesse, et non le délai initial
 		delaiRef = delais[posActuelle];
-		temps.setDelay(delaiRef);
+		temps.setDelay(delaiRef);	
 		timerOn = false;
 		jourSimu = 0;
 		
 		//Panel de commande (en haut pour l'instant)
 		pCommande = new JPanel(new BorderLayout());
-		pBoutons = new JPanel();
+		pBoutonsCommande = new JPanel();
 		afficheurVit = new TextField();
 		afficheurVit.setEditable(false);
 		afficherVitesse();
@@ -45,25 +60,109 @@ public class Simulation extends JFrame implements ActionListener {
 		bAcc.addActionListener(new EcouteurVitesse(this,"acc"));
 		bRal.addActionListener(new EcouteurVitesse(this,"ral"));
 		
-		pBoutons.add(bRal);
-		pBoutons.add(bPause);
-		pBoutons.add(bAcc);
-		pCommande.add(pBoutons, BorderLayout.CENTER);
+		pBoutonsCommande.add(bRal);
+		pBoutonsCommande.add(bPause);
+		pBoutonsCommande.add(bAcc);
+		pCommande.add(pBoutonsCommande, BorderLayout.CENTER);
 		pCommande.add(afficheurVit, BorderLayout.WEST);
 		pCommande.add(afficheurDate, BorderLayout.EAST);
 		
 		//Panel de création du virus :
-		pCreationVirus = new JPanel(new GridLayout(3,1));
+		pCreationVirus = new JPanel(new GridLayout(1,2));
+		
+		
+		//Sous panel des sliders :
+		pSliders = new JPanel(new GridLayout(7,1));
+		titSliders = new Label("Definition des parametres du virus");
+
 		sVirulence = new JSlider(0,100,50);
-		sDuree = new JSlider(1,30, 10);
-		sLethalite = new JSlider(0,1000,10);
-		pCreationVirus.add(sVirulence);
-		pCreationVirus.add(sDuree);
-		pCreationVirus.add(sLethalite);
+		valVirulence = new Label("Indice de virulence : "+sVirulence.getValue()/100.0);
+		sVirulence.setPaintTicks(true);
+		sVirulence.setMinorTickSpacing(10);
+		sVirulence.setMajorTickSpacing(20);
+		sVirulence.addChangeListener(new ChangeListener() {
+			public void stateChanged(ChangeEvent event) {
+				double viru =((JSlider)event.getSource()).getValue()/100.0;
+				valVirulence.setText("Incidce de virulence : "+viru);
+			}
+		});
+		
+		sDuree = new JSlider(1,30,10);
+		valDuree = new Label("Duree de la maladie : "+sDuree.getValue()+" jour(s)");
+		sDuree.setPaintTicks(true);
+		sDuree.setMinorTickSpacing(5);
+		sDuree.setMajorTickSpacing(10);
+		sDuree.addChangeListener(new ChangeListener() {
+			public void stateChanged(ChangeEvent event) {
+				valDuree.setText("Duree de la maladie : "+((JSlider)event.getSource()).getValue()+" jour(s)");
+			}
+		});
+		
+		sLethalite = new JSlider(0,1000,5);
+		valLethalite = new Label("Taux de lethalite : "+sLethalite.getValue()/10.0+"%");
+		sLethalite.setPaintTicks(true);
+		sLethalite.setMinorTickSpacing(50);
+		sLethalite.setMajorTickSpacing(100);
+		sLethalite.addChangeListener(new ChangeListener() {
+			public void stateChanged(ChangeEvent event) {
+				valLethalite.setText("Taux de lethalite : "+((JSlider)event.getSource()).getValue()/10.0+"%");
+			}
+		});
+		
+		pSliders.add(titSliders);
+		pSliders.add(valVirulence);		
+		pSliders.add(sVirulence);
+		pSliders.add(valDuree);
+		pSliders.add(sDuree);
+		pSliders.add(valLethalite);
+		pSliders.add(sLethalite);
+		pSliders.setBorder(BorderFactory.createLineBorder(Color.black));
+		
+		//Sous-panel des presets :
+		
+		pPresets = new JPanel();
+		pPresets.setLayout(new BoxLayout(pPresets, BoxLayout.Y_AXIS));
+		
+		titPresets = new Label("Choix d'un virus deja existant");
+		bCorona = new JButton("Covid-19");
+		bGrippeEspa = new JButton("Grippe espagnole");
+		bPesteNoire = new JButton("Peste bubonique");
+		rensNom = new Label("Nom du virus :");
+		nomDuVirus = new TextField("");
+		
+		pPresets.add(titPresets);
+		pPresets.add(Box.createVerticalGlue());
+		pPresets.add(bCorona);
+		pPresets.add(Box.createVerticalGlue());
+		pPresets.add(bGrippeEspa);
+		pPresets.add(Box.createVerticalGlue());
+		pPresets.add(bPesteNoire);
+		pPresets.add(Box.createVerticalGlue());		
+		pPresets.add(rensNom);
+		pPresets.add(nomDuVirus);
+		
+		bCorona.setAlignmentX(Component.CENTER_ALIGNMENT);
+		bGrippeEspa.setAlignmentX(Component.CENTER_ALIGNMENT);
+		bPesteNoire.setAlignmentX(Component.CENTER_ALIGNMENT);
+		
+		pPresets.setBorder(BorderFactory.createLineBorder(Color.black));
+		
+		//Ajout des sous-panels au panel de création : 
+		pCreationVirus.add(pSliders);
+		pCreationVirus.add(pPresets);
+		
+		//Panel de lancement de la simu
+		pLancerSimu = new JPanel();
+		bCreerVirus = new JButton("Creer le virus !");
+		pLancerSimu.setBorder(BorderFactory.createLineBorder(Color.black));
+		
+		pLancerSimu.add(bCreerVirus);
+		
 		
 		//Ajout des panels
-		add(pCommande, BorderLayout.NORTH);
+		//add(pCommande, BorderLayout.NORTH);
 		add(pCreationVirus, BorderLayout.CENTER);
+		add(pLancerSimu, BorderLayout.SOUTH);
 		
 		this.setSize(x,y);
 		this.setVisible(true);
@@ -74,6 +173,7 @@ public class Simulation extends JFrame implements ActionListener {
 	public void actionPerformed(ActionEvent ae) { //Chaque incrémentation fait passer au jour suivant.
 		jourSimu++;
 		afficherDate();
+		
 	}
 	
 	public void pauseTimer() {
@@ -117,9 +217,49 @@ public class Simulation extends JFrame implements ActionListener {
 		this.repaint();
 		
 	}
+	
+	public String getNomVirus() {
+		return nomDuVirus.getText();
+	}
+	
+	public void setNomVirus(String s) {
+		nomDuVirus.setText(s);
+		this.validate();
+		this.repaint();
+	}
+	
+	public double getVirulence() {
+		return (double)(sVirulence.getValue())/100.0;
+	}
+	
+	public int getDuree() {
+		return sDuree.getValue();
+	}
+	
+	/*Petit ajout ici : on demande de renseigner la léthalité "totale" du virus (càd la chance de mourir sur toute la durée de la maladie)
+	 *Or le modèle SIR utilise la léthalité journalière (chance chaque jour de mourir du virus)
+	 *On réalise donc une conversion µ = 1 - (1-lTot)^(1/duree)
+	*/ 
+	public double getLethaliteJournaliere() {
+		double lTot = sLethalite.getValue()/1000.0;
+		return (1.0-Math.pow(1-lTot,1.0/sDuree.getValue()));
+	}
+	
+	public void setVirulence(double v) {
+		sVirulence.setValue((int) (v*100));
+	}
+	
+	public void setDuree(int d) {
+		sDuree.setValue(d);
+	}
+	
+	public void setLethalite(double l) {
+		sLethalite.setValue((int) (l*1000));
+	}
+	
 	public static void main (String[] args) {
 		
-		Simulation simu = new Simulation(500,500);
+		Simulation simu = new Simulation(450,350);
 		
 	}
 	

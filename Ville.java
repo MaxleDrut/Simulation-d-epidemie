@@ -8,10 +8,9 @@ public class Ville {
 	private long sains;
 	private long infectes;
 	private long retablis;
-	private long morts;
 	private float[] stades;
 	private int nStade;
-	
+
 	private LinkedList<Long> PopTotaleJour;
 	private LinkedList<Long> SainsJour;
 	private LinkedList<Long> InfectesJour;
@@ -32,8 +31,7 @@ public class Ville {
 
 
 	//Par défaut, une ville crée est vierge de l'épidémie en cours
-	public Ville(String n, long pT,String fTU) {
-		nStade=0;
+	public Ville(String n, int pT,String fTU) {
 		nom = n;
 		popTotale = pT;
 		sains = pT;
@@ -53,12 +51,11 @@ public class Ville {
 		facteurTransmissionUrbain=stades[0];
 		LinkedList<Long> PopTotaleJour=new LinkedList<Long>();
 		LinkedList<Long> SainsJour=new LinkedList<Long>();
-	    LinkedList<Long> InfectesJour=new LinkedList<Long>();
-	    LinkedList<Long> RetablisJour=new LinkedList<Long>();
-	    LinkedList<Long> MortsJour=new LinkedList<Long>();
+	  LinkedList<Long> InfectesJour=new LinkedList<Long>();
+	  LinkedList<Long> RetablisJour=new LinkedList<Long>();
+    LinkedList<Long> MortsJour=new LinkedList<Long>();
 	}
-	public Ville(String n, long pT) {
-		nStade=0;
+	public Ville(String n, int pT) {
 		nom = n;
 		popTotale = pT;
 		sains = pT;
@@ -70,31 +67,33 @@ public class Ville {
 			}
 		facteurTransmissionUrbain=stades[0];
 	}
-	
+
 	public LinkedList<Long> getPopTotaleJour(){return PopTotaleJour;}
 	public LinkedList<Long> getInfectesJour(){return InfectesJour;}
 	public LinkedList<Long> getSainsJour(){return SainsJour;}
 	public LinkedList<Long> getRetablisJour(){return RetablisJour;}
 	public LinkedList<Long> getMortsJour(){return MortsJour;}
 
-	
+
 	public long getPop() { return popTotale; }
 	public long getSains() { return sains; }
 	public long getInfectes() { return infectes; }
 	public long getRetablis() { return retablis; }
-	
+
+	public String getNomVille(){ return nom; };
+
 	public void setSains(long s){
 		sains=s;
 	}
-	
+
 	public void setInfectes(long i){
 		infectes=i;
 	}
-	
+
 	public void setRetablis(long r){
 		retablis=r;
 	}
-	
+
 	public void setPopulation(long total){
 		popTotale=total;
 	}
@@ -110,36 +109,26 @@ public class Ville {
 		retablis=0;
 		sains=popTotale-i;
 	}
-	public void stadeSuivant(){
-		if(nStade<stades.length){
-			nStade++;
-			facteurTransmissionUrbain=stades[nStade];
-		}
-	}
-	
+
 
 	//TODO : fait évoluer les paramètres de la ville selon le modèle SIR et les propriétés du virus
 	public void propagation(Virus v) {
 		long nouveauxCas=(long)((v.getVirulence()*facteurTransmissionUrbain)*infectes*12.0*(double)sains/popTotale);
-		long nouveauxRetablissements= (long)(1.0/(v.getTMaladie())*infectes);	
+		long nouveauxRetablissements= (long)(1.0/(v.getTMaladie())*infectes);
 		long nMorts=(long)(v.getLethalite()*infectes);
-		System.out.println("nCas"+nouveauxCas);
-		System.out.println("nSains"+sains);
-		System.out.println("ninfect"+infectes);
-		System.out.println("nretablis"+nouveauxRetablissements);
+
 		sains=sains-nouveauxCas;
 		infectes= infectes+nouveauxCas-nouveauxRetablissements-nMorts;
 		retablis= retablis+nouveauxRetablissements;
-		morts=morts+nMorts;
 		popTotale= popTotale-nMorts;
-		
+
 		PopTotaleJour.add(popTotale);
 		SainsJour.add(sains);
 		InfectesJour.add(infectes);
 		RetablisJour.add(retablis);
 		MortsJour.add(morts);
 	}
-	
+
 	public String toString(){
 		String message= "La ville de "+nom+" a ces statistiques là: \n PopulationTotale:"+popTotale+"\n Sains:"+sains+" \n Infectés:"+infectes+"\n Retablis:"+retablis+"\n Morts:"+morts;
 		return message;

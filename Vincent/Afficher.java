@@ -35,7 +35,7 @@ private FenetreJeu fen;
 private int compteurPeintre = 0;
 private int [] xPeintureEnCours = new int [1000];
 private int [] yPeintureEnCours = new int [1000];
-private Polygon PeintureEnCours; 
+private Polygon PeintureEnCours;
 private Polygon SAmerica;
 private Polygon Africa;
 private Polygon CAmerica;
@@ -66,15 +66,9 @@ im = ImageIO.read(new File(s));
                 ex.printStackTrace();
             }
 addMouseListener(this);
- 
+ //tailleFen = this.getSize();
 }
 
-public Afficher( Shape f){
-	
-
-	
-	
-}
 ///*
 public void paintComponent(Graphics g) {
 int h = getHeight()/20;
@@ -82,7 +76,7 @@ int w = getWidth()/25;
 if(onAClique == -1){
 			g.drawImage(im, 0, 0, getWidth(), getHeight(), this);
 			g.setColor(Color.GREEN);
-                
+
 				g.fillPolygon(Mexico);
                 g.fillPolygon(Africa);
                 g.fillPolygon(Brazil);
@@ -92,11 +86,11 @@ if(onAClique == -1){
 				g.fillPolygon(Madagascar);
 				g.fillPolygon(Equateur);
 				g.fillPolygon(Canada);
-				
+
    if(compteurPeintre>1){
                // g.fillPolygon(PeintureEnCours);
 			}
-			
+
            g.setColor(Color.YELLOW);
 				g.drawPolygon(Equateur);
 				g.drawPolygon(Argentina);
@@ -110,7 +104,7 @@ if(onAClique == -1){
 }else if(onAClique == 0){
 	g.setColor(Color.BLUE);
 	g.fillPolygon(USA);
-	
+
 }else if ( onAClique == 1 ){
 	g.setColor(Color.RED);
 	g.fillPolygon(Brazil);
@@ -161,11 +155,11 @@ if(onAClique == -1){
         diviserTableauX( xCanada);
         int yCanada [] = {242,245,248,254,255,250,250,254,256,261,265,266,272,275,276,276,264,259,254,250,250,249,251,251,247,241,237,231,230,233,233,231,228,227,224,221,217,207,199,187,193,202,201,198,195,192,188,184,181,179,175,170,170,168,166,169,178,178,185,188,191,199,202,208,215,214,217,223,228,234,237,239,233,230,224,219,217,214,213,210,209,208,204,202,201,198,197,197,195,190,188,185,182,180,172,169,166,164,164,161,161,155,155,151,149,147,150,149,148,148,146,142,137,134,137,140,137,131,133,133,129,123,120,117,112,113,114,113,120,123,126,132,140,146,147,147,143,148,154,154,158,163,166,166,170,174,175,176,172,167,165,162,168,170,168,165,162,155,149,149,142,149,154,153,148,147,146,143,138,134,132,127,122,114,109,106,106,100,96,93,94,97,97,97,92,88,85,85,88,93,97,97,97,96,91,87,81,81,88,90,96,100,102,106,111,112,118,123,125,127,123,117,116,112,114,110,106,103,100,95,91,86,84,82,81,75,75,82,86,99,106,107,103,103,111,117,116,115,115,112,109,105,106,114,109,105,103,98,98,94,87,84,84,84,82,76,77,77,78,79,77,72,54,49,44,39,38,39,45,48,50,51,73,72,73,78,83,87,88,92,95,95,96,101,107,110,116,118,120,121,128,128,133,136,148,155,158,164,167,163,158,158,155,154,151,143,143,143,145,141,139,135,134,130,135,140,140,147,158,163,170,181,189,197,208,217,222};
 		diviserTableauY(yCanada );
-		
-		
-			
-			
-		
+
+
+
+
+
        Africa = new Polygon(xAfrica, yAfrica, yAfrica.length);
        Argentina = new Polygon(xArgentina,yArgentina, xArgentina.length);
        CAmerica = new Polygon(xCAmerica, yCAmerica, yCAmerica.length);
@@ -177,26 +171,26 @@ if(onAClique == -1){
        Equateur = new Polygon(xEquateur, yEquateur, yEquateur.length);
 
     }
-    
-    public void diviserTableauX( int [] t){                             //permet d'adapter le dessin des polygones à la taille de l'écran utilisé	
+
+    public void diviserTableauX( int [] t){                             //permet d'adapter le dessin des polygones à la taille de l'écran utilisé
 		int width =1366;
-	
-		
+
+
 		for( int i = 0 ; i<t.length;i++){
 			t[i] = (int)(t[i]*largeurEcran/width);
-			
+
 		}
-		
+
 	}
-	public void diviserTableauY( int [] t){                             //permet d'adapter le dessin des polygones à la taille de l'écran utilisé	
-	
+	public void diviserTableauY( int [] t){                             //permet d'adapter le dessin des polygones à la taille de l'écran utilisé
+
 		int height=768;
-		
+
 		for( int i = 0 ; i<t.length;i++){
 			t[i] = (int) (t[i]*hauteurEcran/height);
-			
+
 		}
-		
+
 	}
 
 public void mousePressed(MouseEvent e) {
@@ -211,22 +205,22 @@ public void mousePressed(MouseEvent e) {
 		  onAClique = 3;
 	  }
 	  repaint();
-      
+
     }
-     
+
     public void mouseReleased(MouseEvent e) {
        onAClique =-1;
        repaint();
     }
-     
+
     public void mouseEntered(MouseEvent e) {
-     
+
     }
-     
+
     public void mouseExited(MouseEvent e) {
-     
+
     }
-     
+
     public void mouseClicked(MouseEvent e) {							//Permet d'effectuer une action au clic de la souris sur un objet
     Point me =e.getPoint();
     fen.setCoordonateX(me.getX());
@@ -248,15 +242,14 @@ public void mousePressed(MouseEvent e) {
 			J.setExtendedState(Frame.MAXIMIZED_BOTH);
 			J.repaint();
 			JPanel p = new JPanel(new FlowLayout());
-			
+
 			J.add(new JButton("Bouh"));
 			//J.add(p);
 			J.validate();
 			J.repaint();
-		
-		
+
+
 	}*/
     }
 
 }
-
