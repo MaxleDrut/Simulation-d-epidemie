@@ -15,14 +15,22 @@ public class Simulation extends JFrame implements ActionListener {
 	private int posActuelle;
 	private int delaiRef;
 	private Timer temps;
+	
 	private JPanel pCommande, pBoutonsCommande;
-	private JPanel pCreationVirus, pSliders, pPresets;
+	private JPanel pCreationVirus, pSliders, pPresets, pLancerSimu;
+	
 	private JButton bPause, bAcc, bRal;
 	private JButton bCorona, bGrippeEspa, bPesteNoire;
+	private JButton bCreerVirus;
+	
 	private JSlider sVirulence,sDuree,sLethalite;
+	
 	private TextField afficheurVit, afficheurDate;
+	private TextField nomDuVirus;
+	
 	private Label valVirulence, valDuree, valLethalite;
 	private Label titSliders, titPresets;
+	private Label rensNom;
 	
 	
 	public Simulation(int x, int y) {
@@ -61,6 +69,7 @@ public class Simulation extends JFrame implements ActionListener {
 		
 		//Panel de création du virus :
 		pCreationVirus = new JPanel(new GridLayout(1,2));
+		
 		
 		//Sous panel des sliders :
 		pSliders = new JPanel(new GridLayout(7,1));
@@ -107,31 +116,53 @@ public class Simulation extends JFrame implements ActionListener {
 		pSliders.add(sDuree);
 		pSliders.add(valLethalite);
 		pSliders.add(sLethalite);
-
+		pSliders.setBorder(BorderFactory.createLineBorder(Color.black));
 		
 		//Sous-panel des presets :
 		
 		pPresets = new JPanel();
-		titPresets = new Label("Choix d'un virus deja existant");
+		pPresets.setLayout(new BoxLayout(pPresets, BoxLayout.Y_AXIS));
 		
+		titPresets = new Label("Choix d'un virus deja existant");
 		bCorona = new JButton("Covid-19");
 		bGrippeEspa = new JButton("Grippe espagnole");
 		bPesteNoire = new JButton("Peste bubonique");
+		rensNom = new Label("Nom du virus :");
+		nomDuVirus = new TextField("");
 		
 		pPresets.add(titPresets);
 		pPresets.add(Box.createVerticalGlue());
 		pPresets.add(bCorona);
 		pPresets.add(Box.createVerticalGlue());
 		pPresets.add(bGrippeEspa);
+		pPresets.add(Box.createVerticalGlue());
 		pPresets.add(bPesteNoire);
+		pPresets.add(Box.createVerticalGlue());		
+		pPresets.add(rensNom);
+		pPresets.add(nomDuVirus);
+		
+		bCorona.setAlignmentX(Component.CENTER_ALIGNMENT);
+		bGrippeEspa.setAlignmentX(Component.CENTER_ALIGNMENT);
+		bPesteNoire.setAlignmentX(Component.CENTER_ALIGNMENT);
+		
+		pPresets.setBorder(BorderFactory.createLineBorder(Color.black));
 		
 		//Ajout des sous-panels au panel de création : 
 		pCreationVirus.add(pSliders);
 		pCreationVirus.add(pPresets);
 		
+		//Panel de lancement de la simu
+		pLancerSimu = new JPanel();
+		bCreerVirus = new JButton("Creer le virus !");
+		pLancerSimu.setBorder(BorderFactory.createLineBorder(Color.black));
+		
+		pLancerSimu.add(bCreerVirus);
+		
+		
 		//Ajout des panels
 		//add(pCommande, BorderLayout.NORTH);
 		add(pCreationVirus, BorderLayout.CENTER);
+		add(pLancerSimu, BorderLayout.SOUTH);
 		
 		this.setSize(x,y);
 		this.setVisible(true);
@@ -186,9 +217,49 @@ public class Simulation extends JFrame implements ActionListener {
 		this.repaint();
 		
 	}
+	
+	public String getNomVirus() {
+		return nomDuVirus.getText();
+	}
+	
+	public void setNomVirus(String s) {
+		nomDuVirus.setText(s);
+		this.validate();
+		this.repaint();
+	}
+	
+	public double getVirulence() {
+		return (double)(sVirulence.getValue())/100.0;
+	}
+	
+	public int getDuree() {
+		return sDuree.getValue();
+	}
+	
+	/*Petit ajout ici : on demande de renseigner la léthalité "totale" du virus (càd la chance de mourir sur toute la durée de la maladie)
+	 *Or le modèle SIR utilise la léthalité journalière (chance chaque jour de mourir du virus)
+	 *On réalise donc une conversion µ = 1 - (1-lTot)^(1/duree)
+	*/ 
+	public double getLethaliteJournaliere() {
+		double lTot = sLethalite.getValue()/1000.0;
+		return (1.0-Math.pow(1-lTot,1.0/sDuree.getValue()));
+	}
+	
+	public void setVirulence(double v) {
+		sVirulence.setValue((int) (v*100));
+	}
+	
+	public void setDuree(int d) {
+		sDuree.setValue(d);
+	}
+	
+	public void setLethalite(double l) {
+		sLethalite.setValue((int) (l*1000));
+	}
+	
 	public static void main (String[] args) {
 		
-		Simulation simu = new Simulation(500,500);
+		Simulation simu = new Simulation(450,350);
 		
 	}
 	
