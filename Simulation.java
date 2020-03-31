@@ -72,7 +72,7 @@ public class Simulation extends JFrame implements ActionListener {
 		
 		
 		//Sous panel des sliders :
-		pSliders = new JPanel(new GridLayout(7,1));
+		pSliders = new JPanel(new GridLayout(9,1));
 		titSliders = new Label("Definition des parametres du virus");
 
 		sVirulence = new JSlider(0,100,50);
@@ -109,6 +109,9 @@ public class Simulation extends JFrame implements ActionListener {
 			}
 		});
 		
+		rensNom = new Label("Nom du virus :");
+		nomDuVirus = new TextField("");
+		
 		pSliders.add(titSliders);
 		pSliders.add(valVirulence);		
 		pSliders.add(sVirulence);
@@ -116,6 +119,8 @@ public class Simulation extends JFrame implements ActionListener {
 		pSliders.add(sDuree);
 		pSliders.add(valLethalite);
 		pSliders.add(sLethalite);
+		pSliders.add(rensNom);
+		pSliders.add(nomDuVirus);
 		pSliders.setBorder(BorderFactory.createLineBorder(Color.black));
 		
 		//Sous-panel des presets :
@@ -127,8 +132,10 @@ public class Simulation extends JFrame implements ActionListener {
 		bCorona = new JButton("Covid-19");
 		bGrippeEspa = new JButton("Grippe espagnole");
 		bPesteNoire = new JButton("Peste bubonique");
-		rensNom = new Label("Nom du virus :");
-		nomDuVirus = new TextField("");
+		
+		bCorona.addActionListener(new EcouteurPresets(this,"Coronavirus"));
+		bGrippeEspa.addActionListener(new EcouteurPresets(this,"Grippe espagnole"));
+		bPesteNoire.addActionListener(new EcouteurPresets(this,"Peste bubonique"));
 		
 		pPresets.add(titPresets);
 		pPresets.add(Box.createVerticalGlue());
@@ -138,8 +145,6 @@ public class Simulation extends JFrame implements ActionListener {
 		pPresets.add(Box.createVerticalGlue());
 		pPresets.add(bPesteNoire);
 		pPresets.add(Box.createVerticalGlue());		
-		pPresets.add(rensNom);
-		pPresets.add(nomDuVirus);
 		
 		bCorona.setAlignmentX(Component.CENTER_ALIGNMENT);
 		bGrippeEspa.setAlignmentX(Component.CENTER_ALIGNMENT);
