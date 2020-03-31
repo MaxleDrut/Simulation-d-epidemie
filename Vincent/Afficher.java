@@ -25,7 +25,6 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
-import java.awt.Toolkit;
 
 public class Afficher extends JPanel implements MouseListener{
 private BufferedImage im;
@@ -42,6 +41,7 @@ private Polygon CAmerica;
 private Polygon Mexico;
 private Polygon USA;
 private Polygon Brazil;
+<<<<<<< HEAD
 private Polygon Argentina;
 private Polygon Madagascar;
 private Polygon Equateur;
@@ -53,6 +53,8 @@ private int largeurEcran =(int)Toolkit.getDefaultToolkit().getScreenSize().getWi
 private int hauteurEcran = (int)Toolkit.getDefaultToolkit().getScreenSize().getHeight();
 private int onAClique =-1;												// Ce compteur permet de savoir à quelle étape on est de l'affichage -1 signifie qu'on est à l'initialisation
 
+=======
+>>>>>>> 14c039196a4097af627458c58898f978dc8a7b9b
 
 public Afficher( FenetreJeu f , String s) {
 	super(new FlowLayout() );
@@ -60,7 +62,10 @@ public Afficher( FenetreJeu f , String s) {
 fen = f;
 initComponents();
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 14c039196a4097af627458c58898f978dc8a7b9b
 try{
 im = ImageIO.read(new File(s));
 
@@ -76,7 +81,7 @@ addMouseListener(this);
 public void paintComponent(Graphics g) {
 int h = getHeight()/20;
 int w = getWidth()/25;
-if(onAClique == -1){
+
 			g.drawImage(im, 0, 0, getWidth(), getHeight(), this);
 			g.setColor(Color.GREEN);
                 
@@ -85,54 +90,54 @@ if(onAClique == -1){
                 g.fillPolygon(Brazil);
                 g.fillPolygon(CAmerica);
                 g.fillPolygon(USA);
-                g.fillPolygon(Argentina);
-				g.fillPolygon(Madagascar);
-				g.fillPolygon(Equateur);
-				g.fillPolygon(Canada);
-				
+  
    if(compteurPeintre>1){
                 g.fillPolygon(PeintureEnCours);
 			}
 			
            g.setColor(Color.BLACK);
+<<<<<<< HEAD
 				g.drawPolygon(Equateur);
 				g.drawPolygon(Argentina);
 				g.drawPolygon(Madagascar);
+=======
+           
+>>>>>>> 14c039196a4097af627458c58898f978dc8a7b9b
 				g.drawPolygon(Mexico);
                 g.drawPolygon(Africa);
                 g.drawPolygon(Brazil);
                 g.drawPolygon(CAmerica);
                 g.drawPolygon(USA);
-                g.drawPolygon(Canada);
-}else if(onAClique == 0){
-	g.setColor(Color.BLUE);
-	g.fillPolygon(USA);
-	
-}else if ( onAClique == 1 ){
-	g.setColor(Color.RED);
-	g.fillPolygon(Brazil);
-} else if( onAClique == 2){
-	g.setColor(Color.PINK);
-	g.fillPolygon(Argentina);
-} else if ( onAClique == 3){
-	g.setColor(Color.ORANGE);
-	g.fillPolygon(Mexico);
-}
+                
 
-}
-   private void initComponents() {                                       // initialisation des différents polygones qui vont composer la carte
+}//*/
+/* @Override
+           protected void paintComponent(Graphics g) {
+                super.paintComponent(g);
+                g.setColor(Color.GREEN);
+                
+				g.fillPolygon(Mexico);
+                g.fillPolygon(Africa);
+                g.fillPolygon(SAmerica);
+                g.fillPolygon(CAmerica);
+            }*/
+   private void initComponents() {
 
 		int xBrazil [] = {383,380,380,380,379,368,360,347,337,344,347,354,376,382,387,391,394,401,406,408,410,406,407,411,414,416,419,421,424,427,430,435,436,441,447,453,455,460,467,472,474,475,475,472,467,461,461,461,459,455,452,447,440,432,422,422,420,416,411,404,397};
-		diviserTableauX( xBrazil);
 		int yBrazil [] = {630,611,593,581,566,553,539,538,530,513,500,490,461,458,458,457,458,462,467,471,476,482,488,490,490,488,487,487,485,487,488,490,494,493,493,493,496,498,502,505,510,514,516,521,529,541,546,553,558,566,577,578,575,585,592,596,603,610,617,628,635};
-        diviserTableauY( yBrazil);
         int xArgentina [] = {384,385,387,388,390,392,388,386,378,371,370,364,362,361,362,362,359,358,357,362,365,362,359,357,357,357,352,346,340,339,336,333,333,332,332,332,332,326,325,328,323,326,327,327,332,337,346,351,360,366,371,376,379};
-        diviserTableauX( xArgentina);
         int yArgentina [] = {630,634,636,638,643,643,651,652,655,655,666,663,667,672,675,682,687,692,696,700,699,705,712,716,722,727,734,732,729,726,719,713,703,697,689,681,670,667,663,657,652,646,640,559,538,531,538,539,540,550,556,566,567};
+<<<<<<< HEAD
         diviserTableauY( yArgentina);
+=======
+        int xAfrica[] = {705, 678, 681, 667, 658, 594, 555, 556, 604, 670, 764, 816, 848, 798, 804, 775, 762, 714};
+        int yAfrica[] = {631, 558, 509, 488, 466, 464, 425, 394, 332, 325, 354, 441, 435, 503, 550, 571, 608, 632};
+		int xSAmerica [] = {293,297,300,303,305,308,313,318,317,319,327,334,340,345,356,362,365,368,371,375,380,387,389,396,401,405,410,409,408,402,414,419,423,433,436,452,460,465,470,473,474,474,471,465,463,461,460,461,460,457,452,452,448,440,432,428,425,423,402,395,388,385,392,390,384,375,372,366,363,363,367,364,365,359,364,367,359,357,352,348,342,337,335,333,330,328,331,331,331,329,325,326,323,323,326,327,308,300,294,285,280,278,275,282,285,287,293,293,293,291,293};
+		int ySAmerica [] = {447,447,444,441,438,434,433,431,438,438,434,437,439,439,438,438,442,445,448,452,455,459,457,459,461,465,474,477,481,489,489,484,486,490,493,494,498,502,502,505,510,518,526,530,536,539,542,550,555,562,573,577,579,580,584,587,589,604,631,635,632,632,646,651,654,654,665,665,665,672,673,677,685,690,700,702,713,730,731,734,731,721,716,710,702,698,694,690,681,673,669,661,653,647,643,561,550,539,529,514,507,507,502,499,496,474,468,462,456,449,448};
+>>>>>>> 14c039196a4097af627458c58898f978dc8a7b9b
 		int xCAmerica [] = {293,285,277,269,269,269,261,249,251,242,237,238,233,233,245,252,254,261,268,275,281,286,291};
-		diviserTableauX( xCAmerica);
 		int yCAmerica [] = {447,441,444,436,427,418,413,414,403,406,406,412,414,420,425,425,432,440,447,450,452,446,447};
+<<<<<<< HEAD
 		diviserTableauY( yCAmerica);
 		int xMexico [] = {232,228,223,214,205,195,189,183,180,176,179,176,170,161,159,154,152,148,145,144,148,150,157,159,159,152,151,150,149,146,146,144,139,140,139,138,135,129,190,193,199,203,206,212,207,210,211,213,219,224,232,237,240,242,244,246,256,254,254,252,245,242,237,233,232};
 		diviserTableauX( xMexico);
@@ -161,15 +166,21 @@ if(onAClique == -1){
 		
   
        Argentina = new Polygon(xArgentina,yArgentina, xArgentina.length);
+=======
+		int xMexico [] = {232,222,215,181,176,178,162,152,149,145,145,148,149,151,155,157,160,160,151,149,143,144,141,138,136,134,126,125,248,237,227,221,217,214,215,213,212,211,212,214,217,221,227,231,235,239,242,244,247,256,254,251,250,243,236,236,233,232};
+		int yMexico [] = {420,414,417,400,395,390,363,347,338,337,347,350,354,359,367,373,376,382,374,364,359,352,350,341,330,326,321,322,354,351,352,356,358,362,369,374,379,386,393,397,402,404,404,403,400,397,395,392,389,391,395,399,403,407,406,411,417,419};
+        int xUSA [] = {128,124,124,123,121,119,120,119,117,116,118,119,119,121,125,126,128,129,137,342,334,331,326,325,319,315,312,311,306,299,293,290,288,287,290,288,283,280,281,279,276,273,268,259,255,252,249,241,238,128};
+        int yUSA [] = {323,323,318,315,312,307,303,300,295,289,286,280,274,269,265,256,249,242,244,295,295,295,298,303,306,312,321,327,331,333,336,341,345,358,366,371,373,368,362,356,353,353,350,348,349,352,354,353,353,323};
+        Africa = new Polygon(xAfrica, yAfrica, yAfrica.length);
+        SAmerica = new Polygon(xSAmerica, ySAmerica, ySAmerica.length);
+>>>>>>> 14c039196a4097af627458c58898f978dc8a7b9b
        CAmerica = new Polygon(xCAmerica, yCAmerica, yCAmerica.length);
-       Canada = new Polygon(xCanada, yCanada, yCanada.length);
        Mexico = new Polygon(xMexico, yMexico, xMexico.length);
        USA = new Polygon(xUSA, yUSA, xUSA.length);
        Brazil = new Polygon(xBrazil, yBrazil, xBrazil.length);
-       Madagascar = new Polygon(xMadagascar, yMadagascar, yMadagascar.length);
-       Equateur = new Polygon(xEquateur, yEquateur, yEquateur.length);
 
     }
+<<<<<<< HEAD
     
     public void diviserTableauX( int [] t){                             //permet d'adapter le dessin des polygones à la taille de l'écran utilisé	
 		int width =1366;
@@ -205,12 +216,16 @@ public void mousePressed(MouseEvent e) {
 		  onAClique = 3;
 	  }
 	  repaint();
+=======
+
+
+public void mousePressed(MouseEvent e) {
+>>>>>>> 14c039196a4097af627458c58898f978dc8a7b9b
       
     }
      
     public void mouseReleased(MouseEvent e) {
-       onAClique =-1;
-       repaint();
+       
     }
      
     public void mouseEntered(MouseEvent e) {
@@ -221,7 +236,7 @@ public void mousePressed(MouseEvent e) {
      
     }
      
-    public void mouseClicked(MouseEvent e) {							//Permet d'effectuer une action au clic de la souris sur un objet
+    public void mouseClicked(MouseEvent e) {
     Point me =e.getPoint();
     fen.setCoordonateX(me.getX());
     fen.setCoordonateY(me.getY());
@@ -234,7 +249,7 @@ public void mousePressed(MouseEvent e) {
     validate();
     this.repaint();
     fen.repeindre();
-   /* if(Brazil.contains(me)){
+    if(Brazil.contains(me)){
 		System.out.println("Je suis là");
 		JFrame J = new JFrame("corona");
 			//J.removeAll();
@@ -243,13 +258,13 @@ public void mousePressed(MouseEvent e) {
 			J.repaint();
 			JPanel p = new JPanel(new FlowLayout());
 			
-			J.add(new JButton("Bouh"));
+			J.add(new JButton("CA MARCHE"));
 			//J.add(p);
 			J.validate();
 			J.repaint();
 		
 		
-	}*/
+	}
     }
 
 }

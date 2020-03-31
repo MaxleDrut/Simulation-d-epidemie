@@ -24,16 +24,25 @@ public class Region {
 	//TODO : crée la région avec ses villes et les débits de population entre chaque ville
 	public Region() {
 		
-		listeVilles.add(new Ville("Paris",      2200000));
-		listeVilles.add(new Ville("Marseille",  860000));
-		listeVilles.add(new Ville("Lyon",       510000));
-		listeVilles.add(new Ville("Toulouse",   470000));
-		listeVilles.add(new Ville("Nice",       340000));
-		listeVilles.add(new Ville("Nantes",     300000));
-		listeVilles.add(new Ville("Montpellier",270000));
-		listeVilles.add(new Ville("Strasbourg", 270000));
+		// Todo rapprocher le graph ville et la gestion des polygones. 
+		// Amerique 
+		listeVilles.add(new Ville("Brazil",      2200000));
+		listeVilles.add(new Ville("Argentina",  860000));
+		listeVilles.add(new Ville("Canada",  860000));
+		listeVilles.add(new Ville("Amerique central",   470000));
+		listeVilles.add(new Ville("Mexico",       340000));
+		listeVilles.add(new Ville("USA",     300000));
+		listeVilles.add(new Ville("Equateur", 270000));
+		//Afrique
+		listeVilles.add(new Ville("Afrique du nord",       510000));
+		listeVilles.add(new Ville("Africa",       510000));
+		listeVilles.add(new Ville("Africa",       510000));
+		listeVilles.add(new Ville("Africa",       510000));
+		listeVilles.add(new Ville("Africa",       510000));
+
+		listeVilles.add(new Ville("Madagascar",270000));
 		listeVilles.add(new Ville("Bordeaux",   240000));
-		listeVilles.add(new Ville("Lille",      230000));
+		listeVilles.add(new Ville("Canada",      230000));
 	
 		listeVilles.get(1).infectionInitale(5000);
 		for(Ville V : listeVilles){
