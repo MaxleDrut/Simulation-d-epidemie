@@ -9,7 +9,7 @@ public class Virus {
 		nom="Vivi";
 		virulence = v;
 		tMaladie = tM;
-		lethalite = l;
+		lethalite = l; 
 	}
 	public Virus(double v, int tM, double l,String n) {
 		virulence = v;
