@@ -1,3 +1,4 @@
+import java.util.LinkedList;
 
 public class Ville {
 
@@ -10,6 +11,13 @@ public class Ville {
 	private long morts;
 	private float[] stades;
 	private int nStade;
+	
+	private LinkedList<Long> PopTotaleJour;
+	private LinkedList<Long> SainsJour;
+	private LinkedList<Long> InfectesJour;
+	private LinkedList<Long> RetablisJour;
+	private LinkedList<Long> MortsJour;
+
 
 	// Ici est créée la variable facteurTransmissionUrbain. Sa valeur prend une des valeurs de stades.
 	// Elle est à différencier de l'infectiosité du virus dans la mesure où elle est relative à l'organisation
@@ -43,6 +51,11 @@ public class Ville {
 			}
 		}
 		facteurTransmissionUrbain=stades[0];
+		LinkedList<Long> PopTotaleJour=new LinkedList<Long>();
+		LinkedList<Long> SainsJour=new LinkedList<Long>();
+	    LinkedList<Long> InfectesJour=new LinkedList<Long>();
+	    LinkedList<Long> RetablisJour=new LinkedList<Long>();
+	    LinkedList<Long> MortsJour=new LinkedList<Long>();
 	}
 	public Ville(String n, long pT) {
 		nStade=0;
@@ -57,13 +70,17 @@ public class Ville {
 			}
 		facteurTransmissionUrbain=stades[0];
 	}
+	
+	public LinkedList<Long> getPopTotaleJour(){return PopTotaleJour;}
+	public LinkedList<Long> getInfectesJour(){return InfectesJour;}
+	public LinkedList<Long> getSainsJour(){return SainsJour;}
+	public LinkedList<Long> getRetablisJour(){return RetablisJour;}
+	public LinkedList<Long> getMortsJour(){return MortsJour;}
 
+	
 	public long getPop() { return popTotale; }
-
 	public long getSains() { return sains; }
-
 	public long getInfectes() { return infectes; }
-
 	public long getRetablis() { return retablis; }
 	
 	public void setSains(long s){
@@ -103,7 +120,7 @@ public class Ville {
 
 	//TODO : fait évoluer les paramètres de la ville selon le modèle SIR et les propriétés du virus
 	public void propagation(Virus v) {
-		long nouveauxCas=(long)((v.getVirulence()*facteurTransmissionUrbain)*infectes*8.0*(double)sains/popTotale);
+		long nouveauxCas=(long)((v.getVirulence()*facteurTransmissionUrbain)*infectes*12.0*(double)sains/popTotale);
 		long nouveauxRetablissements= (long)(1.0/(v.getTMaladie())*infectes);	
 		long nMorts=(long)(v.getLethalite()*infectes);
 		System.out.println("nCas"+nouveauxCas);
@@ -115,6 +132,12 @@ public class Ville {
 		retablis= retablis+nouveauxRetablissements;
 		morts=morts+nMorts;
 		popTotale= popTotale-nMorts;
+		
+		PopTotaleJour.add(popTotale);
+		SainsJour.add(sains);
+		InfectesJour.add(infectes);
+		RetablisJour.add(retablis);
+		MortsJour.add(morts);
 	}
 	
 	public String toString(){
