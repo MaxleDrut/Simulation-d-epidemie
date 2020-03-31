@@ -46,6 +46,9 @@ private Polygon Argentina;
 private Polygon Madagascar;
 private Polygon Equateur;
 private Polygon Canada;
+//private Dimension taille = FenToolkit.getDefaultToolkit().getScreenSize(); 
+
+
 private int largeurEcran =(int)Toolkit.getDefaultToolkit().getScreenSize().getWidth();
 private int hauteurEcran = (int)Toolkit.getDefaultToolkit().getScreenSize().getHeight();
 private int onAClique =-1;												// Ce compteur permet de savoir à quelle étape on est de l'affichage -1 signifie qu'on est à l'initialisation
@@ -57,7 +60,7 @@ public Afficher( FenetreJeu f , String s) {
 fen = f;
 initComponents();
 
-System.out.println(largeurEcran);
+
 try{
 im = ImageIO.read(new File(s));
 
@@ -66,15 +69,9 @@ im = ImageIO.read(new File(s));
                 ex.printStackTrace();
             }
 addMouseListener(this);
- 
+ //tailleFen = this.getSize();
 }
 
-public Afficher( Shape f){
-	
-
-	
-	
-}
 ///*
 public void paintComponent(Graphics g) {
 int h = getHeight()/20;
@@ -94,10 +91,10 @@ if(onAClique == -1){
 				g.fillPolygon(Canada);
 				
    if(compteurPeintre>1){
-               // g.fillPolygon(PeintureEnCours);
+                g.fillPolygon(PeintureEnCours);
 			}
 			
-           g.setColor(Color.YELLOW);
+           g.setColor(Color.BLACK);
 				g.drawPolygon(Equateur);
 				g.drawPolygon(Argentina);
 				g.drawPolygon(Madagascar);
@@ -133,10 +130,6 @@ if(onAClique == -1){
         diviserTableauX( xArgentina);
         int yArgentina [] = {630,634,636,638,643,643,651,652,655,655,666,663,667,672,675,682,687,692,696,700,699,705,712,716,722,727,734,732,729,726,719,713,703,697,689,681,670,667,663,657,652,646,640,559,538,531,538,539,540,550,556,566,567};
         diviserTableauY( yArgentina);
-        int xAfrica[] = {705, 678, 681, 667, 658, 594, 555, 556, 604, 670, 764, 816, 848, 798, 804, 775, 762, 714};
-        diviserTableauX( xAfrica);
-        int yAfrica[] = {631, 558, 509, 488, 466, 464, 425, 394, 332, 325, 354, 441, 435, 503, 550, 571, 608, 632};
-		diviserTableauY( yAfrica);
 		int xCAmerica [] = {293,285,277,269,269,269,261,249,251,242,237,238,233,233,245,252,254,261,268,275,281,286,291};
 		diviserTableauX( xCAmerica);
 		int yCAmerica [] = {447,441,444,436,427,418,413,414,403,406,406,412,414,420,425,425,432,440,447,450,452,446,447};
@@ -166,7 +159,7 @@ if(onAClique == -1){
 			
 			
 		
-       Africa = new Polygon(xAfrica, yAfrica, yAfrica.length);
+  
        Argentina = new Polygon(xArgentina,yArgentina, xArgentina.length);
        CAmerica = new Polygon(xCAmerica, yCAmerica, yCAmerica.length);
        Canada = new Polygon(xCanada, yCanada, yCanada.length);
@@ -180,7 +173,7 @@ if(onAClique == -1){
     
     public void diviserTableauX( int [] t){                             //permet d'adapter le dessin des polygones à la taille de l'écran utilisé	
 		int width =1366;
-	
+	    //int wEcran =(int)tailleFen.getWidth();
 		
 		for( int i = 0 ; i<t.length;i++){
 			t[i] = (int)(t[i]*largeurEcran/width);
@@ -191,7 +184,7 @@ if(onAClique == -1){
 	public void diviserTableauY( int [] t){                             //permet d'adapter le dessin des polygones à la taille de l'écran utilisé	
 	
 		int height=768;
-		
+		//int hEcran = (int)tailleFen.getHeight();
 		for( int i = 0 ; i<t.length;i++){
 			t[i] = (int) (t[i]*hauteurEcran/height);
 			
@@ -203,6 +196,7 @@ public void mousePressed(MouseEvent e) {
       Point me = e.getPoint();
       if( Brazil.contains(me)){
 		  onAClique = 1;
+		  System.out.println(hauteurEcran + "," +largeurEcran);
 	  } else if ( USA.contains(me)){
 		  onAClique=0;
 	  }else if(Argentina.contains(me)){
