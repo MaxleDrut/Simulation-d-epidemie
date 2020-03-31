@@ -1,9 +1,10 @@
 import java.util.*;
+import java.util.ArrayList;
 
 public class Region {
 	
-	private ArrayList<Ville> listeVilles;
-	
+	private ArrayList<Ville> listeVilles = new ArrayList<Ville>();
+
 	// convention d'écriture : liaisonVilles[X][Y] => De la ville X vers la ville Y. donc non commutatif. Sortie négatives. Entrée positive		
 	// Liaison des villes est en pourcentage de population qui se déplace dans une autre ville.
 
@@ -24,14 +25,22 @@ public class Region {
 	public Region() {
 		
 		// Todo rapprocher le graph ville et la gestion des polygones. 
+		// Amerique 
 		listeVilles.add(new Ville("Brazil",      2200000));
 		listeVilles.add(new Ville("Argentina",  860000));
-		listeVilles.add(new Ville("Africa",       510000));
-		listeVilles.add(new Ville("CAmerica",   470000));
+		listeVilles.add(new Ville("Canada",  860000));
+		listeVilles.add(new Ville("Amerique central",   470000));
 		listeVilles.add(new Ville("Mexico",       340000));
 		listeVilles.add(new Ville("USA",     300000));
-		listeVilles.add(new Ville("Madagascar",270000));
 		listeVilles.add(new Ville("Equateur", 270000));
+		//Afrique
+		listeVilles.add(new Ville("Afrique du nord",       510000));
+		listeVilles.add(new Ville("Africa",       510000));
+		listeVilles.add(new Ville("Africa",       510000));
+		listeVilles.add(new Ville("Africa",       510000));
+		listeVilles.add(new Ville("Africa",       510000));
+
+		listeVilles.add(new Ville("Madagascar",270000));
 		listeVilles.add(new Ville("Bordeaux",   240000));
 		listeVilles.add(new Ville("Canada",      230000));
 	
@@ -43,7 +52,7 @@ public class Region {
 	}
 	
 	//TODO : lorsqu'elle est exécutée, cette méthode réalise fait se propager le virus en interne dans chaque ville 
-	public void infection(Virus virus) {
+	public void majPropaVille(Virus virus) {
 		//-> appel de propagation pour chaque villes. 
 		for(Ville V : listeVilles){
 				V.propagation(virus);
@@ -60,6 +69,7 @@ public class Region {
 		long[][] EntreePopu = new long[listeVilles.size()][3];
 
 		for(int i = 0; i < SortiePopu.length ; i++){ // initialisation des tableaux a zero
+			
 			for(int j = 0; j < SortiePopu[i].length ; j++){ // initialisation des tableaux a zero
 				SortiePopu[i][j] = 0;
 				EntreePopu[i][j] = 0;		
@@ -109,23 +119,44 @@ public class Region {
 		int i = 0;
 		for(Ville V : listeVilles){
 			
-			V.setSains(   V.getSains()    + EntreePopu[i][0] - SortiePopu[i][0]);
-			V.setInfectes(V.getInfectes() + EntreePopu[i][1] - SortiePopu[i][1]);
-			V.setRetablis(V.getRetablis() + EntreePopu[i][2] - SortiePopu[i][2]);
+			long S = (V.getSains()    + EntreePopu[i][0] - SortiePopu[i][0]);
+			long I = (V.getInfectes() + EntreePopu[i][1] - SortiePopu[i][1]);
+			long R = (V.getRetablis() + EntreePopu[i][2] - SortiePopu[i][2]);
+			
+			if ( S > 0){
+				V.setSains(S);
+				}
+			else{
+				V.setSains(0);
+				}
+			
+			if ( I > 0){
+				V.setInfectes(I);
+				}
+			else{
+				V.setInfectes(0);
+				}
+
+			if ( R > 0){
+				V.setRetablis(R);
+				}
+			else{
+				V.setRetablis(0);
+				}
+
 			
 			V.setPopulation(V.getSains() + V.getInfectes() + V.getRetablis());
-			
+			System.out.println(V.getNomVille() + " Sains  : " + V.getSains() + " Infectes : " +  V.getInfectes() + " Rétablis : " + V.getRetablis() + " Population Total : " + V.getPop());
 			i++; 
 		}
 	}
 	
 	
-	//TODO : quand on fait appel dans la simu à cette méthode, on lui renseigne un nom de ville et le nombre d'infecté et ça l'infecte.
-	// pas utile
+	
 	public ArrayList<Ville> getVilles(){
 		return listeVilles;
 		}
-	//Simu ne connait que région et veux x malades a Y 
-	//> get liste ville.
+		
+
 }
 
