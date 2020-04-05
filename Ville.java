@@ -8,17 +8,14 @@ public class Ville {
 	private long sains;
 	private long infectes;
 	private long retablis;
-	private long morts;
 	private float[] stades;
 	private int nStade;
-	private int jour;
 
-	private LinkedList<Long> PopTotaleJour=new LinkedList<Long>();
-	private LinkedList<Long> SainsJour=new LinkedList<Long>();
-	private LinkedList<Long> InfectesJour=new LinkedList<Long>();
-	private LinkedList<Long> RetablisJour=new LinkedList<Long>();
-	private LinkedList<Long> MortsJour=new LinkedList<Long>();
-	private LinkedList<Integer> Jours=new LinkedList<Integer>();
+	private LinkedList<Long> PopTotaleJour;
+	private LinkedList<Long> SainsJour;
+	private LinkedList<Long> InfectesJour;
+	private LinkedList<Long> RetablisJour;
+	private LinkedList<Long> MortsJour;
 
 
 	// Ici est créée la variable facteurTransmissionUrbain. Sa valeur prend une des valeurs de stades.
@@ -31,7 +28,7 @@ public class Ville {
 	// Dans un premier temps, je ne ferai que définir les conditions de seuil pour une ville, et je pourrai voir le reste avec les autres ensuite.
 	// On essaiera plusieurs modèles mathématiques pour décrire l'efficaticé des stades? Pour l'instant linéaire.
 	private float facteurTransmissionUrbain;
-  
+
 
 	//Par défaut, une ville crée est vierge de l'épidémie en cours
 	public Ville(String n, int pT,String fTU) {
@@ -40,8 +37,6 @@ public class Ville {
 		sains = pT;
 		infectes = 0;
 		retablis = 0;
-		morts = 0;
-		jour=0;
 		stades= new float[6];
 		if(fTU=="linear"){
 			for(int i=0;i<6;i++){
@@ -54,6 +49,11 @@ public class Ville {
 			}
 		}
 		facteurTransmissionUrbain=stades[0];
+		LinkedList<Long> PopTotaleJour=new LinkedList<Long>();
+		LinkedList<Long> SainsJour=new LinkedList<Long>();
+	  LinkedList<Long> InfectesJour=new LinkedList<Long>();
+	  LinkedList<Long> RetablisJour=new LinkedList<Long>();
+    LinkedList<Long> MortsJour=new LinkedList<Long>();
 	}
 	public Ville(String n, int pT) {
 		nom = n;
@@ -61,7 +61,6 @@ public class Ville {
 		sains = pT;
 		infectes = 0;
 		retablis = 0;
-		jour=0;
 		stades= new float[6];
 			for (int i=0;i<6;i++){
 				stades[i]=1;
@@ -74,7 +73,6 @@ public class Ville {
 	public LinkedList<Long> getSainsJour(){return SainsJour;}
 	public LinkedList<Long> getRetablisJour(){return RetablisJour;}
 	public LinkedList<Long> getMortsJour(){return MortsJour;}
-	public LinkedList<Integer> getJours(){return Jours;}
 
 
 	public long getPop() { return popTotale; }
@@ -105,14 +103,11 @@ public class Ville {
 		sains=s;
 		retablis=r;
 		infectes=i;
-		jour++;
-		actualiserStats();
 	}
 	public void infectionInitale(int i) {
 		infectes=i;
 		retablis=0;
 		sains=popTotale-i;
-		actualiserStats();
 	}
 
 
@@ -126,18 +121,12 @@ public class Ville {
 		infectes= infectes+nouveauxCas-nouveauxRetablissements-nMorts;
 		retablis= retablis+nouveauxRetablissements;
 		popTotale= popTotale-nMorts;
-		morts=morts+nMorts;
-		actualiserStats();
-	}
-	
-	public void actualiserStats(){
-		jour++;
+
 		PopTotaleJour.add(popTotale);
 		SainsJour.add(sains);
 		InfectesJour.add(infectes);
 		RetablisJour.add(retablis);
 		MortsJour.add(morts);
-		Jours.add(jour);
 	}
 
 	public String toString(){
