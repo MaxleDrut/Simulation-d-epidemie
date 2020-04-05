@@ -7,7 +7,7 @@ import java.util.ArrayList;
 public class Simulation extends JFrame implements ActionListener {
 	
 	private Virus maladie;
-	private Region zone;
+	//private Region zone;
 	protected int jourSimu;
 	
 	private boolean timerOn;
@@ -18,6 +18,8 @@ public class Simulation extends JFrame implements ActionListener {
 	
 	private JPanel pCommande, pBoutonsCommande;
 	private JPanel pCreationVirus, pSliders, pPresets, pLancerSimu;
+	private JPanel pStatistiques;
+	private JPanel pCarte;
 	
 	private JButton bPause, bAcc, bRal;
 	private JButton bCorona, bGrippeEspa, bPesteNoire;
@@ -31,6 +33,7 @@ public class Simulation extends JFrame implements ActionListener {
 	private Label valVirulence, valDuree, valLethalite;
 	private Label titSliders, titPresets;
 	private Label rensNom;
+	private Label todoCarte, todoStatistiques;
 	
 	
 	public Simulation(int x, int y) {
@@ -43,7 +46,7 @@ public class Simulation extends JFrame implements ActionListener {
 		timerOn = false;
 		jourSimu = 0;
 		
-		//Panel de commande (en haut pour l'instant)
+		//Panel de commande
 		pCommande = new JPanel(new BorderLayout());
 		pBoutonsCommande = new JPanel();
 		afficheurVit = new TextField();
@@ -66,6 +69,16 @@ public class Simulation extends JFrame implements ActionListener {
 		pCommande.add(pBoutonsCommande, BorderLayout.CENTER);
 		pCommande.add(afficheurVit, BorderLayout.WEST);
 		pCommande.add(afficheurDate, BorderLayout.EAST);
+		
+		//Panel de la carte de la simu (TODO)
+		pCarte = new JPanel();
+		todoCarte = new Label("ici la carte");
+		pCarte.add(todoCarte);
+		
+		//Panel des statistiques en temps réel (TODO)
+		pStatistiques = new JPanel();
+		todoStatistiques = new Label("ici les stats");
+		pStatistiques.add(todoStatistiques);
 		
 		//Panel de création du virus :
 		pCreationVirus = new JPanel(new GridLayout(1,2));
@@ -159,15 +172,14 @@ public class Simulation extends JFrame implements ActionListener {
 		//Panel de lancement de la simu
 		pLancerSimu = new JPanel();
 		bCreerVirus = new JButton("Creer le virus !");
+		bCreerVirus.addActionListener(new EcouteurCreation(this));
 		pLancerSimu.setBorder(BorderFactory.createLineBorder(Color.black));
 		
 		pLancerSimu.add(bCreerVirus);
 		
-		
-		//Ajout des panels
-		//add(pCommande, BorderLayout.NORTH);
-		add(pCreationVirus, BorderLayout.CENTER);
-		add(pLancerSimu, BorderLayout.SOUTH);
+		//Ajout des panels initiaux
+		this.add(pCreationVirus, BorderLayout.CENTER);
+		this.add(pLancerSimu, BorderLayout.SOUTH);
 		
 		this.setSize(x,y);
 		this.setVisible(true);
@@ -179,6 +191,21 @@ public class Simulation extends JFrame implements ActionListener {
 		jourSimu++;
 		afficherDate();
 		
+	}
+	
+	/* Crée le virus avec les paramètres renseignés et c'est parti !
+	 * Cela va lancer la simu en remplaçant les JPanels */
+	public void creerVirus() {
+		maladie = new Virus(this.getVirulence(),this.getDuree(),this.getLethaliteJournaliere(),this.getNomVirus());
+		System.out.println(maladie);
+		this.remove(pCreationVirus);
+		this.remove(pLancerSimu);
+		this.add(pCommande, BorderLayout.NORTH);
+		this.add(pCarte, BorderLayout.CENTER);
+		this.add(pStatistiques, BorderLayout.SOUTH);
+		this.setSize(1000,600);
+		this.validate();
+		this.repaint();
 	}
 	
 	public void pauseTimer() {
