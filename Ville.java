@@ -81,6 +81,7 @@ public class Ville {
 	public long getSains() { return sains; }
 	public long getInfectes() { return infectes; }
 	public long getRetablis() { return retablis; }
+	public long getMorts() { return morts; }
 
 	public String getNomVille(){ return nom; };
 
