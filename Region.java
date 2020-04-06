@@ -4,6 +4,7 @@ import java.util.ArrayList;
 public class Region {
 	
 	private ArrayList<Ville> listeVilles = new ArrayList<Ville>();
+	private int TTSain, TTPop,TTInf,TTRet,TTmorts;
 
 	// convention d'écriture : liaisonVilles[X][Y] => De la ville X vers la ville Y. donc non commutatif. Sortie négatives. Entrée positive		
 	// Liaison des villes est en pourcentage de population qui se déplace dans une autre ville.
@@ -24,7 +25,7 @@ public class Region {
 	//TODO : crée la région avec ses villes et les débits de population entre chaque ville
 	public Region() {
 		
-		// Todo rapprocher le graph ville et la gestion des polygones. 
+		/*// Todo rapprocher le graph ville et la gestion des polygones. 
 		// Amerique 
 		listeVilles.add(new Ville("Brazil",      2200000));
 		listeVilles.add(new Ville("Argentina",  860000));
@@ -63,12 +64,21 @@ public class Region {
 		listeVilles.add(new Ville("France",       510000));
 		listeVilles.add(new Ville("Spain",       510000));
 		listeVilles.add(new Ville("Italy",       510000));
-		listeVilles.add(new Ville("UK",       510000));
+		listeVilles.add(new Ville("UK",       510000));*/
+		
+		listeVilles.add(new Ville("Paris",      2200000));
+		listeVilles.add(new Ville("Marseille",  860000));
+		listeVilles.add(new Ville("Lyon",       510000));
+		listeVilles.add(new Ville("Toulouse",   470000));
+		listeVilles.add(new Ville("Nice",       340000));
+		listeVilles.add(new Ville("Nantes",     300000));
+		listeVilles.add(new Ville("Montpellier",270000));
+		listeVilles.add(new Ville("Strasbourg", 270000));
+		listeVilles.add(new Ville("Lille",      230000));
+		listeVilles.add(new Ville("Italy",       510000));
 
 		listeVilles.get(1).infectionInitale(5000);
-		for(Ville V : listeVilles){
-			System.out.println(V.getNomVille() + " Sains  : " + V.getSains() + " Infectes : " +  V.getInfectes() + " Rétablis : " + V.getRetablis() + " Population Total : " + V.getPop());
-			}
+
 		
 	}
 	
@@ -135,7 +145,7 @@ public class Region {
 				}
 			}
 		}
-		
+
 		//-> Set la nouvelle population
 		int i = 0;
 		for(Ville V : listeVilles){
@@ -167,12 +177,35 @@ public class Region {
 
 			
 			V.setPopulation(V.getSains() + V.getInfectes() + V.getRetablis());
-			System.out.println(V.getNomVille() + " Sains  : " + V.getSains() + " Infectes : " +  V.getInfectes() + " Rétablis : " + V.getRetablis() + " Population Total : " + V.getPop());
+
 			i++; 
 		}
+
 	}
 	
+	public void ToString(){
+		
+			TTSain = 0;
+			TTPop = 0;
+			TTInf = 0;
+			TTRet = 0;
+			TTmorts =0;
+		int i = 0;
+		for(Ville V : listeVilles){
+			
+			System.out.println(V.getNomVille() + " Sains  : " + V.getSains() + " Infectes : " +  V.getInfectes() + " Rétablis : " + V.getRetablis() + " morts :" + V.getMorts()+ " Population Total : " + V.getPop());
+			
+			TTSain +=  V.getSains() ;
+			TTPop +=  V.getPop();
+			TTInf += V.getInfectes();
+			TTRet += V.getRetablis() ;
+			TTmorts += V.getMorts();
 	
+			i++; 
+		}		
+		System.out.println(" Sains  : " +TTSain + " Infectes : " +  TTInf + " Rétablis : " + TTRet + " morts :" + TTmorts+ " Population Total : " + TTPop);
+
+	}
 	
 	public ArrayList<Ville> getVilles(){
 		return listeVilles;
