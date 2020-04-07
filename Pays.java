@@ -119,7 +119,7 @@ public class Pays {
 
 	//TODO : fait évoluer les paramètres de la Pays selon le modèle SIR et les propriétés du virus
 	public void propagation(Virus v) {
-		long nouveauxCas=(long)((v.getVirulence()*facteurTransmissionUrbain)*infectes*12.0*(double)sains/popTotale);
+		long nouveauxCas=(long)((v.getVirulence()*facteurTransmissionUrbain)*infectes*(double)sains/popTotale);
 		long nouveauxRetablissements= (long)(1.0/(v.getTMaladie())*infectes);
 		long nMorts=(long)(v.getLethalite()*infectes);
 
