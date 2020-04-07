@@ -5,7 +5,7 @@ public class TestRegion {
 
 	public static void main (String[] args) {
 		Monde R = new Monde();
-		Virus V = new Virus( 0.03, 5, 0.5, "vivi");
+		Virus V = new Virus(0.60, 7, 0.05, "vivi");
 				System.out.println();
 
 		R.ToString();

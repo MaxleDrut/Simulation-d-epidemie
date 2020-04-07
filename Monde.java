@@ -183,14 +183,13 @@ public class Monde {
 
 	}
 	
-	public void ToString(){
+	public void AfficheMonde(){
 		
 			TTSain = 0;
 			TTPop = 0;
 			TTInf = 0;
 			TTRet = 0;
 			TTmorts =0;
-		int i = 0;
 		for(Pays V : listePays){
 			
 			System.out.println(V.getNomPays() + " Sains  : " + V.getSains() + " Infectes : " +  V.getInfectes() + " Rétablis : " + V.getRetablis() + " morts :" + V.getMorts()+ " Population Total : " + V.getPop());
@@ -200,8 +199,7 @@ public class Monde {
 			TTInf += V.getInfectes();
 			TTRet += V.getRetablis() ;
 			TTmorts += V.getMorts();
-	
-			i++; 
+
 		}		
 		System.out.println(" Sains  : " +TTSain + " Infectes : " +  TTInf + " Rétablis : " + TTRet + " morts :" + TTmorts+ " Population Total : " + TTPop);
 
@@ -211,6 +209,24 @@ public class Monde {
 		return listePays;
 		}
 		
+	public String getStats() {
+			TTSain = 0;
+			TTPop = 0;
+			TTInf = 0;
+			TTRet = 0;
+			TTmorts =0;
+		for(Pays V : listePays){
+			
+			TTSain +=  V.getSains() ;
+			TTPop +=  V.getPop();
+			TTInf += V.getInfectes();
+			TTRet += V.getRetablis() ;
+			TTmorts += V.getMorts();
+		}	
+		
+		return("Total sains : "+TTSain+" infecte : "+TTInf+" retablis : "+TTRet+" morts : "+TTmorts+" et pop totale : "+TTPop);
+			
+	}
 
 }
 
