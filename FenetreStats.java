@@ -29,7 +29,6 @@ public class FenetreStats extends JFrame {
         if(T==0){
 			T=10000;
 		}
-        System.out.println("HOHE C MOI "+T);
         objetsGraphe.add(new ObjetStatistique(vM.getPopTotaleJour(),vM.getJours(),"Population Totale",T));
         objetsGraphe.add(new ObjetStatistique(vM.getRetablisJour(),vM.getJours(),"Nombre de retablis",T));
         objetsGraphe.add(new ObjetStatistique(vM.getInfectesJour(),vM.getJours(),"Nombre d'infectés",T));
@@ -65,7 +64,6 @@ public class FenetreStats extends JFrame {
         JPanel conteneurPrincipal= new JPanel(new BorderLayout());
         JPanel panneauBoutons= new JPanel();
 		this.T=T;
-        System.out.println("HOHE C MOI "+T);
         objetsGraphe.add(new ObjetStatistique(vM.getPopTotaleJour(),vM.getJours(),"Population Totale",T));
         objetsGraphe.add(new ObjetStatistique(vM.getRetablisJour(),vM.getJours(),"Nombre de retablis",T));
         objetsGraphe.add(new ObjetStatistique(vM.getInfectesJour(),vM.getJours(),"Nombre d'infectés",T));
