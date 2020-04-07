@@ -5,10 +5,10 @@ EcouteurCreation.class
 EcouteurPresets.class
 EcouteurVitesse.class
 FenetreStats.class
-Region.class
+Monde.class
 Simulation$1.class
 Simulation$2.class
 Simulation$3.class
 Simulation.class
-Ville.class
+Pays.class
 Virus.class

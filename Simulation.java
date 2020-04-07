@@ -7,7 +7,7 @@ import java.util.ArrayList;
 public class Simulation extends JFrame implements ActionListener {
 	
 	private Virus maladie;
-	private Region zone;
+	private Monde zone;
 	protected int jourSimu;
 	
 	private boolean timerOn;
