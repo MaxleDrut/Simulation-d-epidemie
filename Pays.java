@@ -1,4 +1,7 @@
+
+import java.awt.Polygon;
 import java.util.LinkedList;
+
 
 public class Pays {
 
@@ -12,6 +15,9 @@ public class Pays {
 	private float[] stades;
 	private int nStade;
 	private int jour;
+	private Polygon polygone;
+	private static LinkedList<Pays> listeDesPays;
+	
 
 	private LinkedList<Long> PopTotaleJour=new LinkedList<Long>();
 	private LinkedList<Long> SainsJour=new LinkedList<Long>();
@@ -34,6 +40,7 @@ public class Pays {
   
 
 	//Par défaut, une Pays crée est vierge de l'épidémie en cours
+	public Pays(){}
 	public Pays(String n, int pT,String fTU) {
 		nom = n;
 		popTotale = pT;
@@ -67,6 +74,7 @@ public class Pays {
 				stades[i]=1;
 			}
 		facteurTransmissionUrbain=stades[0];
+		listeDesPays.add(this);
 	}
 
 	public LinkedList<Long> getPopTotaleJour(){return PopTotaleJour;}
@@ -83,7 +91,9 @@ public class Pays {
 	public long getRetablis() { return retablis; }
 	public long getMorts() { return morts; }
 
-	public String getNomPays(){ return nom; };
+	public String getNomPays(){ return nom; }
+	public Polygon getPolygon(){ return polygone;}
+	public static LinkedList<Pays>getListePays(){return listeDesPays;}
 
 	public void setSains(long s){
 		sains=s;
@@ -139,6 +149,9 @@ public class Pays {
 		RetablisJour.add(retablis);
 		MortsJour.add(morts);
 		Jours.add(jour);
+	}
+	public void setPolygon(Polygon p){
+		this.polygone=p;
 	}
 
 	public String toString(){

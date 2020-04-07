@@ -10,7 +10,7 @@ public class FenetreStats extends JFrame {
 	private XChartPanel<XYChart> panelGraphique;
 	private XYChart graphique=new XYChart(0,0);
 	private LinkedList<ObjetStatistique> objetsGraphe=new LinkedList<ObjetStatistique>();
-	private Ville vM;
+	private Pays vM;
 	private int T;
 	private int nChoixJours=5;
 	
@@ -19,8 +19,8 @@ public class FenetreStats extends JFrame {
 		graphique.addSeries(oS.getNomAxe(),oS.getJours(),oS.getSerieStatistique());
 	}
 	
-    public FenetreStats(Ville vM) {		
-		super("Statistiques de la zone "+vM.getNomVille());
+    public FenetreStats(Pays vM) {		
+		super("Statistiques de la zone "+vM.getNomPays());
 		this.vM=vM;
 		this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         this.setSize(1080,720);
@@ -56,8 +56,8 @@ public class FenetreStats extends JFrame {
         this.setVisible(true);
     }
     
-        public FenetreStats(Ville vM,int T) {		
-		super("Statistiques de la zone "+vM.getNomVille());
+        public FenetreStats(Pays vM,int T) {		
+		super("Statistiques de la zone "+vM.getNomPays());
 		this.vM=vM;
 		this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         this.setSize(1080,720);
