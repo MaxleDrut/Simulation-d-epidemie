@@ -48,7 +48,7 @@ public class FenetreJeu extends JFrame implements MouseListener{
         //this.setResizable(false);
         
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		this.setContentPane( new Afficher(this ,"carte.jpg"));
+		this.setContentPane( new Afficher(this ,"bleu.jpg"));
 		
         //Création des conteneurs
     
@@ -56,11 +56,9 @@ public class FenetreJeu extends JFrame implements MouseListener{
 		conteneurPrincipal.setOpaque(false);
 	JPanel conteneurCentral = new JPanel(new BorderLayout());
 		conteneurCentral.setOpaque(false);
-	conteneurPrincipal.add(conteneurCentral,BorderLayout.CENTER);
-	conteneurPrincipal.add(imgN,BorderLayout.NORTH);
-	conteneurPrincipal.add(imgE,BorderLayout.EAST);
-	conteneurPrincipal.add(imgW,BorderLayout.WEST);
-	conteneurPrincipal.add(imgS,BorderLayout.SOUTH);
+
+
+	
         //Création des panels
         
         JPanel bandeBouton = new JPanel(new FlowLayout());
@@ -72,39 +70,32 @@ public class FenetreJeu extends JFrame implements MouseListener{
 		titre.setEditable(false);
 		panoTitre.setOpaque(false);
 		titre.setOpaque(false);
-		//panoTitre.setBackground(new Color(237,72,81));
+
 		
 		
-		//panoTitre.add(titre);
-		conteneurCentral.add(panoTitre,BorderLayout.NORTH);
-		conteneurCentral.add(bandeBouton,BorderLayout.CENTER);
+
 		
-		imgN.add(img1,BorderLayout.NORTH);
-		imgN.setOpaque(false);
-		imgS.add(img2,BorderLayout.SOUTH);
+
+
 		imgS.setOpaque(false);
-		imgE.add(img3,BorderLayout.EAST);
-		imgE.setOpaque(false);
-		imgW.add(img4,BorderLayout.WEST);
-		imgW.setOpaque(false);
-        //Elements de panel Bouton
-        imgS.add(xZone);
-		imgS.add(yZone);
-        
-       // bandeBouton.add(boutonLancement);
-        boutonLancement.setFont(new Font("hooge 05_55", Font.ITALIC,12));
-       // bandeBouton.add(boutonParametre);
-		boutonParametre.setFont(new Font("hooge 05_55", Font.ITALIC,12));
-        
-          
-        //Effets des boutons
+
+        GridLayout coordonees =  new GridLayout(20,20);
+
+
+        //add(xZone);
+       // add(yZone);
+	
+		xZone.setBounds(20,2000,100,10);
+		yZone.setBounds(20,20,100,10);
+    
+
         
         //boutonLancement.addActionListener( new EcouteurClic(this, 1));
 		boutonLancement.addMouseListener(this);
 		titre.addMouseListener(this);
 		titre.setHighlighter(null);
         //ajout du conteneur principal dans la fenetre
-        this.add(conteneurPrincipal);
+        //this.add(conteneurCentral);
         
         this.setVisible(true);
     }
