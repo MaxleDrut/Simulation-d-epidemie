@@ -33,7 +33,8 @@ public class Simulation extends JFrame implements ActionListener {
 	private Label valVirulence, valDuree, valLethalite;
 	private Label titSliders, titPresets;
 	private Label rensNom;
-	private Label todoCarte, todoStatistiques;
+	private Label todoCarte;
+	private Label statistiques;
 	
 	
 	public Simulation(int x, int y) {
@@ -76,10 +77,10 @@ public class Simulation extends JFrame implements ActionListener {
 		todoCarte = new Label("ici la carte");
 		pCarte.add(todoCarte);
 		
-		//Panel des statistiques en temps réel (TODO)
+		//Panel des statistiques en temps réel
 		pStatistiques = new JPanel();
-		todoStatistiques = new Label("ici les stats");
-		pStatistiques.add(todoStatistiques);
+		statistiques = new Label(zone.getStats());
+		pStatistiques.add(statistiques);
 		
 		//Panel de création du virus :
 		pCreationVirus = new JPanel(new GridLayout(1,2));
@@ -194,6 +195,7 @@ public class Simulation extends JFrame implements ActionListener {
 		zone.majPropaPays(maladie);
 		zone.deplacements();
 		zone.AfficheMonde();
+		afficherStatistiques();
 		
 	}
 	
@@ -211,6 +213,17 @@ public class Simulation extends JFrame implements ActionListener {
 		this.validate();
 		this.repaint();
 	}
+	
+	public void infectionPays(Pays aTrouver, int aInfecter) {
+		ArrayList<Pays> listePays = zone.getPays();
+		String nomATrouver = aTrouver.getNomPays();
+		int i=0;
+		while(i<listePays.size() && nomATrouver!=listePays.get(i).getNomPays()) {
+			i++;
+		}
+		
+		
+	} 
 	
 	public void pauseTimer() {
 		if(timerOn) {
@@ -252,6 +265,12 @@ public class Simulation extends JFrame implements ActionListener {
 		this.validate();
 		this.repaint();
 		
+	}
+	
+	public void afficherStatistiques() {
+		statistiques.setText(zone.getStats());
+		this.validate();
+		this.repaint();
 	}
 	
 	public String getNomVirus() {
