@@ -1,5 +1,4 @@
 TestMaxence.java
-TestRegion.java
 TestRegion.class
 EcouteurCreation.class
 EcouteurPresets.class
@@ -12,3 +11,6 @@ Simulation$3.class
 Simulation.class
 Pays.class
 Virus.class
+Vincent\Afficher.class
+Vincent\FenetreJeu.class
+Vincent\TestFenetreJeu.class
