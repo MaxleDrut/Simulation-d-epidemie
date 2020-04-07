@@ -59,13 +59,12 @@ private Polygon SEAsia;
 private Polygon India;
 private Polygon Kazakhstan;
 private Polygon China;
-
+private Polygon CAsia;
 private Polygon Indonesia;
 private Polygon Australia;
 private Polygon NewZealand;
 private Polygon CenterEurope;
 private Polygon Russia;
-
 private Polygon NorthenLands;
 private Polygon IndependantNationOfReunionIsland;
 private Polygon Greenland;
@@ -130,7 +129,7 @@ int w = getWidth()/25;
 				g.fillPolygon(SEAsia);
 				g.fillPolygon(China);
                 g.fillPolygon(Kazakhstan);
-            
+                g.fillPolygon(CAsia);
 				
    if(compteurPeintre>1){
 	   
@@ -163,7 +162,7 @@ int w = getWidth()/25;
                 g.drawPolygon(Australia);
                 g.drawPolygon(NewZealand);
                 g.drawPolygon(Indonesia);
-        
+				g.drawPolygon(CAsia);
 				g.drawPolygon(China);
                 g.drawPolygon(Kazakhstan);
 
@@ -289,8 +288,8 @@ int w = getWidth()/25;
         diviserTableauY( yGreenland);
         int xJapan [] = {};
         int yJapan [] = {};
-        int xCAsia [] = {};
-        int yCAsia [] = {};
+        int xCAsia [] = {845,850,839,839,843,844,847,852,856,859,864,867,868,876,879,880,909,907,906,918,920,925,929,932,937,957,972,975,984,983,982,981,985,986,970,956,930,916,909,898,883,872,869,866,862,860,855,852,849,843,842,843,846,849,850,843,842,847,849,851,851,851,848,846,850};
+        int yCAsia [] = {326,343,357,359,360,366,365,370,372,372,369,368,372,375,375,377,377,375,365,350,347,347,346,346,344,345,346,344,346,328,323,316,308,302,296,302,289,292,292,291,291,283,285,284,284,286,287,288,291,292,296,300,297,301,303,304,308,309,313,315,319,324,325,325,343};
         int xIndependantNationOfReunionIsland [] = {};
         int yIndependantNationOfReunionIsland [] = {};
        Argentina = new Polygon(xArgentina,yArgentina, xArgentina.length);
