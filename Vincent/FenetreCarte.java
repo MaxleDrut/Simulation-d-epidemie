@@ -1,6 +1,4 @@
 import java.awt.*;
-import java.awt.geom.Rectangle2D;
-import java.awt.Shape;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -12,11 +10,6 @@ import java.awt.event.MouseEvent;
 
 
 public class FenetreCarte extends JFrame implements MouseListener{
-
-
-    
-
-
 
 	private JTextArea xZone = new JTextArea("ici les coordonées en x");
 	private JTextArea yZone = new JTextArea("ici les coordonées en y");

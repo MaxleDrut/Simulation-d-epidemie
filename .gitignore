@@ -11,6 +11,6 @@ Simulation$3.class
 Simulation.class
 Pays.class
 Virus.class
-Vincent\Afficher.class
-Vincent\FenetreJeu.class
-Vincent\TestFenetreJeu.class
+Vincent\Carte.class
+Vincent\FenetreCarte.class
+
