@@ -11,7 +11,7 @@ import java.awt.event.MouseListener;
 import java.awt.event.MouseEvent;
 
 
-public class FenetreJeu extends JFrame implements MouseListener{
+public class Carte extends JFrame implements MouseListener{
 
     //Declaration des attributs de la fenêtre
 	private JButton boutonLancement = new JButton(" Jouer ");
@@ -37,7 +37,7 @@ public class FenetreJeu extends JFrame implements MouseListener{
     /**
      * Constructeur de la classe UneFenetre
      */
-    public FenetreJeu(int lg, int larg) {
+    public Carte() {
 
         //on definit le nom de la fenetre
         super("Corona Virus .INC");
@@ -159,7 +159,9 @@ public void changeFenetre(){
 		validate();
 		repaint();
 	}
-	
+	 public static void main(String[] args){
+        Carte f = new Carte();
+    }
 		
 }
 
