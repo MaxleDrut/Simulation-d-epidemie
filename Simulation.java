@@ -17,11 +17,12 @@ public class Simulation extends JFrame implements ActionListener {
 	private Timer temps;
 	
 	private JPanel pCommande, pBoutonsCommande;
-	private JPanel pCreationVirus, pSliders, pPresets, pLancerSimu;
+	private JPanel pCreationVirus, pSliders, pEnteteNom, pPresets, pLancerSimu;
 	private JPanel pStatistiques;
 	private JPanel pCarte;
 	
 	private JButton bPause, bAcc, bRal;
+	private JButton bNomRandom;
 	private JButton bCorona, bRougeole, bVariole, bPolio, bGrippeSaison, bGrippeEspa, bPesteBombay;
 	private JButton bCreerVirus;
 	
@@ -124,7 +125,14 @@ public class Simulation extends JFrame implements ActionListener {
 			}
 		});
 		
-		rensNom = new Label("Nom du virus :");
+			//Sous-sous panel avec le titre et le bouton pour nommer le virus
+			JPanel pEnteteNom = new JPanel(new BorderLayout());
+			rensNom = new Label("Nom du virus :");
+			bNomRandom = new JButton("Aleatoire !");
+			bNomRandom.addActionListener(new EcouteurNomRandom(this));
+			pEnteteNom.add(rensNom, BorderLayout.WEST);
+			pEnteteNom.add(bNomRandom, BorderLayout.EAST);
+			
 		nomDuVirus = new TextField("");
 		
 		pSliders.add(titSliders);
@@ -134,7 +142,7 @@ public class Simulation extends JFrame implements ActionListener {
 		pSliders.add(sDuree);
 		pSliders.add(valLethalite);
 		pSliders.add(sLethalite);
-		pSliders.add(rensNom);
+		pSliders.add(pEnteteNom);
 		pSliders.add(nomDuVirus);
 		pSliders.setBorder(BorderFactory.createLineBorder(Color.black));
 		

@@ -1,6 +1,7 @@
 TestMaxence.java
 TestRegion.class
 EcouteurCreation.class
+EcouteurNomRandom.class
 EcouteurPresets.class
 EcouteurVitesse.class
 FenetreStats.class
@@ -13,4 +14,5 @@ Pays.class
 Virus.class
 Vincent\Carte.class
 Vincent\FenetreCarte.class
+
 
