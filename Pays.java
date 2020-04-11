@@ -16,7 +16,7 @@ public class Pays {
 	private int nStade;
 	private int jour;
 	private Polygon polygone;
-	private static LinkedList<Pays> listeDesPays;
+	private static LinkedList<Pays> listeDesPays = new LinkedList<Pays>();
 	
 
 	private LinkedList<Long> PopTotaleJour=new LinkedList<Long>();

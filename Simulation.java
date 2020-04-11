@@ -22,7 +22,7 @@ public class Simulation extends JFrame implements ActionListener {
 	private JPanel pCarte;
 	
 	private JButton bPause, bAcc, bRal;
-	private JButton bCorona, bGrippeEspa, bPesteNoire;
+	private JButton bCorona, bRougeole, bVariole, bPolio, bGrippeSaison, bGrippeEspa, bPesteBombay;
 	private JButton bCreerVirus;
 	
 	private JSlider sVirulence,sDuree,sLethalite;
@@ -102,7 +102,7 @@ public class Simulation extends JFrame implements ActionListener {
 			}
 		});
 		
-		sDuree = new JSlider(1,30,10);
+		sDuree = new JSlider(1,60,10);
 		valDuree = new Label("Duree de la maladie : "+sDuree.getValue()+" jour(s)");
 		sDuree.setPaintTicks(true);
 		sDuree.setMinorTickSpacing(5);
@@ -145,25 +145,39 @@ public class Simulation extends JFrame implements ActionListener {
 		
 		titPresets = new Label("Choix d'un virus deja existant");
 		bCorona = new JButton("Covid-19");
+		bRougeole = new JButton("Rougeole");
+		bVariole = new JButton("Variole");
+		bPolio = new JButton("Polio");
+		bGrippeSaison = new JButton("Grippe saisonniere");
 		bGrippeEspa = new JButton("Grippe espagnole");
-		bPesteNoire = new JButton("Peste bubonique");
+		bPesteBombay = new JButton("Peste de Bombay");
 		
 		bCorona.addActionListener(new EcouteurPresets(this,"Coronavirus"));
+		bRougeole.addActionListener(new EcouteurPresets(this,"Rougeole"));
+		bVariole.addActionListener(new EcouteurPresets(this,"Variole"));
+		bPolio.addActionListener(new EcouteurPresets(this,"Polio"));
+		bGrippeSaison.addActionListener(new EcouteurPresets(this,"Grippe saisonniere"));
 		bGrippeEspa.addActionListener(new EcouteurPresets(this,"Grippe espagnole"));
-		bPesteNoire.addActionListener(new EcouteurPresets(this,"Peste bubonique"));
+		bPesteBombay.addActionListener(new EcouteurPresets(this,"Peste de Bombay"));
 		
 		pPresets.add(titPresets);
 		pPresets.add(Box.createVerticalGlue());
 		pPresets.add(bCorona);
-		pPresets.add(Box.createVerticalGlue());
+		pPresets.add(bRougeole);
+		pPresets.add(bVariole);
+		pPresets.add(bPolio);
+		pPresets.add(bGrippeSaison);
 		pPresets.add(bGrippeEspa);
-		pPresets.add(Box.createVerticalGlue());
-		pPresets.add(bPesteNoire);
+		pPresets.add(bPesteBombay);
 		pPresets.add(Box.createVerticalGlue());		
 		
 		bCorona.setAlignmentX(Component.CENTER_ALIGNMENT);
+		bRougeole.setAlignmentX(Component.CENTER_ALIGNMENT);
+		bVariole.setAlignmentX(Component.CENTER_ALIGNMENT);
+		bPolio.setAlignmentX(Component.CENTER_ALIGNMENT);
+		bGrippeSaison.setAlignmentX(Component.CENTER_ALIGNMENT);
 		bGrippeEspa.setAlignmentX(Component.CENTER_ALIGNMENT);
-		bPesteNoire.setAlignmentX(Component.CENTER_ALIGNMENT);
+		bPesteBombay.setAlignmentX(Component.CENTER_ALIGNMENT);
 		
 		pPresets.setBorder(BorderFactory.createLineBorder(Color.black));
 		
@@ -189,7 +203,8 @@ public class Simulation extends JFrame implements ActionListener {
 		
 	}
 	
-	public void actionPerformed(ActionEvent ae) { //Chaque incrémentation fait passer au jour suivant.
+	//Chaque incrémentation fait passer au jour suivant, ce qui va faire se propager la maladie dans les pays et le monde.
+	public void actionPerformed(ActionEvent ae) { 
 		jourSimu++;
 		afficherDate();
 		zone.majPropaPays(maladie);
