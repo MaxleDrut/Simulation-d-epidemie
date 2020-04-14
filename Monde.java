@@ -25,42 +25,42 @@ public class Monde {
 	//TODO : crée la région avec ses Payss et les débits de population entre chaque Pays
 	public Monde() {
 		
-			listePays.add(new Pays("Brazil",200000);
-			listePays.add(new Pays("Argentina",200000);
-			listePays.add(new Pays("Canada",200000);
-			listePays.add(new Pays("CAmerica",200000);
-			listePays.add(new Pays("Mexico",200000);
-			listePays.add(new Pays("USA",200000);
-			listePays.add(new Pays("Equateur",200000);
-			listePays.add(new Pays("Greenland",200000);
-			listePays.add(new Pays("North Africa",200000);
-			listePays.add(new Pays("Sahel",200000);
-			listePays.add(new Pays("Ethiopia",200000);
-			listePays.add(new Pays("Congo",200000);
-			listePays.add(new Pays("South Africa",200000);
-			listePays.add(new Pays("Madagascar",200000);
-			listePays.add(new Pays("Arabia",200000);
-			listePays.add(new Pays("India",200000);
-			listePays.add(new Pays("Kazakstan",200000);
-			listePays.add(new Pays("China",200000);
-			listePays.add(new Pays("S.E Asia",200000);
-			listePays.add(new Pays("Turkey",200000);
-			listePays.add(new Pays("Central Asia",200000);
-			listePays.add(new Pays("Japon",200000);
-			listePays.add(new Pays("Indonesia",200000);
-			listePays.add(new Pays("New Zealand",200000);
-			listePays.add(new Pays("Australia",200000);
-			listePays.add(new Pays("Independant Nation of Reunion Island",200000);
-			listePays.add(new Pays("Russia",200000);
-			listePays.add(new Pays("Northen Lands",200000);
-			listePays.add(new Pays("Balkans",200000);
-			listePays.add(new Pays("Islande",200000);
-			listePays.add(new Pays("Center Europe",200000);
-			listePays.add(new Pays("France",200000);
-			listePays.add(new Pays("Spain",200000);
-			listePays.add(new Pays("Italy",200000);
-			listePays.add(new Pays("UK",200000);
-		listePays.get(1).infectionInitale(5000);
+			listePays.add(new Pays("Brazil",200000));
+			listePays.add(new Pays("Argentina",200000));
+			listePays.add(new Pays("Canada",200000));
+			listePays.add(new Pays("CAmerica",200000));
+			listePays.add(new Pays("Mexico",200000));
+			listePays.add(new Pays("USA",200000));
+			listePays.add(new Pays("Equateur",200000));
+			listePays.add(new Pays("Greenland",200000));
+			listePays.add(new Pays("North Africa",200000));
+			listePays.add(new Pays("Sahel",200000));
+			listePays.add(new Pays("Ethiopia",200000));
+			listePays.add(new Pays("Congo",200000));
+			listePays.add(new Pays("South Africa",200000));
+			listePays.add(new Pays("Madagascar",200000));
+			listePays.add(new Pays("Arabia",200000));
+			listePays.add(new Pays("India",200000));
+			listePays.add(new Pays("Kazakstan",200000));
+			listePays.add(new Pays("China",200000));
+			listePays.add(new Pays("S.E Asia",200000));
+			listePays.add(new Pays("Turkey",200000));
+			listePays.add(new Pays("Central Asia",200000));
+			listePays.add(new Pays("Japon",200000));
+			listePays.add(new Pays("Indonesia",200000));
+			listePays.add(new Pays("New Zealand",200000));
+			listePays.add(new Pays("Australia",200000));
+			listePays.add(new Pays("Independant Nation of Reunion Island",200000));
+			listePays.add(new Pays("Russia",200000));
+			listePays.add(new Pays("Northen Lands",200000));
+			listePays.add(new Pays("Balkans",200000));
+			listePays.add(new Pays("Islande",200000));
+			listePays.add(new Pays("Center Europe",200000));
+			listePays.add(new Pays("France",200000));
+			listePays.add(new Pays("Spain",200000));
+			listePays.add(new Pays("Italy",200000));
+			listePays.add(new Pays("UK",200000));
+			listePays.get(1).infectionInitale(5000);
 
 			// set 
 			
@@ -192,6 +192,20 @@ public class Monde {
 	public ArrayList<Pays> getPays(){
 		return listePays;
 		}
+		//METHODE POUR VOIR LE PAYS CORRESPONDANT AU NOM
+	public Pays getPaysParNom(String n){
+		Pays r=new Pays();
+		for(Pays p:listePays){
+			if (p.getNomPays().equals(n)){
+			r=p;
+			}
+		}
+		if(r.getNomPays()==null){
+			System.out.println(n+" n a pas pu etre place");
+		}
+		return r;
+	}
+		
 		
 		
 		

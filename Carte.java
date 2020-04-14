@@ -40,7 +40,6 @@ private Monde monde;
 
 private LinkedList<Polygon> listePays= new LinkedList<Polygon>();
 private Polygon SAmerica;
-private Polygon Africa;
 private Polygon CAmerica;
 private Polygon Mexico;
 private Polygon USA;
@@ -90,8 +89,6 @@ public Carte( FenetreCarte f , String s) {
 //im = Toolkit.getDefaultToolkit().getImage(s);
 fen = f;
 initComponents();
-this.monde= new Monde();
-
 
 try{
 im = ImageIO.read(new File(s));
@@ -191,12 +188,13 @@ g.fillPolygon(Iceland);
 
 }
 private void initComponents() {
-
+		monde=new Monde();
 		int xBrazil [] = {383,380,380,380,379,368,360,347,337,344,347,354,376,382,387,391,394,401,406,408,410,406,407,411,414,416,419,421,424,427,430,435,436,441,447,453,455,460,467,472,474,475,475,472,467,461,461,461,459,455,452,447,440,432,422,422,420,416,411,404,397};
 		int yBrazil [] = {630,611,593,581,566,553,539,538,530,513,500,490,461,458,458,457,458,462,467,471,476,482,488,490,490,488,487,487,485,487,488,490,494,493,493,493,496,498,502,505,510,514,516,521,529,541,546,553,558,566,577,578,575,585,592,596,603,610,617,628,635};
         diviserTableauX(xBrazil);
         diviserTableauY(yBrazil);
         Brazil = new Polygon(xBrazil, yBrazil, xBrazil.length);
+        System.out.println(monde.getPaysParNom("Brazil").toString());
         monde.getPaysParNom("Brazil").setPolygon(Brazil);
         listePays.add(Brazil);
 
@@ -294,7 +292,7 @@ private void initComponents() {
         diviserTableauX( xNAfrica);
         diviserTableauY( yNAfrica);
         NAfrica = new Polygon(xNAfrica, yNAfrica, xNAfrica.length);
-        monde.getPaysParNom("NAfrica").setPolygon(NAfrica);
+        monde.getPaysParNom("North Africa").setPolygon(NAfrica);
 	    listePays.add(NAfrica);
 
         int xSahel [] = {746,721,707,671,632,616,594,578,565,563,561,559,559,555,557,558,558,559,557,557,556,554,556,555,560,563,569,569,571,576,580,585,590,601,603,613,616,621,622,627,628,634,634,641,646,650,655,659,666,669,676,695,705,717,727,735,741,743,744,745,745};
@@ -326,7 +324,7 @@ private void initComponents() {
         diviserTableauX( xSAfrica);
         diviserTableauY( ySAfrica);
         SAfrica = new Polygon(xSAfrica, ySAfrica, xSAfrica.length);
-        monde.getPaysParNom("SAfrica").setPolygon(SAfrica);
+        monde.getPaysParNom("South Africa").setPolygon(SAfrica);
 	    listePays.add(SAfrica);
 
         int xArabia [] = {773,774,773,773,779,779,782,785,786,790,791,793,794,794,799,801,807,811,812,813,813,813,820,822,831,833,836,837,842,846,849,854,857,860,864,865,868,872,874,875,875,881,881,883,878,871,868,865,862,859,857,854,851,849,847,847,844,844,841,838,834,831,830,834,838,849,846,845,838,836,830,827,822,818,813,814,809,804,790,780,779,775,773,773,774};
@@ -342,7 +340,7 @@ private void initComponents() {
         diviserTableauX( xSEAsia);
         diviserTableauY( ySEAsia);
         SEAsia = new Polygon(xSEAsia, ySEAsia, xSEAsia.length);
-        monde.getPaysParNom("SEAsia").setPolygon(SEAsia);
+        monde.getPaysParNom("S.E Asia").setPolygon(SEAsia);
         listePays.add(SEAsia);
 
         int xIndia [] = {1020,1010,988,975,957,931,919,912,906,907,912,919,926,925,931,938,938,940,943,948,950,952,954,956,959,960,963,965,968,971,971,969,971,972,972,975,981,983,987,990,992,995,998,998,999,1000,1004,1010,1014,1013,1020};
@@ -358,7 +356,7 @@ private void initComponents() {
         diviserTableauX( xKazakhstan);
         diviserTableauX( yKazakhstan);
         Kazakhstan = new Polygon(xKazakhstan, yKazakhstan, xKazakhstan.length);
-        monde.getPaysParNom("Kazakhstan").setPolygon(Kazakhstan);
+        monde.getPaysParNom("Kazakstan").setPolygon(Kazakhstan);
         listePays.add(Kazakhstan);
 
         int xChina [] = {1008,992,991,987,981,982,983,1010,1014,1020,1025,1029,1035,1042,1049,1050,1057,1059,1066,1067,1088,1092,1099,1106,1109,1114,1118,1124,1131,1135,1137,1137,1138,1139,1141,1137,1139,1138,1137,1134,1130,1127,1125,1128,1130,1132,1132,1136,1134,1132,1130,1128,1127,1124,1123,1121,1117,1117,1116,1114,1119,1121,1123,1124,1126,1129,1132,1132,1131,1132,1140,1144,1148,1148,1157,1158,1158,1163,1164,1166,1167,1164,1163,1160,1157,1155,1155,1158,1161,1162,1162,1164,1165,1164,1161,1164,1167,1168,1169,1169,1169,1165,1163,1161,1154,1153,1151,1143,1140,1138,1133,1132,1131,1126,1122,1118,1115,1109,1105,1101,1102,1102,1102,1102,1102,1100,1099,1096,1093,1091,1082,1082,1081,1075,1072,1068,1059,1055,1050,1043,1040,1034,1030,1029,1028,1027,1025,1023,1019,1017,1015,1015,1018,1018,1014,1008,1008};
@@ -374,7 +372,7 @@ private void initComponents() {
         diviserTableauX( xNewZealand);
         diviserTableauY( yNewZealand);
         NewZealand = new Polygon(xNewZealand, yNewZealand, xNewZealand.length);
-        monde.getPaysParNom("NewZealand").setPolygon(NewZealand);
+        monde.getPaysParNom("New Zealand").setPolygon(NewZealand);
         listePays.add(NewZealand);
 
         int xAustralia [] = {1217,1207,1202,1198,1195,1190,1188,1185,1177,1174,1170,1167,1162,1160,1154,1154,1142,1132,1125,1117,1114,1112,1111,1111,1113,1112,1114,1114,1114,1109,1111,1115,1120,1124,1128,1135,1140,1142,1146,1150,1153,1158,1164,1167,1173,1179,1188,1192,1194,1195,1200,1204,1207,1207,1206,1210,1211,1211,1217,1221,1225,1230,1234,1239,1243,1249,1252,1256,1258,1263,1264,1269,1273,1277,1279,1278,1274,1271,1271,1269,1263,1255,1255,1254,1254,1248,1247,1241,1240,1237,1237,1235,1231,1219,1215,1213,1213,1213,1216};
@@ -398,7 +396,7 @@ private void initComponents() {
         diviserTableauX( xCenterEurope);
         diviserTableauY( yCenterEurope);
         CenterEurope = new Polygon(xCenterEurope, yCenterEurope, xCenterEurope.length);
-        monde.getPaysParNom("CenterEurope").setPolygon(CenterEurope);
+        monde.getPaysParNom("Center Europe").setPolygon(CenterEurope);
         listePays.add(CenterEurope);
 
         int xNorthenLands [] = {766,761,753,739,732,723,715,710,707,705,708,711,717,717,713,705,704,698,693,693,691,695,698,698,692,691,690,687,683,680,675,666,660,659,659,662,668,668,670,675,678,678,675,674,674,673,673,671,671,669,666,665,663,657,654,651,649,649,653,648,650,653,651,649,651,654,660,661,667,667,668,669,669,674,674,674,678,683,685,687,693,698,701,711,719,725,735,740,746,749,754,758,766,769,770,766,752,743,746,749,749,752,754,762};
@@ -406,7 +404,7 @@ private void initComponents() {
         diviserTableauX( xNorthenLands);
         diviserTableauY( yNorthenLands);
         NorthenLands = new Polygon(xNorthenLands, yNorthenLands, xNorthenLands.length);
-        monde.getPaysParNom("NorthernLands").setPolygon(NorthenLands);
+        monde.getPaysParNom("Northen Lands").setPolygon(NorthenLands);
         listePays.add(NorthenLands);
 
         int xRussia [] = {739,735,734,733,730,724,720,716,719,724,728,730,735,738,743,745,748,750,753,757,760,763,767,769,769,768,765,763,762,762,765,768,769,771,774,776,780,785,786,786,783,781,780,779,781,783,786,805,816,818,821,823,824,821,814,816,831,834,844,850,854,860,862,860,860,859,863,902,904,917,920,921,926,929,934,937,939,943,947,948,960,964,974,979,984,986,989,991,995,999,1002,1004,1017,1016,1015,1015,1016,1028,1031,1034,1046,1050,1060,1067,1071,1078,1081,1100,1101,1101,1101,1101,1101,1106,1110,1123,1127,1131,1133,1136,1142,1148,1151,1154,1157,1163,1166,1170,1169,1169,1169,1168,1165,1161,1164,1165,1169,1178,1180,1183,1185,1186,1187,1188,1189,1188,1185,1185,1185,1186,1182,1181,1177,1173,1170,1169,1166,1162,1158,1154,1159,1162,1163,1164,1172,1179,1187,1189,1202,1208,1209,1210,1217,1220,1224,1227,1230,1233,1237,1239,1237,1235,1234,1232,1230,1229,1228,1227,1228,1231,1237,1240,1244,1248,1249,1253,1253,1250,1253,1256,1254,1253,1253,1256,1259,1255,1254,1253,1252,1247,1244,1243,1250,1253,1254,1257,1262,1267,1267,1267,1270,1271,1274,1279,1279,1287,1286,1281,1278,1274,1270,1265,1262,1269,1271,1271,1270,1267,1275,1282,1298,1298,1294,1296,1288,1278,1273,1259,1252,1243,1228,1213,1202,1192,1178,1172,1163,1158,1154,1148,1141,1136,1132,1128,1123,1119,1118,1114,1106,1104,1091,1085,1083,1081,1086,1086,1081,1076,1071,1067,1063,1067,1060,1056,1052,1047,1039,1039,1042,1040,1023,1020,1022,1021,1014,1010,1004,998,997,994,988,985,976,978,977,977,972,963,944,930,929,931,928,925,925,920,913,910,894,896,900,903,896,890,886,886,886,888,894,898,899,903,911,896,888,876,878,882,877,873,873,876,879,881,887,887,885,884,882,878,878,878,875,872,872,867,866,865,865,863,858,855,852,851,853,853,850,852,856,859,861,861,855,852,838,834,829,819,803,795,793,790,785,785,786,780,778,779,781,781,779,779,776,772,770,771,764,761,759,764,765,761,755,749,740,738};
@@ -430,7 +428,7 @@ private void initComponents() {
         diviserTableauX( xIceland);
         diviserTableauY( yIceland);
         Iceland = new Polygon(xIceland, yIceland, xIceland.length);
-        monde.getPaysParNom("Iceland").setPolygon(Iceland);
+        monde.getPaysParNom("Islande").setPolygon(Iceland);
 	    listePays.add(Iceland);
 
         int xJapan [] = {1209,1212,1221,1224,1221,1219,1219,1217,1207,1206,1208,1207,1204,1200,1196,1185,1182,1178,1182,1183,1187,1195,1197,1200,1201,1208,1213,1214,1214,1213,1215,1214,1217,1216,1214,1212,1206,1205,1206,1206,1206,1205,1205,1205,1208,1211};
@@ -438,7 +436,7 @@ private void initComponents() {
         diviserTableauX( xJapan);
         diviserTableauY( yJapan);
         Japan = new Polygon(xJapan, yJapan, xJapan.length);
-        monde.getPaysParNom("Japan").setPolygon(Japan);
+        monde.getPaysParNom("Japon").setPolygon(Japan);
 	    listePays.add(Japan);
 
         int xCAsia [] = {845,850,839,839,843,844,847,852,856,859,864,867,868,876,879,880,909,907,906,918,920,925,929,932,937,957,972,975,984,983,982,981,985,986,970,956,930,916,909,898,883,872,869,866,862,860,855,852,849,843,842,843,846,849,850,843,842,847,849,851,851,851,848,846,850};
@@ -446,7 +444,7 @@ private void initComponents() {
         diviserTableauX( xCAsia);
         diviserTableauY( yCAsia);
         CAsia = new Polygon(xCAsia, yCAsia, xCAsia.length);
-        monde.getPaysParNom("CAsia").setPolygon(CAsia);
+        monde.getPaysParNom("Central Asia").setPolygon(CAsia);
         listePays.add(CAsia);
 
         int xIndependantNationOfReunionIsland [] = {845,854,861,860,854,849};
@@ -454,7 +452,7 @@ private void initComponents() {
         diviserTableauX( xIndependantNationOfReunionIsland);
         diviserTableauY( yIndependantNationOfReunionIsland);
         Turkey = new Polygon(xIndependantNationOfReunionIsland, yIndependantNationOfReunionIsland, xIndependantNationOfReunionIsland.length);
-        monde.getPaysParNom("IndependantNationOfReunionIsland").setPolygon(IndependantNationOfReunionIsland);
+        monde.getPaysParNom("Independant Nation of Reunion Island").setPolygon(IndependantNationOfReunionIsland);
 	    listePays.add(IndependantNationOfReunionIsland);
 
         int xTurkey[] = {805,817,824,831,831,824,821,812,813,811,806,792,782,774,771,762,762,758,755,754,749,744,740,737,735,742,747,754,757,762,768,771,775,780,780,785,787,793,796,797,793,791,789,785};
@@ -496,14 +494,15 @@ private void initComponents() {
       Point me = e.getPoint();
 	  Polygon polygoneClic= new Polygon();
 	  for(Polygon poly:listePays){
-		  if(poly.contains(me)){
+		  if(poly!=null && poly.contains(me)){
 			  polygoneClic=poly;
 		  }
 	  }
 	 Pays paysClic=new Pays();
-	  for(Pays p:Pays.getListePays()){
-			if(p.getPolygon().equals(polygoneClic)){
+	  for(Pays p:monde.getPays()){
+			if(p.getPolygon()!=null && p.getPolygon().equals(polygoneClic)){
 				paysClic=p;
+				System.out.println(paysClic.toString());
 			}
 	  }
 	 new FenetreStats(paysClic);
