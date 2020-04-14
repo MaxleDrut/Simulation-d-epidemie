@@ -74,9 +74,7 @@ public class Simulation extends JFrame implements ActionListener {
 		pCommande.add(afficheurDate, BorderLayout.EAST);
 		
 		//Panel de la carte de la simu (TODO)
-		pCarte = new JPanel();
-		todoCarte = new Label("ici la carte");
-		pCarte.add(todoCarte);
+		pCarte = new Carte(this,"bleu.jpg");
 		
 		//Panel des statistiques en temps réel
 		pStatistiques = new JPanel();
@@ -232,7 +230,7 @@ public class Simulation extends JFrame implements ActionListener {
 		this.add(pCommande, BorderLayout.NORTH);
 		this.add(pCarte, BorderLayout.CENTER);
 		this.add(pStatistiques, BorderLayout.SOUTH);
-		this.setSize(1000,600);
+		this.setSize(1200,700);
 		this.validate();
 		this.repaint();
 	}
@@ -333,6 +331,11 @@ public class Simulation extends JFrame implements ActionListener {
 	
 	public void setLethalite(double l) {
 		sLethalite.setValue((int) (l*1000));
+	}
+	
+	public void repeindre() {
+		this.validate();
+		this.repaint();
 	}
 	
 	public static void main (String[] args) {
