@@ -14,5 +14,5 @@ Pays.class
 Virus.class
 Vincent\Carte.class
 Vincent\FenetreCarte.class
-
-
+Carte.class
+BarreStatistiques.class

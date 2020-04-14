@@ -146,6 +146,7 @@ g.fillPolygon(CenterEurope);
 g.fillPolygon(Greenland);
 g.fillPolygon(Russia);
 g.fillPolygon(Iceland);
+g.fillPolygon(IndependantNationOfReunionIsland);
 
 	if(compteurPeintre>1){
 		g.setColor(Color.BLACK);
@@ -187,6 +188,8 @@ g.fillPolygon(Iceland);
 	g.drawPolygon(Russia);
 	g.drawPolygon(Iceland);
 	g.drawPolygon(SEAsia);
+	g.drawPolygon(IndependantNationOfReunionIsland);
+	
 
 }
 private void initComponents() {
@@ -420,7 +423,7 @@ private void initComponents() {
         int yIndependantNationOfReunionIsland [] = {582,588,583,576,572,574};
         diviserTableauX( xIndependantNationOfReunionIsland);
         diviserTableauY( yIndependantNationOfReunionIsland);
-        Turkey = new Polygon(xIndependantNationOfReunionIsland, yIndependantNationOfReunionIsland, xIndependantNationOfReunionIsland.length);
+        IndependantNationOfReunionIsland = new Polygon(xIndependantNationOfReunionIsland, yIndependantNationOfReunionIsland, xIndependantNationOfReunionIsland.length);
 	    listePays.add(IndependantNationOfReunionIsland);
         
         int xTurkey[] = {805,817,824,831,831,824,821,812,813,811,806,792,782,774,771,762,762,758,755,754,749,744,740,737,735,742,747,754,757,762,768,771,775,780,780,785,787,793,796,797,793,791,789,785};

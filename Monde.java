@@ -25,61 +25,45 @@ public class Monde {
 	//TODO : crée la région avec ses Payss et les débits de population entre chaque Pays
 	public Monde() {
 		
-		/*// Todo rapprocher le graph Pays et la gestion des polygones. 
-		// Amerique 
-		listePays.add(new Pays("Brazil",      2200000));
-		listePays.add(new Pays("Argentina",  860000));
-		listePays.add(new Pays("Canada",  860000));
-		listePays.add(new Pays("Amerique central",   470000));
-		listePays.add(new Pays("Mexico",       340000));
-		listePays.add(new Pays("USA",     300000));
-		listePays.add(new Pays("Equateur", 270000));
-		listePays.add(new Pays("Canada",      230000));
-
-		//Afrique
-		listePays.add(new Pays("North Africa",       510000));
-		listePays.add(new Pays("Sahel",       510000));
-		listePays.add(new Pays("Ethiopia",       510000));
-		listePays.add(new Pays("Congo",       510000));
-		listePays.add(new Pays("South Africa",       510000));
-		listePays.add(new Pays("Madagascar",270000));
-
-		//Asie 
-		listePays.add(new Pays("Arabia",       510000));
-		listePays.add(new Pays("India",       510000));
-		listePays.add(new Pays("Kazakstan",       510000));
-		listePays.add(new Pays("China",       510000));
-		listePays.add(new Pays("S.E Asia",       510000));
-		
-		//oceanie
-		listePays.add(new Pays("Indonesia",       510000));
-		listePays.add(new Pays("New Zealand",       510000));
-		listePays.add(new Pays("Australia",       510000));
-		
-		// Europe
-		listePays.add(new Pays("Independant Nation of Reunion Island",  510000));
-		listePays.add(new Pays("Russia",       510000));
-		listePays.add(new Pays("Northen Lands",       510000));
-		listePays.add(new Pays("Center Europe",       510000));
-		listePays.add(new Pays("France",       510000));
-		listePays.add(new Pays("Spain",       510000));
-		listePays.add(new Pays("Italy",       510000));
-		listePays.add(new Pays("UK",       510000));*/
-		
-		listePays.add(new Pays("Paris",      2200000));
-		listePays.add(new Pays("Marseille",  860000));
-		listePays.add(new Pays("Lyon",       510000));
-		listePays.add(new Pays("Toulouse",   470000));
-		listePays.add(new Pays("Nice",       340000));
-		listePays.add(new Pays("Nantes",     300000));
-		listePays.add(new Pays("Montpellier",270000));
-		listePays.add(new Pays("Strasbourg", 270000));
-		listePays.add(new Pays("Lille",      230000));
-		listePays.add(new Pays("Italy",       510000));
-
+			listePays.add(new Pays("Brazil",200000);
+			listePays.add(new Pays("Argentina",200000);
+			listePays.add(new Pays("Canada",200000);
+			listePays.add(new Pays("CAmerica",200000);
+			listePays.add(new Pays("Mexico",200000);
+			listePays.add(new Pays("USA",200000);
+			listePays.add(new Pays("Equateur",200000);
+			listePays.add(new Pays("Greenland",200000);
+			listePays.add(new Pays("North Africa",200000);
+			listePays.add(new Pays("Sahel",200000);
+			listePays.add(new Pays("Ethiopia",200000);
+			listePays.add(new Pays("Congo",200000);
+			listePays.add(new Pays("South Africa",200000);
+			listePays.add(new Pays("Madagascar",200000);
+			listePays.add(new Pays("Arabia",200000);
+			listePays.add(new Pays("India",200000);
+			listePays.add(new Pays("Kazakstan",200000);
+			listePays.add(new Pays("China",200000);
+			listePays.add(new Pays("S.E Asia",200000);
+			listePays.add(new Pays("Turkey",200000);
+			listePays.add(new Pays("Central Asia",200000);
+			listePays.add(new Pays("Japon",200000);
+			listePays.add(new Pays("Indonesia",200000);
+			listePays.add(new Pays("New Zealand",200000);
+			listePays.add(new Pays("Australia",200000);
+			listePays.add(new Pays("Independant Nation of Reunion Island",200000);
+			listePays.add(new Pays("Russia",200000);
+			listePays.add(new Pays("Northen Lands",200000);
+			listePays.add(new Pays("Balkans",200000);
+			listePays.add(new Pays("Islande",200000);
+			listePays.add(new Pays("Center Europe",200000);
+			listePays.add(new Pays("France",200000);
+			listePays.add(new Pays("Spain",200000);
+			listePays.add(new Pays("Italy",200000);
+			listePays.add(new Pays("UK",200000);
 		listePays.get(1).infectionInitale(5000);
 
-		
+			// set 
+			
 	}
 	
 	//TODO : lorsqu'elle est exécutée, cette méthode réalise fait se propager le virus en interne dans chaque Pays 
@@ -209,12 +193,14 @@ public class Monde {
 		return listePays;
 		}
 		
-	public String getStats() {
-			TTSain = 0;
-			TTPop = 0;
-			TTInf = 0;
-			TTRet = 0;
-			TTmorts =0;
+		
+		
+	public int[] getStats() {
+			int TTSain = 0;
+			int TTPop = 0;
+			int TTInf = 0;
+			int TTRet = 0;
+			int TTmorts =0;
 		for(Pays V : listePays){
 			
 			TTSain +=  V.getSains() ;
@@ -223,8 +209,8 @@ public class Monde {
 			TTRet += V.getRetablis() ;
 			TTmorts += V.getMorts();
 		}	
-		
-		return("Total sains : "+TTSain+" infecte : "+TTInf+" retablis : "+TTRet+" morts : "+TTmorts+" et pop totale : "+TTPop);
+		int[] tab = {TTSain,TTPop,TTInf,TTRet,TTmorts};
+		return tab;
 			
 	}
 

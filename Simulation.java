@@ -20,6 +20,7 @@ public class Simulation extends JFrame implements ActionListener {
 	private JPanel pCreationVirus, pSliders, pEnteteNom, pPresets, pLancerSimu;
 	private JPanel pStatistiques;
 	private JPanel pCarte;
+	private JPanel barreStats;
 	
 	private JButton bPause, bAcc, bRal;
 	private JButton bNomRandom;
@@ -74,14 +75,15 @@ public class Simulation extends JFrame implements ActionListener {
 		pCommande.add(afficheurDate, BorderLayout.EAST);
 		
 		//Panel de la carte de la simu (TODO)
-		pCarte = new JPanel();
-		todoCarte = new Label("ici la carte");
-		pCarte.add(todoCarte);
+		pCarte = new Carte(this,"bleu.jpg");
 		
 		//Panel des statistiques en temps réel
-		pStatistiques = new JPanel();
-		statistiques = new Label(zone.getStats());
+		pStatistiques = new JPanel(new GridLayout(2,1));
+		statistiques = new Label("cc");
+		//barreStats = new BarreStatistiques();
 		pStatistiques.add(statistiques);
+		//pStatistiques.add(barreStats);
+		
 		
 		//Panel de création du virus :
 		pCreationVirus = new JPanel(new GridLayout(1,2));
@@ -232,7 +234,7 @@ public class Simulation extends JFrame implements ActionListener {
 		this.add(pCommande, BorderLayout.NORTH);
 		this.add(pCarte, BorderLayout.CENTER);
 		this.add(pStatistiques, BorderLayout.SOUTH);
-		this.setSize(1000,600);
+		this.setSize(1200,700);
 		this.validate();
 		this.repaint();
 	}
@@ -244,8 +246,6 @@ public class Simulation extends JFrame implements ActionListener {
 		while(i<listePays.size() && nomATrouver!=listePays.get(i).getNomPays()) {
 			i++;
 		}
-		
-		
 	} 
 	
 	public void pauseTimer() {
@@ -291,7 +291,10 @@ public class Simulation extends JFrame implements ActionListener {
 	}
 	
 	public void afficherStatistiques() {
-		statistiques.setText(zone.getStats());
+		int[] stats = zone.getStats();
+		
+		
+		
 		this.validate();
 		this.repaint();
 	}
@@ -333,6 +336,11 @@ public class Simulation extends JFrame implements ActionListener {
 	
 	public void setLethalite(double l) {
 		sLethalite.setValue((int) (l*1000));
+	}
+	
+	public void repeindre() {
+		this.validate();
+		this.repaint();
 	}
 	
 	public static void main (String[] args) {
