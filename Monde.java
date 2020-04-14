@@ -209,12 +209,14 @@ public class Monde {
 		return listePays;
 		}
 		
-	public String getStats() {
-			TTSain = 0;
-			TTPop = 0;
-			TTInf = 0;
-			TTRet = 0;
-			TTmorts =0;
+		
+		
+	public int[] getStats() {
+			int TTSain = 0;
+			int TTPop = 0;
+			int TTInf = 0;
+			int TTRet = 0;
+			int TTmorts =0;
 		for(Pays V : listePays){
 			
 			TTSain +=  V.getSains() ;
@@ -223,8 +225,8 @@ public class Monde {
 			TTRet += V.getRetablis() ;
 			TTmorts += V.getMorts();
 		}	
-		
-		return("Total sains : "+TTSain+" infecte : "+TTInf+" retablis : "+TTRet+" morts : "+TTmorts+" et pop totale : "+TTPop);
+		int[] tab = {TTSain,TTPop,TTInf,TTRet,TTmorts};
+		return tab;
 			
 	}
 

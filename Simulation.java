@@ -20,6 +20,7 @@ public class Simulation extends JFrame implements ActionListener {
 	private JPanel pCreationVirus, pSliders, pEnteteNom, pPresets, pLancerSimu;
 	private JPanel pStatistiques;
 	private JPanel pCarte;
+	private JPanel barreStats;
 	
 	private JButton bPause, bAcc, bRal;
 	private JButton bNomRandom;
@@ -77,9 +78,12 @@ public class Simulation extends JFrame implements ActionListener {
 		pCarte = new Carte(this,"bleu.jpg");
 		
 		//Panel des statistiques en temps réel
-		pStatistiques = new JPanel();
-		statistiques = new Label(zone.getStats());
+		pStatistiques = new JPanel(new GridLayout(2,1));
+		statistiques = new Label("cc");
+		barreStats = new BarreStatistiques();
 		pStatistiques.add(statistiques);
+		pStatistiques.add(barreStats);
+		
 		
 		//Panel de création du virus :
 		pCreationVirus = new JPanel(new GridLayout(1,2));
@@ -289,7 +293,10 @@ public class Simulation extends JFrame implements ActionListener {
 	}
 	
 	public void afficherStatistiques() {
-		statistiques.setText(zone.getStats());
+		int[] stats = zone.getStats();
+		
+		
+		
 		this.validate();
 		this.repaint();
 	}

@@ -48,7 +48,7 @@ public class FenetreCarte extends JFrame implements MouseListener{
 		xZone.setText(t);
 		
 	}
-		public void setCoordonateY( double y){
+	public void setCoordonateY( double y){
 		String t = yZone.getText() +(int)y+",";
 		yZone.setText(t);
 		
