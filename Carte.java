@@ -39,8 +39,7 @@ private int [] yPeintureEnCours = new int [1000];
 private Polygon PeintureEnCours; 
 
 private LinkedList<Polygon> listePays= new LinkedList<Polygon>();
-private Polygon SAmerica;
-private Polygon Africa;
+
 private Polygon CAmerica;
 private Polygon Mexico;
 private Polygon USA;
@@ -76,6 +75,8 @@ private Polygon Turkey;
 private Polygon Japan;
 private Polygon Iceland;
 
+private boolean passage;
+private Object surbrillance;
 
 
 
@@ -152,6 +153,7 @@ g.fillPolygon(IndependantNationOfReunionIsland);
 		g.setColor(Color.BLACK);
 		g.drawPolygon(PeintureEnCours);
 	}
+	
 
 	g.setColor(Color.BLACK);
 
@@ -189,7 +191,13 @@ g.fillPolygon(IndependantNationOfReunionIsland);
 	g.drawPolygon(Iceland);
 	g.drawPolygon(SEAsia);
 	g.drawPolygon(IndependantNationOfReunionIsland);
-	
+	if(passage){
+		
+	g.setColor(Color.GRAY);
+	g.drawPolygon( (Polygon) surbrillance);
+	g.setColor(Color.YELLOW);
+	g.fillPolygon( (Polygon) surbrillance);
+}
 
 }
 private void initComponents() {
@@ -338,7 +346,7 @@ private void initComponents() {
         int xKazakhstan [] = {986,989,991,991,1001,1006,1003,1001,998,995,989,987,980,966,959,948,945,939,936,929,925,921,917,905,902,897,884,876,865,863,860,860,862,855,850,848,839,834,830,822,818,816,814,818,821,823,825,827,830,834,837,839,839,837,833,834,835,837,844,847,851,856,860,862,865,868,871,883,917,929,955,969,};        
         int yKazakhstan [] = {301,289,280,271,255,245,244,241,242,242,240,244,250,250,248,247,242,239,235,230,229,229,231,224,225,225,227,227,229,231,236,245,251,252,251,250,249,249,247,248,249,255,262,268,272,275,273,272,272,272,272,275,277,281,285,288,291,293,293,292,288,288,286,285,284,286,283,291,293,289,301,295};
         diviserTableauX( xKazakhstan);
-        diviserTableauX( yKazakhstan);
+        diviserTableauY( yKazakhstan);
         Kazakhstan = new Polygon(xKazakhstan, yKazakhstan, xKazakhstan.length);
         listePays.add(Kazakhstan);
         
@@ -443,7 +451,7 @@ private void initComponents() {
 	    //int wEcran =(int)tailleFen.getWidth();
 		
 		for( int i = 0 ; i<t.length;i++){
-			t[i] = (int)(t[i]*largeurEcran/width);
+			t[i] = (int)(t[i]*1100/width);
 			
 		}
 		
@@ -453,7 +461,7 @@ private void initComponents() {
 		int height=768;
 		//int hEcran = (int)tailleFen.getHeight();
 		for( int i = 0 ; i<t.length;i++){
-			t[i] = (int) (t[i]*hauteurEcran/height);
+			t[i] = (int) (t[i]*550/height);
 			
 		}
 		
@@ -479,11 +487,18 @@ private void initComponents() {
      
     public void mouseReleased(MouseEvent e) {
        onAClique = -1;
+       passage = false;
+     repaint();
+     fen.repeindre();
        
     }
+    
      
     public void mouseEntered(MouseEvent e) {
-     
+		
+		
+
+		 
     }
      
     public void mouseExited(MouseEvent e) {
@@ -517,6 +532,21 @@ private void initComponents() {
 		
 		
 	}
+	boolean estUnPolygone=false;
+	for( Polygon p : listePays){
+
+	if(p.contains(me)){
+		surbrillance=p;
+		estUnPolygone=true;
+		System.out.println("Voila le polygone" + e.getSource());
+	} 
+	}
+		
+		passage = estUnPolygone;
+		repaint();
+		fen.repeindre();
+	
+	
     }
 
 }
