@@ -79,12 +79,14 @@ public class Monde {
 				String[] splitArray = null; //tableau de chaînes
 				String str = l;
 				splitArray = str.split(",");
-
+ 
 				for(int j = 0; j< splitArray.length;j++){
-					liaisonPays[i][j] = Integer.parseInt(splitArray[j]);
+					if(splitArray[j]!=null) {
+						liaisonPays[i][j] = Double.parseDouble(splitArray[j]);
 					}
-				i++;
 				}
+				i++;
+			}
 			br.close(); // OBLIGATOIRE
 		    } catch (IOException e) { e.printStackTrace(); }
 
@@ -247,7 +249,7 @@ public class Monde {
 			TTRet += V.getRetablis() ;
 			TTmorts += V.getMorts();
 		}
-		int[] tab = {TTSain,TTPop,TTInf,TTRet,TTmorts};
+		int[] tab = {TTSain,TTInf,TTRet,TTmorts};
 		return tab;
 
 	}

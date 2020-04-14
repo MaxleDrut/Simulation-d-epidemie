@@ -20,7 +20,7 @@ public class Simulation extends JFrame implements ActionListener {
 	private JPanel pCreationVirus, pSliders, pEnteteNom, pPresets, pLancerSimu;
 	private JPanel pStatistiques;
 	private JPanel pCarte;
-	private JPanel barreStats;
+	private BarreStatistiques barreStats;
 	
 	private JButton bPause, bAcc, bRal;
 	private JButton bNomRandom;
@@ -291,8 +291,7 @@ public class Simulation extends JFrame implements ActionListener {
 	}
 	
 	public void afficherStatistiques() {
-		BarreStatistiques barreCastee=(BarreStatistiques)(barreStats);
-		barreCastee.setProportions(zone.getStats());
+		barreStats.setProportions(zone.getStats());
 		this.validate();
 		this.repaint();
 	}

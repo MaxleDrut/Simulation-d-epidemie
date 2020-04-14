@@ -4,12 +4,11 @@ import java.awt.Color;
  
 public class BarreStatistiques extends JPanel {
 	
-	double[] proportions;
+	double[] proportions = {1,0,0,0};
+	
 	
 	public void paintComponent(Graphics g){
-			double[] proportions = {1.0,0.0,0.0,0.0};
 		int i=0;
-		System.out.println("cc");
 		int seuilInf = 0;
 		int seuilSup = (int) (this.getWidth()*proportions[i]);
 		g.setColor(Color.GREEN);

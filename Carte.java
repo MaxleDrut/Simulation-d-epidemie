@@ -30,7 +30,7 @@ import java.util.LinkedList;
 public class Carte extends JPanel implements MouseListener{
 private BufferedImage im;
 
-private FenetreCarte fen;
+private Simulation fen;
 
 private int compteurPeintre = 0;
 private int [] xPeintureEnCours = new int [1000];
@@ -85,7 +85,7 @@ private int onAClique =-1;												// Ce compteur permet de savoir à quelle 
 
 
 
-public Carte( FenetreCarte f , String s) {
+public Carte( Simulation f , String s) {
 	super(new FlowLayout() );
 //im = Toolkit.getDefaultToolkit().getImage(s);
 fen = f;
