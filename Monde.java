@@ -9,7 +9,9 @@ public class Monde {
 	// convention d'écriture : liaisonPayss[X][Y] => De la Pays X vers la Pays Y. donc non commutatif. Sortie négatives. Entrée positive		
 	// Liaison des Payss est en pourcentage de population qui se déplace dans une autre Pays.
 
-	private double[][] liaisonPays = {{0     ,0.02   ,0.01  ,0.015  ,0.005 ,0.012 ,0.009 ,0.008 ,0.013 ,0.01   },	
+	private double[35][35] liaisonPays;
+	
+	/* = {{0     ,0.02   ,0.01  ,0.015  ,0.005 ,0.012 ,0.009 ,0.008 ,0.013 ,0.01   },	
 										{0.015 ,0      ,0.02  ,0.002  ,0.012 ,0.006 ,0     ,0.005 ,0.008 ,0.019  },
 										{0.008 ,0.015  ,0     ,0.006  ,0.02  ,0.012 ,0.015 ,0.005 ,0.01  ,0.002  },
 										{0.01  ,0.008  ,0.003 ,0      ,0.01  ,0.006 ,0.015 ,0.002 ,0     ,0.02   },
@@ -19,51 +21,68 @@ public class Monde {
 										{0.008 ,0.006  ,0.02  ,0.015  ,0.01  ,0.008 ,0.005 ,0     ,0.003 ,0.01   },
 										{0.006 ,0.01   ,0.003 ,0.012  ,0.02  ,0.015 ,0.003 ,0.005 ,0     ,0.006  },
 										{0     ,0.006  ,0.01  ,0.008  ,0.012 ,0.02  ,0.005 ,0.002 ,0.02  ,0      },
-						};
-	
-	
+						};	
+	*/
 	//TODO : crée la région avec ses Payss et les débits de population entre chaque Pays
 	public Monde() {
 		
-			listePays.add(new Pays("Brazil",200000);
-			listePays.add(new Pays("Argentina",200000);
-			listePays.add(new Pays("Canada",200000);
-			listePays.add(new Pays("CAmerica",200000);
-			listePays.add(new Pays("Mexico",200000);
-			listePays.add(new Pays("USA",200000);
-			listePays.add(new Pays("Equateur",200000);
-			listePays.add(new Pays("Greenland",200000);
-			listePays.add(new Pays("North Africa",200000);
-			listePays.add(new Pays("Sahel",200000);
-			listePays.add(new Pays("Ethiopia",200000);
-			listePays.add(new Pays("Congo",200000);
-			listePays.add(new Pays("South Africa",200000);
-			listePays.add(new Pays("Madagascar",200000);
-			listePays.add(new Pays("Arabia",200000);
-			listePays.add(new Pays("India",200000);
-			listePays.add(new Pays("Kazakstan",200000);
-			listePays.add(new Pays("China",200000);
-			listePays.add(new Pays("S.E Asia",200000);
-			listePays.add(new Pays("Turkey",200000);
-			listePays.add(new Pays("Central Asia",200000);
-			listePays.add(new Pays("Japon",200000);
-			listePays.add(new Pays("Indonesia",200000);
-			listePays.add(new Pays("New Zealand",200000);
-			listePays.add(new Pays("Australia",200000);
-			listePays.add(new Pays("Independant Nation of Reunion Island",200000);
-			listePays.add(new Pays("Russia",200000);
-			listePays.add(new Pays("Northen Lands",200000);
-			listePays.add(new Pays("Balkans",200000);
-			listePays.add(new Pays("Islande",200000);
-			listePays.add(new Pays("Center Europe",200000);
-			listePays.add(new Pays("France",200000);
-			listePays.add(new Pays("Spain",200000);
-			listePays.add(new Pays("Italy",200000);
-			listePays.add(new Pays("UK",200000);
+		listePays.add(new Pays("Brazil",200000);
+		listePays.add(new Pays("Argentina",200000);
+		listePays.add(new Pays("Canada",200000);
+		listePays.add(new Pays("CAmerica",200000);
+		listePays.add(new Pays("Mexico",200000);
+		listePays.add(new Pays("USA",200000);
+		listePays.add(new Pays("Equateur",200000);
+		listePays.add(new Pays("Greenland",200000);
+		listePays.add(new Pays("North Africa",200000);
+		listePays.add(new Pays("Sahel",200000);
+		listePays.add(new Pays("Ethiopia",200000);
+		listePays.add(new Pays("Congo",200000);
+		listePays.add(new Pays("South Africa",200000);
+		listePays.add(new Pays("Madagascar",200000);
+		listePays.add(new Pays("Arabia",200000);
+		listePays.add(new Pays("India",200000);
+		listePays.add(new Pays("Kazakstan",200000);
+		listePays.add(new Pays("China",200000);
+		listePays.add(new Pays("S.E Asia",200000);
+		listePays.add(new Pays("Turkey",200000);
+		listePays.add(new Pays("Central Asia",200000);
+		listePays.add(new Pays("Japon",200000);
+		listePays.add(new Pays("Indonesia",200000);
+		listePays.add(new Pays("New Zealand",200000);
+		listePays.add(new Pays("Australia",200000);
+		listePays.add(new Pays("Independant Nation of Reunion Island",200000);
+		listePays.add(new Pays("Russia",200000);
+		listePays.add(new Pays("Northen Lands",200000);
+		listePays.add(new Pays("Balkans",200000);
+		listePays.add(new Pays("Islande",200000);
+		listePays.add(new Pays("Center Europe",200000);
+		listePays.add(new Pays("France",200000);
+		listePays.add(new Pays("Spain",200000);
+		listePays.add(new Pays("Italy",200000);
+		listePays.add(new Pays("UK",200000);
 		listePays.get(1).infectionInitale(5000);
 
-			// set 
 			
+		try {
+
+			int i = 0;
+
+			BufferedReader br =new BufferedReader(new FileReader(new File(« toto.txt »)));
+			String l;
+
+			while ((l= br.readLine()) !=null) {
+				
+				String[] splitArray = null; //tableau de chaînes
+				String str = l;
+				splitArray = str.split(",");
+ 
+				for(int j = 0; j< splitArray.length;j++){
+  			
+				}
+				i++;
+				br.close(); // OBLIGATOIRE
+		    } catch (IOException e) {sop (e.getMessage()); }
 	}
 	
 	//TODO : lorsqu'elle est exécutée, cette méthode réalise fait se propager le virus en interne dans chaque Pays 
