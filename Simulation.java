@@ -80,9 +80,9 @@ public class Simulation extends JFrame implements ActionListener {
 		//Panel des statistiques en temps réel
 		pStatistiques = new JPanel(new GridLayout(2,1));
 		statistiques = new Label("cc");
-		barreStats = new BarreStatistiques();
+		//barreStats = new BarreStatistiques();
 		pStatistiques.add(statistiques);
-		pStatistiques.add(barreStats);
+		//pStatistiques.add(barreStats);
 		
 		
 		//Panel de création du virus :
@@ -246,8 +246,6 @@ public class Simulation extends JFrame implements ActionListener {
 		while(i<listePays.size() && nomATrouver!=listePays.get(i).getNomPays()) {
 			i++;
 		}
-		
-		
 	} 
 	
 	public void pauseTimer() {
