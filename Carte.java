@@ -144,7 +144,8 @@ for( Polygon p : listePays){
 }
 }
 	if(passage){
-	g.setColor(Color.YELLOW);
+		Color couleurTemp = new Color((int) (degreInfection*255),(int) (255-degreInfection*255),0);
+	g.setColor(couleurTemp.brighter());
 	g.fillPolygon(polygonSurbrillance);
 }
 
