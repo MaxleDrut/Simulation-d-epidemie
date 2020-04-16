@@ -221,6 +221,7 @@ public class Simulation extends JFrame implements ActionListener {
 		zone.deplacements();
 		zone.AfficheMonde();
 		afficherStatistiques();
+
 		
 	}
 	

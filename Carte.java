@@ -40,6 +40,9 @@ private Polygon PeintureEnCours;
 private Monde monde;
 
 private LinkedList<Polygon> listePays= new LinkedList<Polygon>();
+
+
+private double degreInfection = 0.5;
 private Polygon CAmerica;
 private Polygon Mexico;
 private Polygon USA;
@@ -100,6 +103,7 @@ im = ImageIO.read(new File(s));
   } catch (IOException ex) {
                 ex.printStackTrace();
             }
+
 addMouseListener(this);
 addMouseMotionListener(this);
  //tailleFen = this.getSize();
@@ -107,94 +111,45 @@ addMouseMotionListener(this);
 
 
 public void paintComponent(Graphics g) {
-int h = getHeight()/20;
-int w = getWidth()/25;
+
 Graphics2D g1 = (Graphics2D) g;
 BasicStroke line = new BasicStroke(3.0f);
 g1.setStroke(line);
-g.drawImage(im, 0, 0, getWidth(), getHeight(), this);
-g.setColor(Color.GREEN);
 
-g.fillPolygon(Mexico);
-g.fillPolygon(Brazil);
-g.fillPolygon(CAmerica);
-g.fillPolygon(USA);
-g.fillPolygon(Argentina);
-g.fillPolygon(Equateur);
-g.fillPolygon(Canada);
-g.fillPolygon(Spain);
-g.fillPolygon(France);
-g.fillPolygon(UK);
-g.fillPolygon(Italy);
-g.fillPolygon(NAfrica);
-g.fillPolygon(Sahel);
-g.fillPolygon(Ethiopia);
-g.fillPolygon(Congo);
-g.fillPolygon(SAfrica);
-g.fillPolygon(Madagascar);
-g.fillPolygon(Arabia);
-g.fillPolygon(India);
-g.fillPolygon(Australia);
-g.fillPolygon(NewZealand);
-g.fillPolygon(Indonesia);
-g.fillPolygon(SEAsia);
-g.fillPolygon(China);
-g.fillPolygon(Kazakhstan);
-g.fillPolygon(CAsia);
-g.fillPolygon(Turkey);
-g.fillPolygon(Japan);
-g.fillPolygon(NorthenLands);
-g.fillPolygon(CenterEurope);
-g.fillPolygon(Greenland);
-g.fillPolygon(Russia);
-g.fillPolygon(Iceland);
+g.drawImage(im, 0, 0, getWidth(), getHeight(), this);
+
+
+for( Polygon p : listePays){
+	
+	g.setColor( new Color((int) (degreInfection*255),(int) (255-degreInfection*255),0));
+	
+	
+	
+	
+	if(p!=null){
+	g.fillPolygon(p);
+}
+}
+
 
 	if(compteurPeintre>1){
 		g.setColor(Color.BLACK);
 		g.drawPolygon(PeintureEnCours);
 	}
+g.setColor(Color.BLACK);
 
-
-	g.setColor(Color.BLACK);
-
-	g.drawPolygon(Equateur);
-	g.drawPolygon(Argentina);
-	g.drawPolygon(Madagascar);
-	g.drawPolygon(Mexico);
-	g.drawPolygon(Brazil);
-	g.drawPolygon(CAmerica);
-	g.drawPolygon(USA);
-	g.drawPolygon(Canada);
-	g.drawPolygon(Spain);
-	g.drawPolygon(France);
-	g.drawPolygon(UK);
-	g.drawPolygon(Italy);
-	g.drawPolygon(NAfrica);
-	g.drawPolygon(Sahel);
-	g.drawPolygon(Ethiopia);
-	g.drawPolygon(Congo);
-	g.drawPolygon(SAfrica);
-	g.drawPolygon(Arabia);
-	g.drawPolygon(India);
-	g.drawPolygon(Australia);
-	g.drawPolygon(NewZealand);
-	g.drawPolygon(Indonesia);
-	g.drawPolygon(CAsia);
-	g.drawPolygon(China);
-	g.drawPolygon(Kazakhstan);
-	g.drawPolygon(Turkey);
-	g.drawPolygon(Japan);
-	g.drawPolygon(NorthenLands);
-	g.drawPolygon(CenterEurope);
-	g.drawPolygon(Greenland);
-	g.drawPolygon(Russia);
-	g.drawPolygon(Iceland);
-	g.drawPolygon(SEAsia);
-	
+for( Polygon p : listePays){
+	if(p!=null){
+	g.drawPolygon(p);
+}
+}
 	if(passage){
 	g.setColor(Color.YELLOW);
 	g.fillPolygon(polygonSurbrillance);
 }
+
+
+
 }
 private void initComponents() {
 		monde=new Monde();
@@ -482,7 +437,7 @@ private void initComponents() {
 	    //int wEcran =(int)tailleFen.getWidth();
 
 		for( int i = 0 ; i<t.length;i++){
-			t[i] = (int)(t[i]*largeurEcran/width);
+			t[i] = (int)(t[i]*1075/width);
 
 		}
 
@@ -492,7 +447,7 @@ private void initComponents() {
 		int height=768;
 		//int hEcran = (int)tailleFen.getHeight();
 		for( int i = 0 ; i<t.length;i++){
-			t[i] = (int) (t[i]*hauteurEcran/height);
+			t[i] = (int) (t[i]*550/height);
 
 		}
 
