@@ -14,6 +14,7 @@ import java.awt.Point;
 import java.awt.Rectangle;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.MouseMotionListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -27,7 +28,7 @@ import javax.swing.UnsupportedLookAndFeelException;
 
 import java.util.LinkedList;
 
-public class Carte extends JPanel implements MouseListener{
+public class Carte extends JPanel implements MouseListener, MouseMotionListener{
 private BufferedImage im;
 
 private Simulation fen;
@@ -75,7 +76,8 @@ private Polygon Japan;
 private Polygon Iceland;
 
 private boolean passage;
-private Object surbrillance;
+private Polygon polygonSurbrillance;
+
 
 
 
@@ -99,6 +101,7 @@ im = ImageIO.read(new File(s));
                 ex.printStackTrace();
             }
 addMouseListener(this);
+addMouseMotionListener(this);
  //tailleFen = this.getSize();
 }
 
@@ -187,7 +190,11 @@ g.fillPolygon(Iceland);
 	g.drawPolygon(Russia);
 	g.drawPolygon(Iceland);
 	g.drawPolygon(SEAsia);
-
+	
+	if(passage){
+	g.setColor(Color.YELLOW);
+	g.fillPolygon(polygonSurbrillance);
+}
 }
 private void initComponents() {
 		monde=new Monde();
@@ -516,8 +523,33 @@ private void initComponents() {
     }
 
     public void mouseEntered(MouseEvent e) {
-
+	
+	for(Polygon p : listePays){
+	if(e.getSource()==p){
+		System.out.println(p);
+		passage = true;
+		polygonSurbrillance = p;
+		repaint();
+	}
+}
+	
     }
+    public void mouseMoved(MouseEvent e){
+		Point me =e.getPoint();
+		System.out.println(e);
+		for(Polygon p : listePays){
+	if(p.contains(me)){
+		System.out.println(p);
+		passage = true;
+		polygonSurbrillance = p;
+		repaint();
+	}
+		
+	}
+}
+	public void mouseDragged(MouseEvent e){
+		
+	}
 
     public void mouseExited(MouseEvent e) {
 
