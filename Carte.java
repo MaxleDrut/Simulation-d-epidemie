@@ -123,9 +123,6 @@ for( Polygon p : listePays){
 	
 	g.setColor( new Color((int) (degreInfection*255),(int) (255-degreInfection*255),0));
 	
-	
-	
-	
 	if(p!=null){
 	g.fillPolygon(p);
 }
@@ -144,7 +141,8 @@ for( Polygon p : listePays){
 }
 }
 	if(passage){
-		Color couleurTemp = new Color((int) (degreInfection*255),(int) (255-degreInfection*255),0);
+		
+	Color couleurTemp = new Color((int) (degreInfection*255),(int) (255-degreInfection*255),0);
 	g.setColor(couleurTemp.brighter());
 	g.fillPolygon(polygonSurbrillance);
 }
@@ -478,29 +476,26 @@ private void initComponents() {
 
     }
 
-    public void mouseEntered(MouseEvent e) {
+    public void mouseEntered(MouseEvent e) {}
 	
-	for(Polygon p : listePays){
-	if(e.getSource()==p){
-		System.out.println(p);
-		passage = true;
-		polygonSurbrillance = p;
-		repaint();
-	}
-}
-	
-    }
+    
     public void mouseMoved(MouseEvent e){
 		Point me =e.getPoint();
-		System.out.println(e);
+		
+		int i = 0;
 		for(Polygon p : listePays){
-	if(p.contains(me)){
-		System.out.println(p);
+	if(p!=null && p.contains(me)){
+		
 		passage = true;
 		polygonSurbrillance = p;
 		repaint();
+		i++;
 	}
 		
+	}
+	if(i==0){
+		passage =false;
+		repaint();
 	}
 }
 	public void mouseDragged(MouseEvent e){
