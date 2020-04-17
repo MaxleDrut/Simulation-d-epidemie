@@ -18,9 +18,9 @@ public class Simulation extends JFrame implements ActionListener {
 	
 	private JPanel pCommande, pBoutonsCommande;
 	private JPanel pCreationVirus, pSliders, pEnteteNom, pPresets, pLancerSimu;
-	private JPanel pStatistiques;
+	private JPanel pStatistiques,pChiffres;
 	private JPanel pCarte;
-	private BarreStatistiques barreStats;
+	private JPanel barreStats;
 	
 	private JButton bPause, bAcc, bRal;
 	private JButton bNomRandom;
@@ -36,7 +36,9 @@ public class Simulation extends JFrame implements ActionListener {
 	private Label titSliders, titPresets;
 	private Label rensNom;
 	private Label todoCarte;
-	private Label statistiques;
+	private Label affSains, affInfectes, affRetablis, affMorts;
+	private Label nomPaysStats;
+	private Label[] separateurs;
 	
 	
 	public Simulation(int x, int y) {
@@ -79,15 +81,36 @@ public class Simulation extends JFrame implements ActionListener {
 		
 		//Panel des statistiques en temps réel
 		pStatistiques = new JPanel(new GridLayout(2,1));
-		statistiques = new Label("cc");
+
 		barreStats = new BarreStatistiques();
-		pStatistiques.add(statistiques);
-		pStatistiques.add(barreStats);
 		
+			//Sous panel de l'affichage des chiffres de la maladie :
+			pChiffres = new JPanel();		
+			nomPaysStats = new Label();
+			affSains = new Label();
+			affInfectes = new Label();
+			affRetablis = new Label();
+			affMorts = new Label();
+			separateurs = new Label[4];
+			for(int i=0;i<separateurs.length;i++) {
+				separateurs[i] = new Label("|");
+			}
+			this.afficherStatistiques();
+			
+			pChiffres.add(nomPaysStats);
+			pChiffres.add(separateurs[0]);
+			pChiffres.add(affSains);
+			pChiffres.add(separateurs[1]);
+			pChiffres.add(affInfectes);
+			pChiffres.add(separateurs[2]);
+			pChiffres.add(affRetablis);
+			pChiffres.add(separateurs[3]);
+			pChiffres.add(affMorts);
 		
+		pStatistiques.add(barreStats);		
+		pStatistiques.add(pChiffres);
 		//Panel de création du virus :
 		pCreationVirus = new JPanel(new GridLayout(1,2));
-		
 		
 		//Sous panel des sliders :
 		pSliders = new JPanel(new GridLayout(9,1));
@@ -101,7 +124,7 @@ public class Simulation extends JFrame implements ActionListener {
 		sVirulence.addChangeListener(new ChangeListener() {
 			public void stateChanged(ChangeEvent event) {
 				double viru =((JSlider)event.getSource()).getValue()/100.0;
-				valVirulence.setText("Incidce de virulence : "+viru);
+				valVirulence.setText("Incice de virulence : "+viru);
 			}
 		});
 		
@@ -235,7 +258,7 @@ public class Simulation extends JFrame implements ActionListener {
 		this.add(pCommande, BorderLayout.NORTH);
 		this.add(pCarte, BorderLayout.CENTER);
 		this.add(pStatistiques, BorderLayout.SOUTH);
-		this.setSize(1200,700);
+		this.setSize(1100,670);
 		this.validate();
 		this.repaint();
 	}
@@ -290,11 +313,113 @@ public class Simulation extends JFrame implements ActionListener {
 		this.repaint();
 		
 	}
-	
+	/* On réactualise les proportions de la barre de statistiques. Puisque l'on fait appel à une méthode spécifique
+	 * à la classe BarreStatistiques, il faut un downcast.
+	 * De plus, on met aussi à jour les chiffres du label.*/
 	public void afficherStatistiques() {
-		barreStats.setProportions(zone.getStats());
+		int[] stats = zone.getStats();
+		((BarreStatistiques) (barreStats)).setProportions(stats);
+		nomPaysStats.setText("Region visualisee : Monde");
+		affSains.setText("Sains : "+arrondirValeur(stats[0]));
+		affInfectes.setText("Infectes : "+arrondirValeur(stats[1]));
+		affRetablis.setText("Retablis : "+arrondirValeur(stats[2]));
+		affMorts.setText("Morts : "+arrondirValeur(stats[3]));
 		this.validate();
 		this.repaint();
+	}
+	
+	//Désormais, on affiche les statistiques d'un pays renseigné particulier en surchargeant la méthode
+	public void afficherStatistiques(Pays p) {
+		int[] stats = {(int) (p.getSains()),(int) (p.getInfectes()),(int) (p.getRetablis()),(int) (p.getMorts())};
+		((BarreStatistiques) (barreStats)).setProportions(stats);
+		nomPaysStats.setText("Region visualisee : Monde");
+		affSains.setText("Sains : "+arrondirValeur(stats[0]));
+		affInfectes.setText("Infectes : "+arrondirValeur(stats[1]));
+		affRetablis.setText("Retablis : "+arrondirValeur(stats[2]));
+		affMorts.setText("Morts : "+arrondirValeur(stats[3]));
+		this.validate();
+		this.repaint();
+	}
+	
+	/*Pour un affichage propre, on ne souhaite que les 3 premiers digits si l'on a + de 1 million de malade)
+	 * Le but de l'arrondisseur sera donc de retourner un String contenant le chiffre arrondi et l'unité 
+	 * (ex : 12.1 millions | 51 245)*/
+	public String arrondirValeur(int val) {
+		int valEntiere;
+		int valDeci;
+		if(val<pDix(3)) { //Pas d'arrondi si moins de 1000
+			return Integer.toString(val);
+			
+		} else if(val<pDix(6)) { //Si compris entre 1000 et 1 million, on sépare les digits en 2 (ex : 12 543)
+			valEntiere = val/pDix(3);
+			valDeci=(val-valEntiere*pDix(3));
+			if(valDeci==0) { //Cas particulier où le nombre est multiple de 1000 : il faut quand même afficher les TROIS zéros derrière !
+				return(valEntiere+" 000");
+			} else if(valDeci<10) { //Autre cas : si les dizaines et centaines sont nulles, il faut rajouter 2 zéros devant
+				return(valEntiere+" 00"+valDeci);
+			} else if(valDeci<100) { //Et si les centaines sont nulles, il faut rajouter 1 zéro.
+				return(valEntiere+" 0"+valDeci);
+			} else {
+				return(valEntiere+" "+valDeci);
+			}
+			
+		} else if(val<2*pDix(6)) { //On différencie le cas de 1 million (sans s) et 2 millionS.
+			valEntiere=1; 
+			valDeci = (val-valEntiere*pDix(6))/pDix(4); //On récupère les 2 digits décimaux grâce à une division euclidienne
+			if(valDeci<10) {
+				return (valEntiere+".0"+valDeci+" million");
+			} else {
+				return(valEntiere+"."+valDeci+" million");
+			}
+			
+		} else if(val<pDix(7)) {
+			valEntiere=val/pDix(6);
+			valDeci =(val-valEntiere*pDix(6))/pDix(4);
+			if(valDeci<10) {
+				return (valEntiere+".0"+valDeci+" millions");
+			} else {
+				return(valEntiere+"."+valDeci+" millions");
+			}
+			
+		} else if(val<pDix(8)) {
+			valEntiere=val/pDix(6);
+			valDeci = (val-valEntiere*pDix(6))/pDix(5);
+			return(valEntiere+"."+valDeci+" millions");
+			
+		} else if(val<pDix(9)) {
+			valEntiere=val/pDix(6);
+			return(valEntiere+" millions");
+			
+		} else if(val<2*pDix(9)){ 
+			valEntiere=1;
+			valDeci =(val-valEntiere*pDix(9))/pDix(7);
+			if(valDeci<10) {
+				return (valEntiere+".0"+valDeci+" milliard");
+			} else {
+				return(valEntiere+"."+valDeci+" milliard");
+			}
+			
+		} else if(val<pDix(10)) {
+			valEntiere=val/pDix(9);
+			valDeci =(val-valEntiere*pDix(9))/pDix(7);
+			if(valDeci<10) {
+				return (valEntiere+".0"+valDeci+" milliards");
+			} else {
+				return(valEntiere+"."+valDeci+" milliards");
+			}
+			
+		} else {
+			return("Erreur"); //On considère que l'on ne dépassera jamais 10 milliards.
+		}
+	}
+	
+	//La fonction Math.pow renvoie des double ! Cela empêche donc la division euclidienne. Renvoyons alors des int à la place.
+	public int pDix(int p) { 
+		if(p>=0) {
+			return (int) (Math.pow(10,p));
+		} else {
+			return 0;
+		}
 	}
 	
 	public String getNomVirus() {
@@ -342,7 +467,7 @@ public class Simulation extends JFrame implements ActionListener {
 	}
 	
 	public static void main (String[] args) {
-		
+
 		Simulation simu = new Simulation(450,350);
 		
 	}
