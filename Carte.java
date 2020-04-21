@@ -389,7 +389,7 @@ private void initComponents() {
         int yIndependantNationOfReunionIsland [] = {582,588,583,576,572,574};
         diviserTableauX( xIndependantNationOfReunionIsland);
         diviserTableauY( yIndependantNationOfReunionIsland);
-        Turkey = new PolygonePays(xIndependantNationOfReunionIsland, yIndependantNationOfReunionIsland, xIndependantNationOfReunionIsland.length,monde.getPaysParNom("Independant Nation of Reunion Island"));
+        IndependantNationOfReunionIsland = new PolygonePays(xIndependantNationOfReunionIsland, yIndependantNationOfReunionIsland, xIndependantNationOfReunionIsland.length,monde.getPaysParNom("Independant Nation of Reunion Island"));
 	    listePays.add(IndependantNationOfReunionIsland);
 
         int xTurkey[] = {805,817,824,831,831,824,821,812,813,811,806,792,782,774,771,762,762,758,755,754,749,744,740,737,735,742,747,754,757,762,768,771,775,780,780,785,787,793,796,797,793,791,789,785};
