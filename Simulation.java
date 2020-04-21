@@ -317,7 +317,7 @@ public class Simulation extends JFrame implements ActionListener {
 	 * à la classe BarreStatistiques, il faut un downcast.
 	 * De plus, on met aussi à jour les chiffres du label.*/
 	public void afficherStatistiques() {
-		long[] stats = zone.getStats();
+		int[] stats = zone.getStats();
 		((BarreStatistiques) (barreStats)).setProportions(stats);
 		nomPaysStats.setText("Region visualisee : Monde");
 		affSains.setText("Sains : "+arrondirValeur(stats[0]));
@@ -327,15 +327,28 @@ public class Simulation extends JFrame implements ActionListener {
 		this.validate();
 		this.repaint();
 	}
-
+	
+	//Désormais, on affiche les statistiques d'un pays renseigné particulier en surchargeant la méthode
+	public void afficherStatistiques(Pays p) {
+		int[] stats = {(int) (p.getSains()),(int) (p.getInfectes()),(int) (p.getRetablis()),(int) (p.getMorts())};
+		((BarreStatistiques) (barreStats)).setProportions(stats);
+		nomPaysStats.setText("Region visualisee : Monde");
+		affSains.setText("Sains : "+arrondirValeur(stats[0]));
+		affInfectes.setText("Infectes : "+arrondirValeur(stats[1]));
+		affRetablis.setText("Retablis : "+arrondirValeur(stats[2]));
+		affMorts.setText("Morts : "+arrondirValeur(stats[3]));
+		this.validate();
+		this.repaint();
+	}
+	
 	/*Pour un affichage propre, on ne souhaite que les 3 premiers digits si l'on a + de 1 million de malade)
 	 * Le but de l'arrondisseur sera donc de retourner un String contenant le chiffre arrondi et l'unité 
 	 * (ex : 12.1 millions | 51 245)*/
-	public String arrondirValeur(long val) {
-		long valEntiere;
-		long valDeci;
+	public String arrondirValeur(int val) {
+		int valEntiere;
+		int valDeci;
 		if(val<pDix(3)) { //Pas d'arrondi si moins de 1000
-			return Long.toString(val);
+			return Integer.toString(val);
 			
 		} else if(val<pDix(6)) { //Si compris entre 1000 et 1 million, on sépare les digits en 2 (ex : 12 543)
 			valEntiere = val/pDix(3);
