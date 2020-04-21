@@ -121,10 +121,10 @@ g.drawImage(im, 0, 0, getWidth(), getHeight(), this);
 
 
 for( PolygonePays p : listePays){
-	
-	g.setColor( new Color((int) (degreInfection*255),(int) (255-degreInfection*255),0));
-	
 	if(p!=null){
+	g.setColor( new Color((int) (p.getPays().getInfectes()*255/p.getPays().getPop()),(int) (255-p.getPays().getInfectes()*255/p.getPays().getPop()),0));
+	System.out.println(p.getPays().getInfectes());
+	
 	g.fillPolygon(p);
 }
 }
