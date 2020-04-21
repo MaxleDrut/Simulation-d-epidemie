@@ -93,6 +93,11 @@ public class Pays {
 	public long getRetablis() { return retablis; }
 	public long getMorts() { return morts; }
 
+	public long[] getStatsPays() {
+		long[] stats = {sains,infectes,retablis,morts};
+		return stats;
+	}
+		
 	public String getNomPays(){ return nom; }
 	public static LinkedList<Pays>getListePays(){return listeDesPays;}
 
