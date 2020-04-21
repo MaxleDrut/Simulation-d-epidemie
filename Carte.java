@@ -122,9 +122,14 @@ g.drawImage(im, 0, 0, getWidth(), getHeight(), this);
 
 for( PolygonePays p : listePays){
 	if(p!=null){
-	g.setColor( new Color((int) (p.getPays().getInfectes()*255/p.getPays().getPop()),(int) (255-p.getPays().getInfectes()*255/p.getPays().getPop()),0));
+		Color couleur = new Color((int) (p.getPays().getInfectes()*255/p.getPays().getPop()),(int) (255-p.getPays().getInfectes()*255/p.getPays().getPop()),0);
+		if(passage && p == PolygonePaysSurbrillance){
+	g.setColor(couleur.brighter().brighter());
 	
+}else{
+	g.setColor( couleur);
 	
+}
 	g.fillPolygon(p);
 }
 }
@@ -140,12 +145,6 @@ for( PolygonePays p : listePays){
 	if(p!=null){
 	g.drawPolygon(p);
 }
-}
-	if(passage){
-		
-	Color couleurTemp = new Color((int) (degreInfection*255),(int) (255-degreInfection*255),0);
-	g.setColor(couleurTemp.brighter());
-	g.fillPolygon(PolygonePaysSurbrillance);
 }
 
 
