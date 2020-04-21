@@ -122,7 +122,7 @@ g.drawImage(im, 0, 0, getWidth(), getHeight(), this);
 
 for( PolygonePays p : listePays){
 	if(p!=null){
-		Color couleur = new Color((int) (p.getPays().getInfectes()*255/p.getPays().getPop()),(int) (255-p.getPays().getInfectes()*255/p.getPays().getPop()),0);
+		Color couleur = new Color((int) (p.getPays().getInfectes()*255/p.getPays().getPop()),(int) (230-p.getPays().getInfectes()*230/(p.getPays().getPop())), (int)(p.getPays().getMorts()*255/p.getPays().getPop()));
 		if(passage && p == PolygonePaysSurbrillance){
 	g.setColor(couleur.brighter().brighter());
 	
