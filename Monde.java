@@ -237,12 +237,12 @@ public class Monde {
 
 
 
-	public int[] getStats() {
-			int TTSain = 0;
-			int TTPop = 0;
-			int TTInf = 0;
-			int TTRet = 0;
-			int TTmorts =0;
+	public long[] getStats() {
+			long TTSain = 0;
+			long TTPop = 0;
+			long TTInf = 0;
+			long TTRet = 0;
+			long TTmorts =0;
 		for(Pays V : listePays){
 
 			TTSain +=  V.getSains() ;
@@ -251,7 +251,7 @@ public class Monde {
 			TTRet += V.getRetablis() ;
 			TTmorts += V.getMorts();
 		}
-		int[] tab = {TTSain,TTInf,TTRet,TTmorts};
+		long[] tab = {TTSain,TTInf,TTRet,TTmorts};
 		return tab;
 
 	}

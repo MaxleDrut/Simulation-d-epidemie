@@ -33,8 +33,8 @@ public class BarreStatistiques extends JPanel {
 		g.fillRect(seuilInf,0,seuilSup,this.getHeight());
 	}
 	
-	public void setProportions(int[] vals) {
-		int total=0;
+	public void setProportions(long[] vals) {
+		long total=0;
 		for(int i=0;i<proportions.length;i++) {
 			total+=vals[i];
 		}
