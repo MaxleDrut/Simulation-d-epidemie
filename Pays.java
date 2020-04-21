@@ -15,6 +15,7 @@ public class Pays {
 	private float[] stades;
 	private int nStade;
 	private int jour;
+	public long popInit;
 	private static LinkedList<Pays> listeDesPays = new LinkedList<Pays>();
 	
 
@@ -43,6 +44,7 @@ public class Pays {
 	public Pays(String n, int pT,String fTU) {
 		nom = n;
 		popTotale = pT;
+		
 		sains = pT;
 		infectes = 0;
 		retablis = 0;
@@ -64,6 +66,7 @@ public class Pays {
 	public Pays(String n, int pT) {
 		nom = n;
 		popTotale = pT;
+		popInit = pT;
 		sains = pT;
 		infectes = 0;
 		retablis = 0;

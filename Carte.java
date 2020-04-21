@@ -156,7 +156,7 @@ private void initComponents() {
 		int yBrazil [] = {630,611,593,581,566,553,539,538,530,513,500,490,461,458,458,457,458,462,467,471,476,482,488,490,490,488,487,487,485,487,488,490,494,493,493,493,496,498,502,505,510,514,516,521,529,541,546,553,558,566,577,578,575,585,592,596,603,610,617,628,635};
         diviserTableauX(xBrazil);
         diviserTableauY(yBrazil);
-        Brazil = new PolygonePays(xBrazil, yBrazil, xBrazil.length, Monde.listePays.get(1));
+        Brazil = new PolygonePays(xBrazil, yBrazil, xBrazil.length, monde.getPaysParNom("Brazil"));
         listePays.add(Brazil);
 
 
