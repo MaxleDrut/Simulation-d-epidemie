@@ -153,6 +153,10 @@ public class Pays {
 	public void setPolygon(Polygon p){
 		this.polygone=p;
 	}
+	
+	public Polygon getPolygone() {
+		return polygone;
+	}
 
 	public String toString(){
 		String message= "La Pays de "+nom+" a ces statistiques là: \n PopulationTotale:"+popTotale+"\n Sains:"+sains+" \n Infectés:"+infectes+"\n Retablis:"+retablis+"\n Morts:"+morts;
