@@ -5,7 +5,7 @@ import java.net.*;
 
 public class Monde {
 
-	private static ArrayList<Pays> listePays = null;
+	public static ArrayList<Pays> listePays = null;
 	private int TTSain, TTPop,TTInf,TTRet,TTmorts;
 
 	// convention d'écriture : liaisonPayss[X][Y] => De la Pays X vers la Pays Y. donc non commutatif. Sortie négatives. Entrée positive
