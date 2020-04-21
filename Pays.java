@@ -15,7 +15,6 @@ public class Pays {
 	private float[] stades;
 	private int nStade;
 	private int jour;
-	private Polygon polygone;
 	private static LinkedList<Pays> listeDesPays = new LinkedList<Pays>();
 	
 
@@ -92,7 +91,6 @@ public class Pays {
 	public long getMorts() { return morts; }
 
 	public String getNomPays(){ return nom; }
-	public Polygon getPolygon(){ return polygone;}
 	public static LinkedList<Pays>getListePays(){return listeDesPays;}
 
 	public void setSains(long s){
@@ -150,14 +148,6 @@ public class Pays {
 		MortsJour.add(morts);
 		Jours.add(jour);
 	}
-	public void setPolygon(Polygon p){
-		this.polygone=p;
-	}
-	
-	public Polygon getPolygone() {
-		return polygone;
-	}
-
 	public String toString(){
 		String message= "La Pays de "+nom+" a ces statistiques là: \n PopulationTotale:"+popTotale+"\n Sains:"+sains+" \n Infectés:"+infectes+"\n Retablis:"+retablis+"\n Morts:"+morts;
 		return message;
