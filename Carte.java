@@ -461,6 +461,8 @@ private void initComponents() {
 		
 		passage = true;
 		PolygonePaysSurbrillance = p;
+		fen.selectionPays(PolygonePaysSurbrillance.getPays());
+		fen.afficherStatistiques();
 		repaint();
 		i++;
 	}
@@ -468,6 +470,8 @@ private void initComponents() {
 	}
 	if(i==0){
 		passage =false;
+		fen.selectionPays(null);
+		fen.afficherStatistiques();
 		repaint();
 	}
 }
