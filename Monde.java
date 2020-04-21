@@ -237,7 +237,7 @@ public class Monde {
 
 
 
-	public long[] getStats() {
+	public long[] getStatsMonde() {
 			long TTSain = 0;
 			long TTPop = 0;
 			long TTInf = 0;

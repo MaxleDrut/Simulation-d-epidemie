@@ -8,6 +8,7 @@ public class Simulation extends JFrame implements ActionListener {
 	
 	private Virus maladie;
 	private Monde zone;
+	private Pays paysSelectionne;
 	protected int jourSimu;
 	
 	private boolean timerOn;
@@ -51,6 +52,7 @@ public class Simulation extends JFrame implements ActionListener {
 		timerOn = false;
 		jourSimu = 0;
 		zone = new Monde();
+		paysSelectionne = null;
 		
 		//Panel de commande
 		pCommande = new JPanel(new BorderLayout());
@@ -263,15 +265,6 @@ public class Simulation extends JFrame implements ActionListener {
 		this.repaint();
 	}
 	
-	public void infectionPays(Pays aTrouver, int aInfecter) {
-		ArrayList<Pays> listePays = zone.getPays();
-		String nomATrouver = aTrouver.getNomPays();
-		int i=0;
-		while(i<listePays.size() && nomATrouver!=listePays.get(i).getNomPays()) {
-			i++;
-		}
-	} 
-	
 	public void pauseTimer() {
 		if(timerOn) {
 			temps.stop();
@@ -317,9 +310,15 @@ public class Simulation extends JFrame implements ActionListener {
 	 * à la classe BarreStatistiques, il faut un downcast.
 	 * De plus, on met aussi à jour les chiffres du label.*/
 	public void afficherStatistiques() {
-		long[] stats = zone.getStats();
+		long[] stats = new long[4];
+		if(paysSelectionne == null) {
+			stats = zone.getStatsMonde();
+			nomPaysStats.setText("Region visualisee : Monde");
+		} else {
+			stats = paysSelectionne.getStatsPays();
+			nomPaysStats.setText("Region visualisee : "+paysSelectionne.getNomPays());
+		}
 		((BarreStatistiques) (barreStats)).setProportions(stats);
-		nomPaysStats.setText("Region visualisee : Monde");
 		affSains.setText("Sains : "+arrondirValeur(stats[0]));
 		affInfectes.setText("Infectes : "+arrondirValeur(stats[1]));
 		affRetablis.setText("Retablis : "+arrondirValeur(stats[2]));
@@ -407,6 +406,10 @@ public class Simulation extends JFrame implements ActionListener {
 		} else {
 			return 0;
 		}
+	}
+	
+	public void selectionPays(Pays p) {
+		paysSelectionne = p;
 	}
 	
 	public String getNomVirus() {
