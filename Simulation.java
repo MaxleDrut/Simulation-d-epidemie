@@ -38,9 +38,10 @@ public class Simulation extends JFrame implements ActionListener {
 	private Label rensNom;
 	private Label todoCarte;
 	private Label affSains, affInfectes, affRetablis, affMorts;
-	private Label nomPaysStats;
+	private Label entetePaysStats, nomPaysStats;
 	private Label[] separateurs;
 	
+	private Font gras;
 	
 	public Simulation(int x, int y) {
 		super("Simulation d'epidemie");
@@ -87,8 +88,10 @@ public class Simulation extends JFrame implements ActionListener {
 		barreStats = new BarreStatistiques();
 		
 			//Sous panel de l'affichage des chiffres de la maladie :
-			pChiffres = new JPanel();		
+			pChiffres = new JPanel();
+			entetePaysStats = new Label("Region visualisee :");		
 			nomPaysStats = new Label();
+			gras = new Font("", Font.BOLD,12);
 			affSains = new Label();
 			affInfectes = new Label();
 			affRetablis = new Label();
@@ -99,7 +102,9 @@ public class Simulation extends JFrame implements ActionListener {
 			}
 			this.afficherStatistiques();
 			
+			pChiffres.add(entetePaysStats);
 			pChiffres.add(nomPaysStats);
+			nomPaysStats.setFont(gras);
 			pChiffres.add(separateurs[0]);
 			pChiffres.add(affSains);
 			pChiffres.add(separateurs[1]);
@@ -308,15 +313,17 @@ public class Simulation extends JFrame implements ActionListener {
 	}
 	/* On réactualise les proportions de la barre de statistiques. Puisque l'on fait appel à une méthode spécifique
 	 * à la classe BarreStatistiques, il faut un downcast.
-	 * De plus, on met aussi à jour les chiffres du label.*/
+	 * De plus, on met aussi à jour les chiffres du label.
+	 * Si l'utilisateur a sélectionné un pays dans Carte, on ira afficher ce pays.
+	 * Sinon, on affiche le monde par défaut.*/
 	public void afficherStatistiques() {
 		long[] stats = new long[4];
 		if(paysSelectionne == null) {
 			stats = zone.getStatsMonde();
-			nomPaysStats.setText("Region visualisee : Monde");
+			nomPaysStats.setText("Monde");
 		} else {
 			stats = paysSelectionne.getStatsPays();
-			nomPaysStats.setText("Region visualisee : "+paysSelectionne.getNomPays());
+			nomPaysStats.setText(paysSelectionne.getNomPays());
 		}
 		((BarreStatistiques) (barreStats)).setProportions(stats);
 		affSains.setText("Sains : "+arrondirValeur(stats[0]));
