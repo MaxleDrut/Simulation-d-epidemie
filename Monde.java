@@ -28,6 +28,7 @@ public class Monde {
 	//TODO : crée la région avec ses Payss et les débits de population entre chaque Pays
 	public Monde() {
 		ArrayList<Pays> listeTempo = new ArrayList<Pays>();
+       /*
        listeTempo.add(new Pays("Brazil",200000));
        listeTempo.add(new Pays("Argentina",200000));
        listeTempo.add(new Pays("Canada",200000));
@@ -63,6 +64,77 @@ public class Monde {
        listeTempo.add(new Pays("Spain",200000));
        listeTempo.add(new Pays("Italy",200000));
        listeTempo.add(new Pays("UK",200000));
+      */ 
+      
+       listeTempo.add(new Pays("Brazil",214273627));
+
+       listeTempo.add(new Pays("Argentina",81532875));
+
+       listeTempo.add(new Pays("Canada",37057765));
+
+       listeTempo.add(new Pays("CAmerica",49280971));
+
+       listeTempo.add(new Pays("Mexico",152044222));
+
+       listeTempo.add(new Pays("USA",326687501));
+
+       listeTempo.add(new Pays("Equateur",127592493));
+
+       listeTempo.add(new Pays("Greenland",56025));
+
+       listeTempo.add(new Pays("North Africa",194924933));
+
+       listeTempo.add(new Pays("Sahel",391976271));
+
+       listeTempo.add(new Pays("Ethiopia",272085235));
+
+       listeTempo.add(new Pays("Congo",267414907));
+
+       listeTempo.add(new Pays("South Africa",109661306));
+
+       listeTempo.add(new Pays("Madagascar",27191452));
+
+       listeTempo.add(new Pays("Arabia",164605681));
+
+       listeTempo.add(new Pays("India",1795782929));
+
+       listeTempo.add(new Pays("Kazakstan",18632200));
+
+       listeTempo.add(new Pays("China",1480768479));
+
+       listeTempo.add(new Pays("S.E Asia",270361468));
+
+       listeTempo.add(new Pays("Turkey",99546424));
+
+       listeTempo.add(new Pays("Central Asia",170166960));
+
+       listeTempo.add(new Pays("Japon",149610903));
+
+       listeTempo.add(new Pays("Indonesia",387872081));
+
+       listeTempo.add(new Pays("New Zealand",5534698));
+
+       listeTempo.add(new Pays("Australia",25464116));
+
+       listeTempo.add(new Pays("Independant Nation of Reunion Island",2125434));
+
+       listeTempo.add(new Pays("Russia",148123520));
+
+       listeTempo.add(new Pays("Northen Lands",26921765));
+
+       listeTempo.add(new Pays("Balkans",64658052));
+
+       listeTempo.add(new Pays("Islande",364134));
+
+       listeTempo.add(new Pays("Center Europe",224487353));
+
+       listeTempo.add(new Pays("France",67101550));
+
+       listeTempo.add(new Pays("Spain",57377013));
+
+       listeTempo.add(new Pays("Italy",60351376));
+
+       listeTempo.add(new Pays("UK",70835881));
 
 		listeTempo.get(1).infectionInitale(5000);
 		

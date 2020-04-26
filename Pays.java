@@ -41,7 +41,7 @@ public class Pays {
 
 	//Par défaut, une Pays crée est vierge de l'épidémie en cours
 	public Pays(){}
-	public Pays(String n, int pT,String fTU) {
+	public Pays(String n, long pT,String fTU) {
 		nom = n;
 		popTotale = pT;
 		
