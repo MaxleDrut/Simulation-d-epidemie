@@ -428,20 +428,14 @@ private void initComponents() {
 
 	public void mousePressed(MouseEvent e) {
       Point me = e.getPoint();
-	 /* PolygonePays PolygonePayseClic= new PolygonePays();
+	 PolygonePays PolygonePaysClic= new PolygonePays();
 	  for(PolygonePays poly:listePays){
 		  if(poly!=null && poly.contains(me)){
-			  PolygonePayseClic=poly;
+			  PolygonePaysClic=poly;
 		  }
 	  }
-	 Pays paysClic=new Pays();
-	  for(Pays p:monde.getPays()){
-			if(p.getPolygonePays()!=null && p.getPolygonePays().equals(PolygonePayseClic)){
-				paysClic=p;
-				System.out.println(paysClic.toString());
-			}
-	  }
-	 new FenetreStats(paysClic);*/
+	 Pays paysClic=PolygonePaysClic.getPays();
+	 new FenetreStats(paysClic,10000);
     }
 
     public void mouseReleased(MouseEvent e) {

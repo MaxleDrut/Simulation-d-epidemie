@@ -10,7 +10,6 @@ public class EcouteurStats implements ActionListener{
         this.choix=choix;
     }
     public void actionPerformed(ActionEvent e){
-		System.out.println(choix);
 		fenetre.setTemps(choix);
     }
 }

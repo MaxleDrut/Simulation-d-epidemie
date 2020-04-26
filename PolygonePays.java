@@ -10,6 +10,8 @@ public class PolygonePays extends Polygon {
 		super(valX, valY, taille);
 		p = paysRens;
 	}
+	//Constructeur vide pour simplement instancier
+	public PolygonePays(){}
 	
 	public Pays getPays() {
 		return p;

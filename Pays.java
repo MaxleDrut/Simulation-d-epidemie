@@ -18,7 +18,7 @@ public class Pays {
 	public long popInit;
 	private static LinkedList<Pays> listeDesPays = new LinkedList<Pays>();
 	
-
+	//STATISTIQUES 1 PAYS
 	private LinkedList<Long> PopTotaleJour=new LinkedList<Long>();
 	private LinkedList<Long> SainsJour=new LinkedList<Long>();
 	private LinkedList<Long> InfectesJour=new LinkedList<Long>();
@@ -85,7 +85,6 @@ public class Pays {
 	public LinkedList<Long> getRetablisJour(){return RetablisJour;}
 	public LinkedList<Long> getMortsJour(){return MortsJour;}
 	public LinkedList<Integer> getJours(){return Jours;}
-
 
 	public long getPop() { return popTotale; }
 	public long getSains() { return sains; }
