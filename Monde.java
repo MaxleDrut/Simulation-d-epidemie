@@ -11,7 +11,7 @@ public class Monde {
 	// convention d'écriture : liaisonPayss[X][Y] => De la Pays X vers la Pays Y. donc non commutatif. Sortie négatives. Entrée positive
 	// Liaison des Payss est en pourcentage de population qui se déplace dans une autre Pays.
 
-	private static double[][] liaisonPays = null;
+	private static int[][] liaisonPays = null;
 
 	/* = {{0     ,0.02   ,0.01  ,0.015  ,0.005 ,0.012 ,0.009 ,0.008 ,0.013 ,0.01   },
 										{0.015 ,0      ,0.02  ,0.002  ,0.012 ,0.006 ,0     ,0.005 ,0.008 ,0.019  },
@@ -28,117 +28,46 @@ public class Monde {
 	//TODO : crée la région avec ses Payss et les débits de population entre chaque Pays
 	public Monde() {
 		ArrayList<Pays> listeTempo = new ArrayList<Pays>();
-       /*
-       listeTempo.add(new Pays("Brazil",200000));
-       listeTempo.add(new Pays("Argentina",200000));
-       listeTempo.add(new Pays("Canada",200000));
-       listeTempo.add(new Pays("CAmerica",200000));
-       listeTempo.add(new Pays("Mexico",200000));
-       listeTempo.add(new Pays("USA",200000));
-       listeTempo.add(new Pays("Equateur",200000));
-       listeTempo.add(new Pays("Greenland",200000));
-       listeTempo.add(new Pays("North Africa",200000));
-       listeTempo.add(new Pays("Sahel",200000));
-       listeTempo.add(new Pays("Ethiopia",200000));
-       listeTempo.add(new Pays("Congo",200000));
-       listeTempo.add(new Pays("South Africa",200000));
-       listeTempo.add(new Pays("Madagascar",200000));
-       listeTempo.add(new Pays("Arabia",200000));
-       listeTempo.add(new Pays("India",200000));
-       listeTempo.add(new Pays("Kazakstan",200000));
-       listeTempo.add(new Pays("China",200000));
-       listeTempo.add(new Pays("S.E Asia",200000));
-       listeTempo.add(new Pays("Turkey",200000));
-       listeTempo.add(new Pays("Central Asia",200000));
-       listeTempo.add(new Pays("Japon",200000));
-       listeTempo.add(new Pays("Indonesia",200000));
-       listeTempo.add(new Pays("New Zealand",200000));
-       listeTempo.add(new Pays("Australia",200000));
-       listeTempo.add(new Pays("Independant Nation of Reunion Island",200000));
-       listeTempo.add(new Pays("Russia",200000));
-       listeTempo.add(new Pays("Northen Lands",200000));
-       listeTempo.add(new Pays("Balkans",200000));
-       listeTempo.add(new Pays("Islande",200000));
-       listeTempo.add(new Pays("Center Europe",200000));
-       listeTempo.add(new Pays("France",200000));
-       listeTempo.add(new Pays("Spain",200000));
-       listeTempo.add(new Pays("Italy",200000));
-       listeTempo.add(new Pays("UK",200000));
-      */ 
+     
       
        listeTempo.add(new Pays("Brazil",214273627));
-
        listeTempo.add(new Pays("Argentina",81532875));
-
        listeTempo.add(new Pays("Canada",37057765));
-
        listeTempo.add(new Pays("CAmerica",49280971));
-
        listeTempo.add(new Pays("Mexico",152044222));
-
        listeTempo.add(new Pays("USA",326687501));
-
        listeTempo.add(new Pays("Equateur",127592493));
-
        listeTempo.add(new Pays("Greenland",56025));
-
        listeTempo.add(new Pays("North Africa",194924933));
-
        listeTempo.add(new Pays("Sahel",391976271));
-
        listeTempo.add(new Pays("Ethiopia",272085235));
-
        listeTempo.add(new Pays("Congo",267414907));
-
        listeTempo.add(new Pays("South Africa",109661306));
-
        listeTempo.add(new Pays("Madagascar",27191452));
-
        listeTempo.add(new Pays("Arabia",164605681));
-
        listeTempo.add(new Pays("India",1795782929));
-
        listeTempo.add(new Pays("Kazakstan",18632200));
-
        listeTempo.add(new Pays("China",1480768479));
-
        listeTempo.add(new Pays("S.E Asia",270361468));
-
        listeTempo.add(new Pays("Turkey",99546424));
-
        listeTempo.add(new Pays("Central Asia",170166960));
-
        listeTempo.add(new Pays("Japon",149610903));
-
        listeTempo.add(new Pays("Indonesia",387872081));
-
        listeTempo.add(new Pays("New Zealand",5534698));
-
        listeTempo.add(new Pays("Australia",25464116));
-
        listeTempo.add(new Pays("Independant Nation of Reunion Island",2125434));
-
        listeTempo.add(new Pays("Russia",148123520));
-
        listeTempo.add(new Pays("Northen Lands",26921765));
-
        listeTempo.add(new Pays("Balkans",64658052));
-
        listeTempo.add(new Pays("Islande",364134));
-
        listeTempo.add(new Pays("Center Europe",224487353));
-
        listeTempo.add(new Pays("France",67101550));
-
        listeTempo.add(new Pays("Spain",57377013));
-
        listeTempo.add(new Pays("Italy",60351376));
-
        listeTempo.add(new Pays("UK",70835881));
-
-		listeTempo.get(1).infectionInitale(5000);
-		
-		double[][] liaisonTempo = new double[35][35];
+	   listeTempo.get(1).infectionInitale(5000);
+	
+		int[][] liaisonTempo = new int[35][35];
 		try {
 
 			int i = 0;
@@ -154,7 +83,7 @@ public class Monde {
  
 				for(int j = 0; j< splitArray.length;j++){
 					if(splitArray[j]!=null) {
-						liaisonTempo[i][j] = Double.parseDouble(splitArray[j]);
+						liaisonTempo[i][j] = Integer.parseInt(splitArray[j]);
 					}
 				}
 				i++;
@@ -180,8 +109,8 @@ public class Monde {
 	public void deplacements() {
 
 		// 0 : sains 1 : infectés 2 : rétablis
-		long[][] SortiePopu = new long[listePays.size()][3];
-		long[][] EntreePopu = new long[listePays.size()][3];
+		int[][] SortiePopu = new int[listePays.size()][3];
+		int[][] EntreePopu = new int[listePays.size()][3];
 
 		for(int i = 0; i < SortiePopu.length ; i++){ // initialisation des tableaux a zero
 
@@ -195,10 +124,10 @@ public class Monde {
 
 		for(int i = 0; i < liaisonPays.length ; i++){
 
-			long popuPays 	  = listePays.get(i).getPop();
-			long popuSains 	  = listePays.get(i).getSains();
-			long popuInfectes = listePays.get(i).getInfectes();
-			long popuRetablis = listePays.get(i).getRetablis();
+			int popuPays 	 = (int)(listePays.get(i).getPop());
+			int popuSains 	 = (int)(listePays.get(i).getSains());
+			int popuInfectes = (int)(listePays.get(i).getInfectes());
+			int popuRetablis = (int)(listePays.get(i).getRetablis());
 
 			//proportion pour aléatoire.
 			double propSains    = popuSains/(double)popuPays;
@@ -207,7 +136,7 @@ public class Monde {
 
 			for(int j = 0; j < liaisonPays[0].length; j++){
 
-				long MvtPopu = (long) ( popuPays * liaisonPays[i][j]);
+				int MvtPopu = liaisonPays[i][j];
 
 				for(int k = 0; k < MvtPopu; k++){
 
@@ -234,9 +163,9 @@ public class Monde {
 		int i = 0;
 		for(Pays V : listePays){
 
-			long S = (V.getSains()    + EntreePopu[i][0] - SortiePopu[i][0]);
-			long I = (V.getInfectes() + EntreePopu[i][1] - SortiePopu[i][1]);
-			long R = (V.getRetablis() + EntreePopu[i][2] - SortiePopu[i][2]);
+			int S = ((int)(V.getSains())   + EntreePopu[i][0] - SortiePopu[i][0]);
+			int I = ((int)(V.getInfectes()) + EntreePopu[i][1] - SortiePopu[i][1]);
+			int R = ((int)(V.getRetablis()) + EntreePopu[i][2] - SortiePopu[i][2]);
 
 			if ( S > 0){
 				V.setSains(S);
