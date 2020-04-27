@@ -407,9 +407,9 @@ public class Simulation extends JFrame implements ActionListener {
 	}
 	
 	//La fonction Math.pow renvoie des double ! Cela empêche donc la division euclidienne. Renvoyons alors des int à la place.
-	public int pDix(int p) { 
+	public long pDix(long p) { 
 		if(p>=0) {
-			return (int) (Math.pow(10,p));
+			return (long) (Math.pow(10,p));
 		} else {
 			return 0;
 		}
