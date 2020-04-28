@@ -6,7 +6,6 @@ import org.knowm.xchart.*;
 
 public class FenetreStats extends JFrame {
 	private JButton[] boutonsStats;
-	private JButton boutonLocalGlobal;
 	private JPanel conteneurPrincipal;
 	private XChartPanel<XYChart> panelGraphique;
 	private XYChart graphique=new XYChart(0,0);
@@ -24,12 +23,14 @@ public class FenetreStats extends JFrame {
 		this.vM=vM;
 		this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         this.setSize(1080,720);
+        graphique.setYAxisTitle("Nombre de personnes");
+        graphique.setXAxisTitle("Jours");
         JPanel conteneurPrincipal= new JPanel(new BorderLayout());
         JPanel panneauBoutons= new JPanel();
 		this.T=T;
 		objetsGraphe.add(new ObjetStatistique(vM.getPopTotaleJour(),vM.getJours(),"Population Totale",T));
 		objetsGraphe.add(new ObjetStatistique(vM.getRetablisJour(),vM.getJours(),"Nombre de retablis",T));
-		objetsGraphe.add(new ObjetStatistique(vM.getInfectesJour(),vM.getJours(),"Nombre d'infectés",T));
+		objetsGraphe.add(new ObjetStatistique(vM.getInfectesJour(),vM.getJours(),"Nombre d'infectes",T));
 		objetsGraphe.add(new ObjetStatistique(vM.getMortsJour(),vM.getJours(),"Nombre de morts",T));
 		objetsGraphe.add(new ObjetStatistique(vM.getSainsJour(),vM.getJours(),"Nombre de sains",T));
         boutonsStats= new JButton[nChoixJours];
