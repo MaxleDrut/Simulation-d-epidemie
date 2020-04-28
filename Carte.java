@@ -55,17 +55,17 @@ private PolygonePays Spain;
 private PolygonePays France;
 private PolygonePays UK;
 private PolygonePays Italy;
-private PolygonePays NAfrica;
+private PolygonePays NorthAfrica;
 private PolygonePays Sahel;
 private PolygonePays Ethiopia;
 private PolygonePays Congo;
-private PolygonePays SAfrica;
+private PolygonePays SouthAfrica;
 private PolygonePays Arabia;
 private PolygonePays SEAsia;
 private PolygonePays India;
 private PolygonePays Kazakhstan;
 private PolygonePays China;
-private PolygonePays CAsia;
+private PolygonePays CentralAsia;
 private PolygonePays Indonesia;
 private PolygonePays Australia;
 private PolygonePays NewZealand;
@@ -122,7 +122,8 @@ g.drawImage(im, 0, 0, getWidth(), getHeight(), this);
 
 for( PolygonePays p : listePays){
 	if(p!=null){
-		Color couleur = new Color((int) (p.getPays().getInfectes()*255/p.getPays().getPop()),(int) (230-p.getPays().getInfectes()*230/(p.getPays().getPop())), (int)(p.getPays().getMorts()*255/p.getPays().getPop()));
+		Color couleur = new Color((int) (p.getPays().getInfectes()/p.getPays().popInit*255),(int) (230-p.getPays().getInfectes()/(p.getPays().popInit)*230), (int)(p.getPays().getMorts()/p.getPays().popInit*255));
+		
 		if(passage && p == PolygonePaysSurbrillance){
 	g.setColor(couleur.brighter().brighter());
 	
@@ -238,12 +239,12 @@ private void initComponents() {
         Italy = new PolygonePays(xItaly, yItaly, xItaly.length,monde.getPaysParNom("Italy"));
 	    listePays.add(Italy);
 
-        int xNAfrica [] = {565,577,593,615,631,650,671,694,708,720,746,760,773,783,785,783,781,779,770,770,765,766,771,773,773,771,762,756,753,745,734,730,725,721,716,715,713,713,712,708,702,695,692,680,672,670,672,672,671,669,664,662,657,651,645,637,631,628,624,618,611,608,604,601,601,597,594,591,590,590,587,588,581,577,573,568,567};
-        int yNAfrica [] = {379,396,394,385,401,413,424,417,412,418,409,414,405,397,395,392,390,383,371,368,360,358,365,364,359,352,351,353,353,351,352,351,347,345,345,350,349,353,356,356,353,351,347,345,341,337,335,333,327,323,325,326,324,328,327,325,329,330,333,333,333,333,333,336,339,338,339,342,346,352,354,358,362,365,368,371,375};
-        diviserTableauX( xNAfrica);
-        diviserTableauY( yNAfrica);
-        NAfrica = new PolygonePays(xNAfrica, yNAfrica, xNAfrica.length, monde.getPaysParNom("North Africa"));
-	    listePays.add(NAfrica);
+        int xNorthAfrica [] = {565,577,593,615,631,650,671,694,708,720,746,760,773,783,785,783,781,779,770,770,765,766,771,773,773,771,762,756,753,745,734,730,725,721,716,715,713,713,712,708,702,695,692,680,672,670,672,672,671,669,664,662,657,651,645,637,631,628,624,618,611,608,604,601,601,597,594,591,590,590,587,588,581,577,573,568,567};
+        int yNorthAfrica [] = {379,396,394,385,401,413,424,417,412,418,409,414,405,397,395,392,390,383,371,368,360,358,365,364,359,352,351,353,353,351,352,351,347,345,345,350,349,353,356,356,353,351,347,345,341,337,335,333,327,323,325,326,324,328,327,325,329,330,333,333,333,333,333,336,339,338,339,342,346,352,354,358,362,365,368,371,375};
+        diviserTableauX( xNorthAfrica);
+        diviserTableauY( yNorthAfrica);
+        NorthAfrica = new PolygonePays(xNorthAfrica, yNorthAfrica, xNorthAfrica.length, monde.getPaysParNom("North Africa"));
+	    listePays.add(NorthAfrica);
 
         int xSahel [] = {746,721,707,671,632,616,594,578,565,563,561,559,559,555,557,558,558,559,557,557,556,554,556,555,560,563,569,569,571,576,580,585,590,601,603,613,616,621,622,627,628,634,634,641,646,650,655,659,666,669,676,695,705,717,727,735,741,743,744,745,745};
         int ySahel [] = {409,419,412,424,402,386,395,396,380,382,385,389,392,393,396,400,404,411,414,418,420,420,427,431,434,439,445,449,452,453,457,461,464,463,462,463,464,464,461,459,460,458,456,458,458,462,467,464,465,468,471,471,469,464,461,456,448,439,425,416,411};
@@ -266,12 +267,12 @@ private void initComponents() {
         Congo = new PolygonePays(xCongo, yCongo, xCongo.length,monde.getPaysParNom("Congo"));
 	    listePays.add(Congo);
 
-        int xSAfrica [] = {681,681,679,679,682,686,688,690,693,697,698,701,704,704,705,709,710,716,718,734,738,744,750,754,757,760,763,764,766,765,771,774,778,777,779,777,776,776,779,782,785,791,794,797,800,801,800,795,791,787,780,777,774,771,758,752,747,741,733,728,726};
-        int ySAfrica [] = {544,548,551,562,565,573,581,591,600,604,609,615,618,626,630,635,632,631,630,630,628,626,620,615,611,608,606,602,597,593,590,589,588,582,580,577,572,568,566,562,560,556,554,553,550,549,545,545,548,545,544,544,541,540,540,540,542,545,548,551,553};
-        diviserTableauX( xSAfrica);
-        diviserTableauY( ySAfrica);
-        SAfrica = new PolygonePays(xSAfrica, ySAfrica, xSAfrica.length,monde.getPaysParNom("South Africa"));
-	    listePays.add(SAfrica);
+        int xSouthAfrica [] = {681,681,679,679,682,686,688,690,693,697,698,701,704,704,705,709,710,716,718,734,738,744,750,754,757,760,763,764,766,765,771,774,778,777,779,777,776,776,779,782,785,791,794,797,800,801,800,795,791,787,780,777,774,771,758,752,747,741,733,728,726};
+        int ySouthAfrica [] = {544,548,551,562,565,573,581,591,600,604,609,615,618,626,630,635,632,631,630,630,628,626,620,615,611,608,606,602,597,593,590,589,588,582,580,577,572,568,566,562,560,556,554,553,550,549,545,545,548,545,544,544,541,540,540,540,542,545,548,551,553};
+        diviserTableauX( xSouthAfrica);
+        diviserTableauY( ySouthAfrica);
+        SouthAfrica = new PolygonePays(xSouthAfrica, ySouthAfrica, xSouthAfrica.length,monde.getPaysParNom("South Africa"));
+	    listePays.add(SouthAfrica);
 
         int xArabia [] = {773,774,773,773,779,779,782,785,786,790,791,793,794,794,799,801,807,811,812,813,813,813,820,822,831,833,836,837,842,846,849,854,857,860,864,865,868,872,874,875,875,881,881,883,878,871,868,865,862,859,857,854,851,849,847,847,844,844,841,838,834,831,830,834,838,849,846,845,838,836,830,827,822,818,813,814,809,804,790,780,779,775,773,773,774};
         int yArabia [] = {354,356,362,364,366,369,376,380,383,383,387,391,393,398,398,404,410,413,418,423,427,432,432,430,429,428,427,424,424,422,419,417,415,414,413,410,410,407,404,400,397,396,393,390,386,383,379,374,376,380,383,383,382,383,383,376,375,380,378,372,366,360,357,356,356,343,328,325,324,323,320,314,315,313,320,323,322,321,324,324,331,337,343,350,358};
@@ -378,12 +379,12 @@ private void initComponents() {
         Japan = new PolygonePays(xJapan, yJapan, xJapan.length,monde.getPaysParNom("Japon"));
 	    listePays.add(Japan);
 
-        int xCAsia [] = {845,850,839,839,843,844,847,852,856,859,864,867,868,876,879,880,909,907,906,918,920,925,929,932,937,957,972,975,984,983,982,981,985,986,970,956,930,916,909,898,883,872,869,866,862,860,855,852,849,843,842,843,846,849,850,843,842,847,849,851,851,851,848,846,850};
-        int yCAsia [] = {326,343,357,359,360,366,365,370,372,372,369,368,372,375,375,377,377,375,365,350,347,347,346,346,344,345,346,344,346,328,323,316,308,302,296,302,289,292,292,291,291,283,285,284,284,286,287,288,291,292,296,300,297,301,303,304,308,309,313,315,319,324,325,325,343};
-        diviserTableauX( xCAsia);
-        diviserTableauY( yCAsia);
-        CAsia = new PolygonePays(xCAsia, yCAsia, xCAsia.length,monde.getPaysParNom("Central Asia"));
-        listePays.add(CAsia);
+        int xCentralAsia [] = {845,850,839,839,843,844,847,852,856,859,864,867,868,876,879,880,909,907,906,918,920,925,929,932,937,957,972,975,984,983,982,981,985,986,970,956,930,916,909,898,883,872,869,866,862,860,855,852,849,843,842,843,846,849,850,843,842,847,849,851,851,851,848,846,850};
+        int yCentralAsia [] = {326,343,357,359,360,366,365,370,372,372,369,368,372,375,375,377,377,375,365,350,347,347,346,346,344,345,346,344,346,328,323,316,308,302,296,302,289,292,292,291,291,283,285,284,284,286,287,288,291,292,296,300,297,301,303,304,308,309,313,315,319,324,325,325,343};
+        diviserTableauX( xCentralAsia);
+        diviserTableauY( yCentralAsia);
+        CentralAsia = new PolygonePays(xCentralAsia, yCentralAsia, xCentralAsia.length,monde.getPaysParNom("Central Asia"));
+        listePays.add(CentralAsia);
 
         int xIndependantNationOfReunionIsland [] = {845,854,861,860,854,849};
         int yIndependantNationOfReunionIsland [] = {582,588,583,576,572,574};
@@ -434,8 +435,13 @@ private void initComponents() {
 			  PolygonePaysClic=poly;
 		  }
 	  }
+	  if(fen.mondeInfect == true){
 	 Pays paysClic=PolygonePaysClic.getPays();
 	 new FenetreStats(paysClic,10000);
+	 
+ }else{
+	 
+ }
     }
 
     public void mouseReleased(MouseEvent e) {

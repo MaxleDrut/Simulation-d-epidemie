@@ -19,3 +19,4 @@ BarreStatistiques.class
 EcouteurStats.class
 ObjetStatistique.class
 PolygonePays.class
+EcouteurValiderInfect.class
