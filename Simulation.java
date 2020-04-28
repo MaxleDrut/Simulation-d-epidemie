@@ -13,7 +13,7 @@ public class Simulation extends JFrame implements ActionListener {
 	protected boolean mondeInfect;
 	
 	private boolean timerOn;
-	private int[] delais = {20,50,100,200,500,1000,2000,5000};
+	private int[] delais = {50,100,200,500,1000,2000,5000};
 	private int posActuelle;
 	private int delaiRef;
 	private Timer temps;
