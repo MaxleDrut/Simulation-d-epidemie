@@ -5,6 +5,7 @@ import org.knowm.xchart.*;
 
 
 public class FenetreStats extends JFrame {
+	
 	private JButton[] boutonsStats;
 	private JPanel conteneurPrincipal;
 	private XChartPanel<XYChart> panelGraphique;
@@ -15,9 +16,10 @@ public class FenetreStats extends JFrame {
 	private int nChoixJours=5;
 	
 	
-	public void ajouterStats(ObjetStatistique oS){
-		graphique.addSeries(oS.getNomAxe(),oS.getJours(),oS.getSerieStatistique());
-	}
+		public void ajouterStats(ObjetStatistique oS){
+			graphique.addSeries(oS.getNomAxe(),oS.getJours(),oS.getSerieStatistique());
+		}
+	
         public FenetreStats(Pays vM,int T) {		
 		super("Statistiques de la zone "+vM.getNomPays());
 		this.vM=vM;
