@@ -64,7 +64,6 @@ public class Monde {
        listeTempo.add(new Pays("Spain",57377013));
        listeTempo.add(new Pays("Italy",60351376));
        listeTempo.add(new Pays("UK",70835881));
-	   listeTempo.get(1).infectionInitale(5000);
 	
 		frontFaible = 0.0001;
 		frontMoy = 0.0005;
@@ -239,7 +238,7 @@ public class Monde {
 		}
 	}
 
-	public void AfficheMonde(){
+	public void afficheMonde(){
 
 			TTSain = 0;
 			TTPop = 0;

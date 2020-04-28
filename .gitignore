@@ -20,3 +20,5 @@ EcouteurStats.class
 ObjetStatistique.class
 PolygonePays.class
 EcouteurValiderInfect.class
+EcouteurNombreInfect.class
+FenetreInfection.class

@@ -62,7 +62,7 @@ public class Simulation extends JFrame implements ActionListener {
 		
 		//Panel d'affichage de l'infection initiale
 		pAffInfect = new JPanel();
-		infectIni = new Label("Cliquer sur la zone à infecter puis renseigner le nombre de cas initiaux");
+		infectIni = new Label("Cliquer sur la zone a infecter puis renseigner le nombre de cas initiaux");
 		pAffInfect.add(infectIni);
 		
 		//Panel de validation de l'infection initiale
@@ -266,10 +266,7 @@ public class Simulation extends JFrame implements ActionListener {
 		afficherDate();
 		zone.majPropaPays(maladie);
 		zone.deplacements();
-		zone.AfficheMonde();
-		afficherStatistiques();
-
-		
+		afficherStatistiques();	
 	}
 	
 	/* Crée le virus avec les paramètres renseignés et c'est parti !
@@ -450,7 +447,7 @@ public class Simulation extends JFrame implements ActionListener {
 	
 	public void afficherInfection() {
 		if(paysSelectionne == null) {
-			infectIni.setText("Cliquer sur la zone à infecter puis renseigner le nombre de cas initiaux");
+			infectIni.setText("Cliquer sur la zone a infecter puis renseigner le nombre de cas initiaux");
 		} else {
 			infectIni.setText("Le pays "+paysSelectionne.getNomPays()+" a actuellement "+paysSelectionne.getInfectes()+" infecte(s)");
 		}

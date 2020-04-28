@@ -24,12 +24,4 @@ public class Virus {
 		return ("Mon virus nomme "+nom+" a les attributs : virulence = "+virulence+", duree maladie = "+tMaladie+" et lethalite journa = "+lethalite);
 	}
 
-	/*TODO : ce serait une méthode qui s'exécute régulièrement, qui modifie aléatoirement
-	  et légèrement les paramètres du virus.
-	 */
-	public void mutation() {
-
-	}
-
-
 }

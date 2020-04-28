@@ -20,7 +20,7 @@ public class FenetreInfection extends JFrame{
 		
 		this.add(titInfect, BorderLayout.NORTH);
 		this.add(nbInfect, BorderLayout.CENTER);
-		this.add(nbInfect, BorderLayout.CENTER);
+		this.add(validerInfect, BorderLayout.SOUTH);
 		
 		this.setSize(500,200);
 		this.setVisible(true);
