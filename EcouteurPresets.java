@@ -47,7 +47,7 @@ public class EcouteurPresets implements ActionListener{
     
     //Dans l'ordre, les attributs sont : le facteur virulence, la durée de la maladie et la léthalité
     private double[] attributsCovid() {
-		double[] param = {0.72,15,0.045};
+		double[] param = {0.62,15,0.003};
 		return param;
 	}
 	
@@ -74,7 +74,7 @@ public class EcouteurPresets implements ActionListener{
 	}
 	
 	private double[] attributsGrippeSaisonniere() {
-		double[] param = {0.6,6,0.002};
+		double[] param = {0.52,6,0.002};
 		return param;
 	}
 	
