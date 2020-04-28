@@ -240,14 +240,12 @@ public class Monde {
 
 	public long[] getStatsMonde() {
 			long TTSain = 0;
-			long TTPop = 0;
 			long TTInf = 0;
 			long TTRet = 0;
 			long TTmorts =0;
 		for(Pays V : listePays){
 
 			TTSain +=  V.getSains() ;
-			TTPop +=  V.getPop();
 			TTInf += V.getInfectes();
 			TTRet += V.getRetablis() ;
 			TTmorts += V.getMorts();

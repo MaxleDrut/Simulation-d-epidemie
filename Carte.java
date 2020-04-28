@@ -456,8 +456,12 @@ private void initComponents() {
 		passage = true;
 		PolygonePaysSurbrillance = p;
 		fen.selectionPays(PolygonePaysSurbrillance.getPays());
-		fen.afficherStatistiques();
-		repaint();
+		if(fen.mondeInfect==true) { //Si le monde est déjà infecté, on affiche les statistiques du monde
+			fen.afficherStatistiques();
+		} else { //Sinon on affiche les stats du pays à infecter
+			fen.afficherInfection();
+		}
+			repaint();
 		i++;
 	}
 		
@@ -465,7 +469,11 @@ private void initComponents() {
 	if(i==0){
 		passage =false;
 		fen.selectionPays(null);
-		fen.afficherStatistiques();
+		if(fen.mondeInfect==true) {
+			fen.afficherStatistiques();
+		} else {
+			fen.afficherInfection();
+		}
 		repaint();
 	}
 }

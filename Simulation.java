@@ -10,6 +10,7 @@ public class Simulation extends JFrame implements ActionListener {
 	private Monde zone;
 	private Pays paysSelectionne;
 	protected int jourSimu;
+	protected boolean mondeInfect;
 	
 	private boolean timerOn;
 	private int[] delais = {20,50,100,200,500,1000,2000,5000};
@@ -22,11 +23,13 @@ public class Simulation extends JFrame implements ActionListener {
 	private JPanel pStatistiques,pChiffres;
 	private JPanel pCarte;
 	private JPanel barreStats;
+	private JPanel pAffInfect, pValInfect;
 	
 	private JButton bPause, bAcc, bRal;
 	private JButton bNomRandom;
 	private JButton bCorona, bRougeole, bVariole, bPolio, bGrippeSaison, bGrippeEspa, bPesteBombay;
 	private JButton bCreerVirus;
+	private JButton bValInfect;
 	
 	private JSlider sVirulence,sDuree,sLethalite;
 	
@@ -40,6 +43,7 @@ public class Simulation extends JFrame implements ActionListener {
 	private Label affSains, affInfectes, affRetablis, affMorts;
 	private Label entetePaysStats, nomPaysStats;
 	private Label[] separateurs;
+	private Label infectIni;
 	
 	private Font gras;
 	
@@ -53,7 +57,20 @@ public class Simulation extends JFrame implements ActionListener {
 		timerOn = false;
 		jourSimu = 0;
 		zone = new Monde();
-		paysSelectionne = null;
+		paysSelectionne = null; // Par défaut, on ne passe le curseur sur aucun pays.
+		mondeInfect = false; // Deviendra true lorsque l'on aura infecté au moins une pers dans le monde.
+		
+		//Panel d'affichage de l'infection initiale
+		pAffInfect = new JPanel();
+		infectIni = new Label("Cliquer sur la zone à infecter puis renseigner le nombre de cas initiaux");
+		pAffInfect.add(infectIni);
+		
+		//Panel de validation de l'infection initiale
+		pValInfect = new JPanel();
+		bValInfect = new JButton("Commencer la simulation !");
+		bValInfect.addActionListener(new EcouteurValiderInfect(this));
+		
+		pValInfect.add(bValInfect);
 		
 		//Panel de commande
 		pCommande = new JPanel(new BorderLayout());
@@ -79,7 +96,7 @@ public class Simulation extends JFrame implements ActionListener {
 		pCommande.add(afficheurVit, BorderLayout.WEST);
 		pCommande.add(afficheurDate, BorderLayout.EAST);
 		
-		//Panel de la carte de la simu (TODO)
+		//Panel de la carte de la simu
 		pCarte = new Carte(this,"bleu.jpg");
 		
 		//Panel des statistiques en temps réel
@@ -262,12 +279,25 @@ public class Simulation extends JFrame implements ActionListener {
 		System.out.println(maladie);
 		this.remove(pCreationVirus);
 		this.remove(pLancerSimu);
-		this.add(pCommande, BorderLayout.NORTH);
+		this.add(pValInfect, BorderLayout.NORTH);
 		this.add(pCarte, BorderLayout.CENTER);
-		this.add(pStatistiques, BorderLayout.SOUTH);
+		this.add(pAffInfect, BorderLayout.SOUTH);
 		this.setSize(1100,670);
 		this.validate();
 		this.repaint();
+	}
+	
+	public void validerInfection() {
+		long[] stats = zone.getStatsMonde();
+		if(stats[1]!=0) { //Il faut qu'il y ait au moins 1 infecté dans le monde pour lancer la simu !
+			mondeInfect = true;
+			this.remove(pValInfect);
+			this.remove(pAffInfect);
+			this.add(pCommande, BorderLayout.NORTH);
+			this.add(pStatistiques, BorderLayout.SOUTH);
+		} else {
+			infectIni.setText("Erreur ! Il faut infecter au minimum une personne !");
+		}
 	}
 	
 	public void pauseTimer() {
@@ -336,7 +366,10 @@ public class Simulation extends JFrame implements ActionListener {
 
 	/*Pour un affichage propre, on ne souhaite que les 3 premiers digits si l'on a + de 1 million de malade)
 	 * Le but de l'arrondisseur sera donc de retourner un String contenant le chiffre arrondi et l'unité 
-	 * (ex : 12.1 millions | 51 245)*/
+	 * (ex : 12.1 millions | 51 245)*
+	 * 
+	 * Ah et oui ce ne sont pas vraiment des arrondis, plutôt une troncature...*/
+	 
 	public String arrondirValeur(long val) {
 		long valEntiere;
 		long valDeci;
@@ -412,6 +445,14 @@ public class Simulation extends JFrame implements ActionListener {
 			return (long) (Math.pow(10,p));
 		} else {
 			return 0;
+		}
+	}
+	
+	public void afficherInfection() {
+		if(paysSelectionne == null) {
+			infectIni.setText("Cliquer sur la zone à infecter puis renseigner le nombre de cas initiaux");
+		} else {
+			infectIni.setText("Le pays "+paysSelectionne.getNomPays()+" a actuellement "+paysSelectionne.getInfectes()+" infecte(s)");
 		}
 	}
 	
