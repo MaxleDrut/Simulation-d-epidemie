@@ -13,7 +13,7 @@ public class Pays {
 	private int retablis;
 	private int morts;
 	private int jour;
-	public long popInit;
+	protected int popInit;
 	//Gestion du confinement élémentaire: l'efficacité du confinement va de 0 à 1, sachant que c'est un facteur multiplicatif
 	//de la virulence, appliqué si le pays est confiné. 0 est donc le plus efficace, 1, la valeur par défaut. Cette efficacité est la même 
 	//pour tous les pays 
@@ -50,11 +50,11 @@ public class Pays {
 	public LinkedList<Integer> getMortsJour(){return MortsJour;}
 	public LinkedList<Integer> getJours(){return Jours;}
 
-	public long getPop() { return popTotale; }
-	public long getSains() { return sains; }
-	public long getInfectes() { return infectes; }
-	public long getRetablis() { return retablis; }
-	public long getMorts() { return morts; }
+	public int getPop() { return popTotale; }
+	public int getSains() { return sains; }
+	public int getInfectes() { return infectes; }
+	public int getRetablis() { return retablis; }
+	public int getMorts() { return morts; }
 
 	public long[] getStatsPays() {
 		long[] stats = {sains,infectes,retablis,morts};

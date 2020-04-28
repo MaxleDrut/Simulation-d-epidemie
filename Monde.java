@@ -7,6 +7,7 @@ public class Monde {
 
 	public static ArrayList<Pays> listePays = null;
 	private int TTSain, TTPop,TTInf,TTRet,TTmorts;
+	private double frontFaible, frontMoy, frontForte, hubFaible, hubFort;
 
 	// convention d'écriture : liaisonPayss[X][Y] => De la Pays X vers la Pays Y. donc non commutatif. Sortie négatives. Entrée positive
 	// Liaison des Payss est en pourcentage de population qui se déplace dans une autre Pays.
@@ -28,8 +29,6 @@ public class Monde {
 	//TODO : crée la région avec ses Payss et les débits de population entre chaque Pays
 	public Monde() {
 		ArrayList<Pays> listeTempo = new ArrayList<Pays>();
-     
-      
        listeTempo.add(new Pays("Brazil",214273627));
        listeTempo.add(new Pays("Argentina",81532875));
        listeTempo.add(new Pays("Canada",37057765));
@@ -67,6 +66,12 @@ public class Monde {
        listeTempo.add(new Pays("UK",70835881));
 	   listeTempo.get(1).infectionInitale(5000);
 	
+		frontFaible = 0.0001;
+		frontMoy = 0.0005;
+		frontForte = 0.001;
+		hubFaible = 0.0002;
+		hubFort = 0.0006;
+
 		int[][] liaisonTempo = new int[35][35];
 		try {
 
@@ -136,7 +141,7 @@ public class Monde {
 
 			for(int j = 0; j < liaisonPays[0].length; j++){
 
-				int MvtPopu = liaisonPays[i][j];
+				int MvtPopu = valeurDeplacement(i,j);
 
 				for(int k = 0; k < MvtPopu; k++){
 
@@ -195,6 +200,44 @@ public class Monde {
 		}
 
 	}
+	
+	/*On calcule le nombre de personnes qui se déplacent entre un pays A et B.
+	 *Pour cela on prend la population du plus petit pays et l'on cherche le type de connexion (frontière forte, hub...)
+	 *Défini dans liaisonPays. 
+	 *On renvoie alors la population du plus petit pays*la valeur*/
+	
+	public int valeurDeplacement(int i, int j) {
+		Pays paysA = listePays.get(i);
+		Pays paysB = listePays.get(j);
+		
+		if(paysA.getInfectes()==0 && paysB.getInfectes()==0 && paysA.getRetablis()==0 && paysB.getRetablis()==0) {
+			/*Exception pour le calcul : si les pays n'ont ni infectés ni rétablis (que des sains et des morts)
+			 *Alors c'est incohérent de quand même faire le calcul d'échange de pop.
+			 *En échangeant uniquement les pays avec au moins un malade on économise en puissance de calcul*/
+			return 0; 
+		}
+		int popMin;
+		if(paysA.getPop() > paysB.getPop()) {
+			popMin = paysB.getPop();
+		} else {
+			popMin = paysA.getPop();
+		}
+		
+		switch(liaisonPays[i][j]) { //(Pas besoin de break dans ce switch case, les return le font déjà...)
+			case 1 : //Frontière faible
+			return (int) (popMin*frontFaible);
+			case 2 : //Frontière moyenne
+			return (int) (popMin*frontMoy);
+			case 3 : //Frontière forte
+			return (int) (popMin*frontForte);
+			case 4 : //Hub faible
+			return (int) (popMin*hubFaible);
+			case 5 : //Hub fort
+			return (int) (popMin*hubFort);
+			default : //Pas de connexion entre les pays
+			return 0;
+		}
+	}
 
 	public void AfficheMonde(){
 
@@ -220,7 +263,8 @@ public class Monde {
 
 	public ArrayList<Pays> getPays(){
 		return listePays;
-		}
+	}
+		
 		//METHODE POUR VOIR LE PAYS CORRESPONDANT AU NOM
 	public Pays getPaysParNom(String n){
 		Pays r=new Pays();
@@ -244,7 +288,6 @@ public class Monde {
 			long TTRet = 0;
 			long TTmorts =0;
 		for(Pays V : listePays){
-
 			TTSain +=  V.getSains() ;
 			TTInf += V.getInfectes();
 			TTRet += V.getRetablis() ;
