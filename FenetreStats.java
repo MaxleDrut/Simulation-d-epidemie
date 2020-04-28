@@ -46,7 +46,7 @@ public class FenetreStats extends JFrame {
 			boutonsStats[i].addActionListener(new EcouteurStats(this,5*i));
 			panneauBoutons.add(boutonsStats[i]);
 		}
-
+ 
 		boutonsStats[nChoixJours-1]=new JButton("Tous les jours");
 		boutonsStats[nChoixJours-1].addActionListener(new EcouteurStats(this,10000));
 		panneauBoutons.add(boutonsStats[nChoixJours-1]);	
