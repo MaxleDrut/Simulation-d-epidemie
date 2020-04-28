@@ -29,120 +29,119 @@ import javax.swing.UnsupportedLookAndFeelException;
 import java.util.LinkedList;
 
 public class Carte extends JPanel implements MouseListener, MouseMotionListener{
-private BufferedImage im;
+	private BufferedImage im;
 
-private Simulation fen;
+	private Simulation fen;
 
-private int compteurPeintre = 0;
-private int [] xPeintureEnCours = new int [1000];
-private int [] yPeintureEnCours = new int [1000];
-private PolygonePays PeintureEnCours;
-private Monde monde;
+	private int compteurPeintre = 0;
+	private int [] xPeintureEnCours = new int [1000];
+	private int [] yPeintureEnCours = new int [1000];
+	private PolygonePays PeintureEnCours;
+	private Monde monde;
 
-private LinkedList<PolygonePays> listePolygonePays= new LinkedList<PolygonePays>();
-
-
-private double degreInfection = 0.5;
-private PolygonePays CAmerica;
-private PolygonePays Mexico;
-private PolygonePays USA;
-private PolygonePays Brazil;
-private PolygonePays Argentina;
-private PolygonePays Madagascar;
-private PolygonePays Equateur;
-private PolygonePays Canada;
-private PolygonePays Spain;
-private PolygonePays France;
-private PolygonePays UK;
-private PolygonePays Italy;
-private PolygonePays NorthAfrica;
-private PolygonePays Sahel;
-private PolygonePays Ethiopia;
-private PolygonePays Congo;
-private PolygonePays SouthAfrica;
-private PolygonePays Arabia;
-private PolygonePays SEAsia;
-private PolygonePays India;
-private PolygonePays Kazakhstan;
-private PolygonePays China;
-private PolygonePays CentralAsia;
-private PolygonePays Indonesia;
-private PolygonePays Australia;
-private PolygonePays NewZealand;
-private PolygonePays CenterEurope;
-private PolygonePays Russia;
-private PolygonePays NorthenLands;
-private PolygonePays IndependantNationOfReunionIsland;
-private PolygonePays Greenland;
-private PolygonePays Turkey;
-private PolygonePays Japan;
-private PolygonePays Iceland;
-private PolygonePays Balkans;
-
-private boolean passage;
-private PolygonePays PolygonePaysSurbrillance;
+	private LinkedList<PolygonePays> listePolygonePays= new LinkedList<PolygonePays>();
 
 
+	private double degreInfection = 0.5;
+	private PolygonePays CAmerica;
+	private PolygonePays Mexico;
+	private PolygonePays USA;
+	private PolygonePays Brazil;
+	private PolygonePays Argentina;
+	private PolygonePays Madagascar;
+	private PolygonePays Equateur;
+	private PolygonePays Canada;
+	private PolygonePays Spain;
+	private PolygonePays France;
+	private PolygonePays UK;
+	private PolygonePays Italy;
+	private PolygonePays NorthAfrica;
+	private PolygonePays Sahel;
+	private PolygonePays Ethiopia;
+	private PolygonePays Congo;
+	private PolygonePays SouthAfrica;
+	private PolygonePays Arabia;
+	private PolygonePays SEAsia;
+	private PolygonePays India;
+	private PolygonePays Kazakhstan;
+	private PolygonePays China;
+	private PolygonePays CentralAsia;
+	private PolygonePays Indonesia;
+	private PolygonePays Australia;
+	private PolygonePays NewZealand;
+	private PolygonePays CenterEurope;
+	private PolygonePays Russia;
+	private PolygonePays NorthenLands;
+	private PolygonePays IndependantNationOfReunionIsland;
+	private PolygonePays Greenland;
+	private PolygonePays Turkey;
+	private PolygonePays Japan;
+	private PolygonePays Iceland;
+	private PolygonePays Balkans;
+
+	private boolean passage;
+	private PolygonePays PolygonePaysSurbrillance;
 
 
-private int largeurEcran =(int)Toolkit.getDefaultToolkit().getScreenSize().getWidth();
-private int hauteurEcran = (int)Toolkit.getDefaultToolkit().getScreenSize().getHeight();
-private int onAClique =-1;												// Ce compteur permet de savoir à quelle étape on est de l'affichage -1 signifie qu'on est à l'initialisation
+
+
+	private int largeurEcran =(int)Toolkit.getDefaultToolkit().getScreenSize().getWidth();
+	private int hauteurEcran = (int)Toolkit.getDefaultToolkit().getScreenSize().getHeight();
+	private int onAClique =-1;												// Ce compteur permet de savoir à quelle étape on est de l'affichage -1 signifie qu'on est à l'initialisation
 
 
 
 public Carte( Simulation f , String s) {
 	super(new FlowLayout() );
-//im = Toolkit.getDefaultToolkit().getImage(s);
-fen = f;
-initComponents();
+	fen = f;
+	initComponents();
 
-try{
-im = ImageIO.read(new File(s));
+	try{
+	im = ImageIO.read(new File(s));
 
 
-  } catch (IOException ex) {
-                ex.printStackTrace();
+	} catch (IOException ex) {
+               // ex.printStackTrace();
             }
 
-addMouseListener(this);
-addMouseMotionListener(this);
- //tailleFen = this.getSize();
-}
+	addMouseListener(this);
+	addMouseMotionListener(this);
+	
+	}
 
 
 public void paintComponent(Graphics g) {
 
-Graphics2D g1 = (Graphics2D) g;
-BasicStroke line = new BasicStroke(3.0f);
-g1.setStroke(line);
+	Graphics2D g1 = (Graphics2D) g;
+	BasicStroke line = new BasicStroke(3.0f);
+	g1.setStroke(line);
 
-g.drawImage(im, 0, 0, getWidth(), getHeight(), this);
+	g.drawImage(im, 0, 0, getWidth(), getHeight(), this);
 
 
-for( PolygonePays p : listePolygonePays){
-	if(p!=null){
-		Color couleur = new Color((int) ((double) (p.getPays().getInfectes())/p.getPays().popInit*255),230 - (int) ((double)(p.getPays().getInfectes())/(p.getPays().popInit)*230), (int)((double) (p.getPays().getMorts())/p.getPays().popInit*255));
+	for( PolygonePays p : listePolygonePays){
+		if(p!=null){
+			Color couleur = new Color((int) ((double) (p.getPays().getInfectes())/p.getPays().popInit*255),230 - (int) ((double)(p.getPays().getInfectes())/(p.getPays().popInit)*230), (int)((double) (p.getPays().getMorts())/p.getPays().popInit*255));
 		if(passage && p == PolygonePaysSurbrillance){
-	g.setColor(couleur.brighter().brighter());
-}else{
-	g.setColor( couleur);
+			g.setColor(couleur.brighter().brighter());
+		}else{
+			g.setColor( couleur);
 	
 }
-	g.fillPolygon(p);
+			g.fillPolygon(p);
 }
 }
 
 
-	if(compteurPeintre>1){
-		g.setColor(Color.BLACK);
-		g.drawPolygon(PeintureEnCours);
-	}
-g.setColor(Color.BLACK);
+		if(compteurPeintre>1){
+			g.setColor(Color.BLACK);
+			g.drawPolygon(PeintureEnCours);
+}
+	g.setColor(Color.BLACK);
 
-for( PolygonePays p : listePolygonePays){
-	if(p!=null){
-	g.drawPolygon(p);
+	for( PolygonePays p : listePolygonePays){
+		if(p!=null){
+			g.drawPolygon(p);
 }
 }
 
@@ -489,32 +488,6 @@ private void initComponents() {
     }
 
     public void mouseClicked(MouseEvent e) {
-    /*Point me =e.getPoint();
-    fen.setCoordonateX(me.getX());
-    fen.setCoordonateY(me.getY());
-    xPeintureEnCours[compteurPeintre] = (int)me.getX();
-    yPeintureEnCours[compteurPeintre] = (int)me.getY();
-    PeintureEnCours = new PolygonePays( xPeintureEnCours, yPeintureEnCours, compteurPeintre+1);
-    compteurPeintre++;
-    System.out.println(	me);
-    System.out.println(	compteurPeintre);
-    validate();
-    this.repaint();
-    fen.repeindre();
-    if(Brazil.contains(me)){
-		System.out.println("Je suis là");
-		JFrame J = new JFrame("corona");
-			//J.removeAll();
-			J.setVisible(true);
-			J.setExtendedState(Frame.MAXIMIZED_BOTH);
-			J.repaint();
-			JPanel p = new JPanel(new FlowLayout());
-
-			J.add(new JButton("CA MARCHE"));
-			//J.add(p);
-			J.validate();
-			J.repaint();
-		*/
 
 	}
 
