@@ -122,7 +122,8 @@ g.drawImage(im, 0, 0, getWidth(), getHeight(), this);
 
 for( PolygonePays p : listePays){
 	if(p!=null){
-		Color couleur = new Color((int) (p.getPays().getInfectes()*255/p.getPays().getPop()),(int) (230-p.getPays().getInfectes()*230/(p.getPays().getPop())), (int)(p.getPays().getMorts()*255/p.getPays().getPop()));
+		Color couleur = new Color((int) (p.getPays().getInfectes()/p.getPays().popInit*255),(int) (230-p.getPays().getInfectes()/(p.getPays().popInit)*230), (int)(p.getPays().getMorts()/p.getPays().popInit*255));
+		
 		if(passage && p == PolygonePaysSurbrillance){
 	g.setColor(couleur.brighter().brighter());
 	
@@ -434,8 +435,13 @@ private void initComponents() {
 			  PolygonePaysClic=poly;
 		  }
 	  }
+	  if(fen.mondeInfect == true){
 	 Pays paysClic=PolygonePaysClic.getPays();
 	 new FenetreStats(paysClic,10000);
+	 
+ }else{
+	 
+ }
     }
 
     public void mouseReleased(MouseEvent e) {
