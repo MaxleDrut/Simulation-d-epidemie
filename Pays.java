@@ -80,15 +80,13 @@ public class Pays {
 		popTotale=total;
 	}
 
-	//TODO : set l'état initial de la Pays
-	public void infectionInitale(int s, int i, int r) {
-		sains=s;
-		retablis=r;
-		infectes=i;
-		jour++;
-		actualiserStats();
-	}
+	/* Si le nombre renseigné de personne à infecter est supérieur à la population totale
+	 * Alors on va simplement infecter tout le pays !*/
+	
 	public void infectionInitale(int i) {
+		if(i>popTotale) {
+			i = popTotale;
+		}
 		infectes=i;
 		retablis=0;
 		sains=popTotale-i;
