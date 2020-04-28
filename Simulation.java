@@ -280,6 +280,7 @@ public class Simulation extends JFrame implements ActionListener {
 		this.add(pCarte, BorderLayout.CENTER);
 		this.add(pAffInfect, BorderLayout.SOUTH);
 		this.setSize(1100,670);
+		this.setTitle("Simulation d'epidemie : "+maladie.getNom());
 		this.validate();
 		this.repaint();
 	}

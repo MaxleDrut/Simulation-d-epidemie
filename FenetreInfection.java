@@ -22,13 +22,18 @@ public class FenetreInfection extends JFrame{
 		this.add(nbInfect, BorderLayout.CENTER);
 		this.add(validerInfect, BorderLayout.SOUTH);
 		
-		this.setSize(500,200);
+		this.setSize(500,150);
 		this.setVisible(true);
 		this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 	}
 	
 	public int getValeurInfect() {
-		return Integer.parseInt(nbInfect.getText());
+		try {
+			return Integer.parseInt(nbInfect.getText());
+		} catch (NumberFormatException e) {
+			JOptionPane.showMessageDialog(this, "Ah ah ah ! Petit filou. Rentre un nombre Integer s'il te plait :-)");
+			return 0;
+		}
 	}
 }
 
