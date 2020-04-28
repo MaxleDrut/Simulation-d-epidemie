@@ -19,3 +19,5 @@ BarreStatistiques.class
 EcouteurStats.class
 ObjetStatistique.class
 PolygonePays.class
+EcouteurNombreInfect.class
+FenetreInfection.class
