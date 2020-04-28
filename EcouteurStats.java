@@ -10,6 +10,11 @@ public class EcouteurStats implements ActionListener{
         this.choix=choix;
     }
     public void actionPerformed(ActionEvent e){
+		try{
 		fenetre.setTemps(choix);
+		}
+		catch(NoSuchElementException r){
+			System.out.println("Rien a afficher pour l'instant");
+		}	
     }
 }
