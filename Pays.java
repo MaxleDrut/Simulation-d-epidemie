@@ -14,6 +14,7 @@ public class Pays {
 	private int morts;
 	private int jour;
 	protected int popInit;
+	
 	//Gestion du confinement élémentaire: l'efficacité du confinement va de 0 à 1, sachant que c'est un facteur multiplicatif
 	//de la virulence, appliqué si le pays est confiné. 0 est donc le plus efficace, 1, la valeur par défaut. Cette efficacité est la même 
 	//pour tous les pays 
@@ -84,12 +85,12 @@ public class Pays {
 	 * Alors on va simplement infecter tout le pays !*/
 	
 	public void infectionInitale(int i) {
-		if(i>popTotale) {
-			i = popTotale;
+		if(i+infectes>popTotale) {
+			i = popTotale-infectes;
 		}
-		infectes=i;
+		infectes+=i;
 		retablis=0;
-		sains=popTotale-i;
+		sains-=i;
 		actualiserStats();
 	}
 

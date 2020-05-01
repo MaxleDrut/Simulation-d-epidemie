@@ -422,10 +422,12 @@ private void initComponents() {
 		}
 
 	}
-
+	/*On récupère le polygone cliqué parmi les polygones du JPanel.
+	 *Ensuite, soit la simulation est déjà en cours (mondeInfect est true) et donc l'on affiche la fenêtre XChart du pays,
+	 *soit la simulation n'a pas encore commencé et l'on ouvre la fenêtre d'infection*/
 
 	public void mousePressed(MouseEvent e) {
-      Point me = e.getPoint();
+     Point me = e.getPoint();
 	 PolygonePays PolygonePaysClic= new PolygonePays();
 	 for(PolygonePays poly:listePolygonePays){
 		 if(poly!=null && poly.contains(me)){
