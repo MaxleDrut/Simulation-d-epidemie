@@ -16,10 +16,21 @@ public class Monde {
 	 *Liaison des Payss est en pourcentage de population qui se déplace dans une autre Pays.*/
 	private static int[][] liaisonPays = null;
 	
+	
+	/* Définitions des variables utiles pour le décodage de la matrice d'adjacence des liaisons entre pays.  '
+	 * 
+	 * */
 	private double frontFaible, frontMoy, frontForte, hubFaible, hubFort;
-
+	
+	/* Constructeurs de Monde :
+	 * 	-> Création des pays 
+	 * 	-> Création de la matrice d'adjacence 
+	 * 	-> set des coéfs de '
+	 * */
 	public Monde() {
 		ArrayList<Pays> listeTempo = new ArrayList<Pays>();
+		
+		// Définitions des pays et de leurs populations. Il s'agit en réalité de regroupement de Pays et donc de populations. Il s'agit des chiffres de population de 2019
 		listeTempo.add(new Pays("Brazil",214273627));
 		listeTempo.add(new Pays("Argentina",81532875));
 		listeTempo.add(new Pays("Canada",37057765));
@@ -56,17 +67,27 @@ public class Monde {
 		listeTempo.add(new Pays("Italy",60351376));
 		listeTempo.add(new Pays("UK",70835881));
 	
+		// set des pourcentage de population sortant en fonction du type de liaisons. 
 		frontFaible = 0.0001;
 		frontMoy = 0.0005;
 		frontForte = 0.001;
 		hubFaible = 0.0002;
 		hubFort = 0.0006;
 
+		
+		/*Lecture du fichier matrice adj.csv
+		 *Permet de créer la matrice des liaisons
+		 *pour voir cette belle matrice : https://docs.google.com/spreadsheets/d/1V4MqJJkmcMB7VqllnY6_Yh6n_44gbsr8_WzuP3ZPz6s/edit#gid=0
+		 *avec 1225 cases !! 
+		 *La construction de cette matrice est subjective. 
+		 * */
 		int[][] liaisonTempo = new int[35][35];
 		try {
 			int i = 0;
 			BufferedReader br =new BufferedReader(new FileReader(new File("matrice adj.csv")));
+			
 			String l;
+			
 			while ((l= br.readLine()) !=null) {
 				String[] splitArray = null; //tableau de chaînes
 				String str = l;
@@ -78,7 +99,7 @@ public class Monde {
 				}
 				i++;
 			}
-			br.close(); // OBLIGATOIRE
+			br.close(); 
 		    } catch (IOException e) { e.printStackTrace(); }
 
 		listePays = listeTempo;
@@ -93,37 +114,50 @@ public class Monde {
 			}
 	}
 
-	//Lorsqu'elle est exécutée, cette population fait transiter les populations entre les pays
-	//Modifier la population -> Popu actuel - population + popu entrante
+	
+	/* Méthode déplacement : 
+	 * cette méthode se charge de faire transiter les populations entre les pays. 
+	 * Pour se faire, on dertermine la population sortant d'un pays. 
+	 * On tire ensuite au sort sa composition en sains, infectés, rétablis.
+	 * On traite chaque individu. 
+	 * puis on modifier les populations du pays une fois avoir determiner tout les déplacement en suivant ce calcul : Popu actuel - popu sortant+ popu entrante
+	 * */
 
 	public void deplacements() {
-		// 0 : sains 1 : infectés 2 : rétablis
+		// tableau permettant de concerver le nombre de sains : 0, infectés : 1, rétablis : 2 entrant et sortant dans chaque pays. 
 		int[][] SortiePopu = new int[listePays.size()][3];
 		int[][] EntreePopu = new int[listePays.size()][3];
 
-		for(int i = 0; i < SortiePopu.length ; i++) { // initialisation des tableaux a zero
-			for(int j = 0; j < SortiePopu[i].length ; j++) { // initialisation des tableaux a zero
+		// initialisation des tableaux a zero
+		for(int i = 0; i < SortiePopu.length ; i++) { 
+			for(int j = 0; j < SortiePopu[i].length ; j++) {
 				SortiePopu[i][j] = 0;
 				EntreePopu[i][j] = 0;
 			}
 		}
-		//-> Comptabiliser tout les entrants et sortants de chaques Pays
+		
+		
 		for(int i = 0; i < liaisonPays.length ; i++) {
 			int popuPays 	 = (int)(listePays.get(i).getPop());
 			int popuSains 	 = (int)(listePays.get(i).getSains());
 			int popuInfectes = (int)(listePays.get(i).getInfectes());
 			int popuRetablis = (int)(listePays.get(i).getRetablis());
-
-			//proportion pour aléatoire.
+			
+			//pour chaque pays on détermine le pourcentage de sains, infectés et rétablis. 
 			double propSains    = popuSains/(double)popuPays;
 			double propInfectes = popuInfectes/(double)popuPays;
 			double propRetablis = popuRetablis/(double)popuPays;
 
 			for(int j = 0; j < liaisonPays[0].length; j++) {
-				int MvtPopu = valeurDeplacement(i,j);
+				int MvtPopu = valeurDeplacement(i,j); // ValeurDeplacement revoit le nombre de personne se déplaçant. 
 				for(int k = 0; k < MvtPopu; k++) { 
-				//gestion d'une répartion aléatoire de l'état de santé de la population sortante/entrante en correspondance avec les proportions dans la Pays.
+					
+					 /* le tirage est dans l'intervalle ]0,1[ 
+					  * On compare ensuite avec les différentes proportions de sains, infectés et rétablis. 
+					  * Nous avons fait le choix de mettre un random pour mettre en évidence le caractère aléatoire de l'état de l'individu sortant
+					  **/				
 					double tirage = Math.random();
+					
 					if(tirage <= propSains) { //tirage sains
 						SortiePopu[i][0]++;
 						EntreePopu[j][0]++;
@@ -139,13 +173,14 @@ public class Monde {
 				}
 			}
 		}
-		//-> Set la nouvelle population
+		// Set la nouvelle population
 		int i = 0;
 		for(Pays p : listePays) {
 			int sain = ((int)(p.getSains())   + EntreePopu[i][0] - SortiePopu[i][0]);
 			int infect = ((int)(p.getInfectes()) + EntreePopu[i][1] - SortiePopu[i][1]);
 			int reta = ((int)(p.getRetablis()) + EntreePopu[i][2] - SortiePopu[i][2]);
-
+			
+			// s'assuré de la positivité des populations.
 			if (sain>0){
 				p.setSains(sain);
 			} else {
@@ -216,6 +251,7 @@ public class Monde {
 		long totInf = 0;
 		long totRet = 0;
 		long totmorts =0;
+		
 		for(Pays V : listePays) {
 			System.out.println(V.getNomPays() + " Sains  : " + V.getSains() + " Infectes : " +  V.getInfectes() + " Rétablis : " + V.getRetablis() + " morts :" + V.getMorts()+ " Population Total : " + V.getPop());
 			totSain +=  V.getSains() ;
@@ -244,7 +280,7 @@ public class Monde {
 		}
 		return r;
 	}
-
+	
 	public long[] getStatsMonde() {
 			long totSain = 0;
 			long totInf = 0;
