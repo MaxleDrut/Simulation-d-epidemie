@@ -24,7 +24,7 @@ public class FenetreStats extends JFrame {
         JPanel conteneurPrincipal= new JPanel(new BorderLayout());
         JPanel panneauBoutons= new JPanel();
 		this.t=t;
-		
+		//Ajouts des objets statistiques à la liste des stats souhaitées
 		objetsGraphe.add(new ObjetStatistique(vM.getPopTotaleJour(),vM.getJours(),"Population Totale",t));
 		objetsGraphe.add(new ObjetStatistique(vM.getRetablisJour(),vM.getJours(),"Nombre de retablis",t));
 		objetsGraphe.add(new ObjetStatistique(vM.getInfectesJour(),vM.getJours(),"Nombre d'infectes",t));
@@ -58,11 +58,11 @@ public class FenetreStats extends JFrame {
         this.add(conteneurPrincipal);
         this.setVisible(true);
     }
-
+	//Ajout d'un objet statistique sur le graphe
 	public void ajouterStats(ObjetStatistique oS) {
 		graphique.addSeries(oS.getNomAxe(),oS.getJours(),oS.getSerieStatistique());
 	}
-	
+	//Définition du temps d'affichage souhaité, pour zoomer ou dézoomer sur le graphe
     public void setTemps(int temps){
 		this.dispose();
 		new FenetreStats(vM,temps);

@@ -14,11 +14,6 @@ public class Pays {
 	private int morts;
 	private int jour;
 	protected int popInit;
-	
-	//Gestion du confinement élémentaire: l'efficacité du confinement va de 0 à 1, sachant que c'est un facteur multiplicatif
-	//de la virulence, appliqué si le pays est confiné. 0 est donc le plus efficace, 1, la valeur par défaut. Cette efficacité est la même 
-	//pour tous les pays 
-	private double efficaciteReaction;
 	private static LinkedList<Pays> listeDesPays = new LinkedList<Pays>();
 	
 	//STATISTIQUES 1 PAYS-
@@ -33,7 +28,7 @@ public class Pays {
 	public Pays(){ 
 		
 	}
-
+	//Constructeur prenant en charge un nom et une population initiale
 	public Pays(String n, int pT) {
 		nom = n;
 		popTotale = pT;
@@ -43,9 +38,8 @@ public class Pays {
 		retablis = 0;
 		jour=0;
 		listeDesPays.add(this);
-		efficaciteReaction=1;
 	}
-
+	//Getters
 	public LinkedList<Integer> getPopTotaleJour() { return popTotaleJour; }
 	public LinkedList<Integer> getInfectesJour()  {return infectesJour; }
 	public LinkedList<Integer> getSainsJour() { return sainsJour; }
@@ -67,7 +61,9 @@ public class Pays {
 	public String getNomPays(){ return nom; }
 	
 	public static LinkedList<Pays>getListePays(){return listeDesPays;}
-
+	
+	//Setters
+	
 	public void setSains(int s){
 		sains=s;
 	}
@@ -98,10 +94,11 @@ public class Pays {
 	}
 
 
-	//TODO : fait évoluer les paramètres de la Pays selon le modèle SIR et les propriétés du virus
+	//Fait évoluer les paramètres de la Pays selon le modèle SIR 
+	//et les propriétés du virus; actualise les données statistiques
 	public void propagation(Virus v) {
 		
-		int nouveauxCas=(int)(v.getVirulence()*efficaciteReaction*infectes*(int)sains/popTotale);
+		int nouveauxCas=(int)(v.getVirulence()*infectes*(int)sains/popTotale);
 		int nouveauxRetablissements= (int)(1.0/(v.getTMaladie())*infectes);
 		int nMorts=(int)(v.getLethalite()*infectes);
 		sains=sains-nouveauxCas;
@@ -112,10 +109,8 @@ public class Pays {
 		actualiserStats();
 	}
 	
-	public void setReactionPays(double r){
-		efficaciteReaction=r;
-	}
-	
+	//Methode pour mettre à jour les linked list des statistiques
+
 	public void actualiserStats(){
 		jour++;
 		popTotaleJour.add(popTotale);
@@ -125,6 +120,8 @@ public class Pays {
 		mortsJour.add(morts);
 		jours.add(jour);
 	}
+	
+	//Renvoie les stats de la ville.
 	public String toString(){
 		String message= "La Pays de "+nom+" a ces statistiques : \n PopulationTotale:"+popTotale+"\n Sains:"+sains+" \n Infectés:"+infectes+"\n Retablis:"+retablis+"\n Morts:"+morts;
 		return message;
