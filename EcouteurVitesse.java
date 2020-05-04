@@ -17,10 +17,10 @@ public class EcouteurVitesse implements ActionListener{
 		   simu.pauseTimer();
 		   break;
 		   case ("acc"):
-		   simu.changerVit(-1);
+		   simu.changerVitesse(-1);
 		   break;
 		   case ("ral"):
-		   simu.changerVit(1);
+		   simu.changerVitesse(1);
 		   break;
 		   default:
 	   }
