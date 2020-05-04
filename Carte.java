@@ -25,28 +25,23 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
-import java.util.LinkedList;
+import java.util.ArrayList;
 
 public class Carte extends JPanel implements MouseListener, MouseMotionListener{
 	private BufferedImage im;
 
 	private Simulation fen;
 
-	private int compteurPeintre = 0;
-	private int [] xPeintureEnCours = new int [1000];
-	private int [] yPeintureEnCours = new int [1000];
+	
 	private PolygonePays peintureEnCours;
 	private Monde monde;
 
 	private boolean passage;
 	private int largeurEcran =(int)Toolkit.getDefaultToolkit().getScreenSize().getWidth();
 	private int hauteurEcran = (int)Toolkit.getDefaultToolkit().getScreenSize().getHeight();
-	private int onAClique =-1; // Ce compteur permet de savoir à quelle étape on est de l'affichage ; -1 signifie qu'on est à l'initialisation
-
-	private double degreInfection;
 	private PolygonePays polygonePaysSurbrillance;
 	
-	private LinkedList<PolygonePays> listePolygonePays= new LinkedList<PolygonePays>();
+	private ArrayList<PolygonePays> listePolygonePays= new ArrayList<PolygonePays>(35);
 	
 	private PolygonePays CAmerica;
 	private PolygonePays Mexico;
@@ -125,12 +120,6 @@ public void paintComponent(Graphics g) {
 			g.fillPolygon(p);
 }
 }
-
-
-		if(compteurPeintre>1){
-			g.setColor(Color.BLACK);
-			g.drawPolygon(peintureEnCours);
-}
 	g.setColor(Color.BLACK);
 
 		for( PolygonePays p : listePolygonePays){
@@ -144,6 +133,10 @@ public void paintComponent(Graphics g) {
 }
 private void initComponents() {
 	monde=new Monde();
+	
+	/* Pour chaque PolygonePays, on va utiliser deux set de coordonnées en x et en y
+	* On adapte ces coordonnées à la taille de l'écran
+	* On ajoute chaque PolygonePays à la linkedList pour plus de simplicité au niveau affichage*/
 	int xBrazil [] = {383,380,380,380,379,368,360,347,337,344,347,354,376,382,387,391,394,401,406,408,410,406,407,411,414,416,419,421,424,427,430,435,436,441,447,453,455,460,467,472,474,475,475,472,467,461,461,461,459,455,452,447,440,432,422,422,420,416,411,404,397};
 	int yBrazil [] = {630,611,593,581,566,553,539,538,530,513,500,490,461,458,458,457,458,462,467,471,476,482,488,490,490,488,487,487,485,487,488,490,494,493,493,493,496,498,502,505,510,514,516,521,529,541,546,553,558,566,577,578,575,585,592,596,603,610,617,628,635};
 	diviserTableauX(xBrazil);
@@ -396,21 +389,17 @@ private void initComponents() {
     }
 
 
-    public void diviserTableauX( int [] t){                             //permet d'adapter le dessin des PolygonePayses à la taille de l'écran utilisé
+    public void diviserTableauX( int [] t){ //Permet d'adapter le dessin des PolygonePays à la largeur de l'écran utilisé
 		int width =1366;
 		for( int i = 0 ; i<t.length;i++){
 			t[i] = (int)(t[i]*1075/width);
-
-		}
-
+			}
 	}
-	public void diviserTableauY( int [] t){                             //permet d'adapter le dessin des PolygonePayses à la taille de l'écran utilisé
+	public void diviserTableauY( int [] t){ //Permet d'adapter le dessin des PolygonePays à la hauteur de l'écran utilisé
 		int height=768;
 		for( int i = 0 ; i<t.length;i++){
 			t[i] = (int) (t[i]*550/height);
-
 		}
-
 	}
 	/*On récupère le polygone cliqué parmi les polygones du JPanel.
 	 *Ensuite, soit la simulation est déjà en cours (mondeInfect est true) et donc l'on affiche la fenêtre XChart du pays,
@@ -432,12 +421,7 @@ private void initComponents() {
 		}
 	}
 
-    public void mouseReleased(MouseEvent e) {
-       onAClique = -1;
-    }
-
-    public void mouseEntered(MouseEvent e) {}
-	
+   
     
     public void mouseMoved(MouseEvent e){
 		Point me =e.getPoint();
@@ -468,17 +452,11 @@ private void initComponents() {
 		repaint();
 	}
 }
-	public void mouseDragged(MouseEvent e){
-		
-	}
 
-    public void mouseExited(MouseEvent e) {
-
-    }
-
-    public void mouseClicked(MouseEvent e) {
-
-	}
-
+	public void mouseReleased(MouseEvent e) {}
+    public void mouseEntered(MouseEvent e) {}
+	public void mouseDragged(MouseEvent e){}
+    public void mouseExited(MouseEvent e) {}
+    public void mouseClicked(MouseEvent e) {}
 
 }
