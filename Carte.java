@@ -35,13 +35,19 @@ public class Carte extends JPanel implements MouseListener, MouseMotionListener{
 	private int compteurPeintre = 0;
 	private int [] xPeintureEnCours = new int [1000];
 	private int [] yPeintureEnCours = new int [1000];
-	private PolygonePays PeintureEnCours;
+	private PolygonePays peintureEnCours;
 	private Monde monde;
 
+	private boolean passage;
+	private int largeurEcran =(int)Toolkit.getDefaultToolkit().getScreenSize().getWidth();
+	private int hauteurEcran = (int)Toolkit.getDefaultToolkit().getScreenSize().getHeight();
+	private int onAClique =-1; // Ce compteur permet de savoir à quelle étape on est de l'affichage ; -1 signifie qu'on est à l'initialisation
+
+	private double degreInfection;
+	private PolygonePays polygonePaysSurbrillance;
+	
 	private LinkedList<PolygonePays> listePolygonePays= new LinkedList<PolygonePays>();
-
-
-	private double degreInfection = 0.5;
+	
 	private PolygonePays CAmerica;
 	private PolygonePays Mexico;
 	private PolygonePays USA;
@@ -78,18 +84,7 @@ public class Carte extends JPanel implements MouseListener, MouseMotionListener{
 	private PolygonePays Iceland;
 	private PolygonePays Balkans;
 
-	private boolean passage;
-	private PolygonePays PolygonePaysSurbrillance;
-
-
-
-
-	private int largeurEcran =(int)Toolkit.getDefaultToolkit().getScreenSize().getWidth();
-	private int hauteurEcran = (int)Toolkit.getDefaultToolkit().getScreenSize().getHeight();
-	private int onAClique =-1;												// Ce compteur permet de savoir à quelle étape on est de l'affichage -1 signifie qu'on est à l'initialisation
-
-
-
+	
 public Carte( Simulation f , String s) {
 	super(new FlowLayout() );
 	fen = f;
@@ -121,7 +116,7 @@ public void paintComponent(Graphics g) {
 	for( PolygonePays p : listePolygonePays){
 		if(p!=null){
 			Color couleur = new Color((int) ((double) (p.getPays().getInfectes())/p.getPays().popInit*255),230 - (int) ((double)(p.getPays().getInfectes())/(p.getPays().popInit)*230), (int)((double) (p.getPays().getMorts())/p.getPays().popInit*255));
-		if(passage && p == PolygonePaysSurbrillance){
+		if(passage && p == polygonePaysSurbrillance){
 			g.setColor(couleur.brighter().brighter());
 		}else{
 			g.setColor( couleur);
@@ -134,7 +129,7 @@ public void paintComponent(Graphics g) {
 
 		if(compteurPeintre>1){
 			g.setColor(Color.BLACK);
-			g.drawPolygon(PeintureEnCours);
+			g.drawPolygon(peintureEnCours);
 }
 	g.setColor(Color.BLACK);
 
@@ -451,8 +446,8 @@ private void initComponents() {
 	if(p!=null && p.contains(me)){
 		
 		passage = true;
-		PolygonePaysSurbrillance = p;
-		fen.selectionPays(PolygonePaysSurbrillance.getPays());
+		polygonePaysSurbrillance = p;
+		fen.selectionPays(polygonePaysSurbrillance.getPays());
 		if(fen.mondeInfect==true) { //Si le monde est déjà infecté, on affiche les statistiques du monde
 			fen.afficherStatistiques();
 		} else { //Sinon on affiche les stats du pays à infecter

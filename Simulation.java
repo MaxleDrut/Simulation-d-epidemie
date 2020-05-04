@@ -311,7 +311,7 @@ public class Simulation extends JFrame implements ActionListener {
 		this.repaint();
 	}
 	
-	public void changerVit(int commande) { //Accélérer envoie -1, ralentir envoie +1
+	public void changerVitesse(int commande) { //Accélérer envoie -1, ralentir envoie +1
 		if(!(commande==1 && posActuelle==delais.length-1) && !(commande==-1 && posActuelle==0)) { //Pour éviter les outOfBounds
 			posActuelle+=commande;
 			temps.setDelay(delais[posActuelle]);
@@ -368,7 +368,7 @@ public class Simulation extends JFrame implements ActionListener {
 	 * 
 	 * Ah et oui ce ne sont pas vraiment des arrondis, plutôt une troncature...*/
 	 
-	public String arrondirValeur(long val) {
+	private String arrondirValeur(long val) {
 		long valEntiere;
 		long valDeci;
 		if(val<pDix(3)) { //Pas d'arrondi si moins de 1000
@@ -438,7 +438,7 @@ public class Simulation extends JFrame implements ActionListener {
 	}
 	
 	//La fonction Math.pow renvoie des double ! Cela empêche donc la division euclidienne. Renvoyons alors des int à la place.
-	public long pDix(long p) { 
+	private long pDix(long p) { 
 		if(p>=0) {
 			return (long) (Math.pow(10,p));
 		} else {

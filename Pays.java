@@ -21,16 +21,18 @@ public class Pays {
 	private double efficaciteReaction;
 	private static LinkedList<Pays> listeDesPays = new LinkedList<Pays>();
 	
-	//STATISTIQUES 1 PAYS
-	private LinkedList<Integer> PopTotaleJour=new LinkedList<Integer>();
-	private LinkedList<Integer> SainsJour=new LinkedList<Integer>();
-	private LinkedList<Integer> InfectesJour=new LinkedList<Integer>();
-	private LinkedList<Integer> RetablisJour=new LinkedList<Integer>();
-	private LinkedList<Integer> MortsJour=new LinkedList<Integer>();
-	private LinkedList<Integer> Jours=new LinkedList<Integer>();
+	//STATISTIQUES 1 PAYS-
+	private LinkedList<Integer> popTotaleJour=new LinkedList<Integer>();
+	private LinkedList<Integer> sainsJour=new LinkedList<Integer>();
+	private LinkedList<Integer> infectesJour=new LinkedList<Integer>();
+	private LinkedList<Integer> retablisJour=new LinkedList<Integer>();
+	private LinkedList<Integer> mortsJour=new LinkedList<Integer>();
+	private LinkedList<Integer> jours=new LinkedList<Integer>();
 	
 	//Par défaut, une Pays crée est vierge de l'épidémie en cours
-	public Pays(){}
+	public Pays(){ 
+		
+	}
 
 	public Pays(String n, int pT) {
 		nom = n;
@@ -44,12 +46,12 @@ public class Pays {
 		efficaciteReaction=1;
 	}
 
-	public LinkedList<Integer> getPopTotaleJour(){return PopTotaleJour;}
-	public LinkedList<Integer> getInfectesJour(){return InfectesJour;}
-	public LinkedList<Integer> getSainsJour(){return SainsJour;}
-	public LinkedList<Integer> getRetablisJour(){return RetablisJour;}
-	public LinkedList<Integer> getMortsJour(){return MortsJour;}
-	public LinkedList<Integer> getJours(){return Jours;}
+	public LinkedList<Integer> getPopTotaleJour() { return popTotaleJour; }
+	public LinkedList<Integer> getInfectesJour()  {return infectesJour; }
+	public LinkedList<Integer> getSainsJour() { return sainsJour; }
+	public LinkedList<Integer> getRetablisJour() { return retablisJour; }
+	public LinkedList<Integer> getMortsJour() { return mortsJour; }
+	public LinkedList<Integer> getJours() { return jours; }
 
 	public int getPop() { return popTotale; }
 	public int getSains() { return sains; }
@@ -63,6 +65,7 @@ public class Pays {
 	}
 		
 	public String getNomPays(){ return nom; }
+	
 	public static LinkedList<Pays>getListePays(){return listeDesPays;}
 
 	public void setSains(int s){
@@ -115,15 +118,15 @@ public class Pays {
 	
 	public void actualiserStats(){
 		jour++;
-		PopTotaleJour.add(popTotale);
-		SainsJour.add(sains);
-		InfectesJour.add(infectes);
-		RetablisJour.add(retablis);
-		MortsJour.add(morts);
-		Jours.add(jour);
+		popTotaleJour.add(popTotale);
+		sainsJour.add(sains);
+		infectesJour.add(infectes);
+		retablisJour.add(retablis);
+		mortsJour.add(morts);
+		jours.add(jour);
 	}
 	public String toString(){
-		String message= "La Pays de "+nom+" a ces statistiques là: \n PopulationTotale:"+popTotale+"\n Sains:"+sains+" \n Infectés:"+infectes+"\n Retablis:"+retablis+"\n Morts:"+morts;
+		String message= "La Pays de "+nom+" a ces statistiques : \n PopulationTotale:"+popTotale+"\n Sains:"+sains+" \n Infectés:"+infectes+"\n Retablis:"+retablis+"\n Morts:"+morts;
 		return message;
 	}
 
