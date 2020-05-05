@@ -325,13 +325,13 @@ private void initComponents() {
     public void diviserTableauX( int [] t){ //Permet d'adapter le dessin des PolygonePays à la largeur de l'écran utilisé
 		int width =1366;
 		for( int i = 0 ; i<t.length;i++){
-			t[i] = (int)(t[i]*1075/largeurEcran);
+			t[i] = (int)(t[i]*fen.simWidth/1466);
 			}
 	}
 	public void diviserTableauY( int [] t){ //Permet d'adapter le dessin des PolygonePays à la hauteur de l'écran utilisé
 		int height=768;
 		for( int i = 0 ; i<t.length;i++){
-			t[i] = (int) (t[i]*550/hauteurEcran);
+			t[i] = (int) (t[i]*fen.simHeight/886);
 		}
 	}
 	/*On récupère le polygone cliqué parmi les polygones du JPanel.

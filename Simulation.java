@@ -14,6 +14,8 @@ public class Simulation extends JFrame implements ActionListener {
 	
 	private int largeurEcran =(int)Toolkit.getDefaultToolkit().getScreenSize().getWidth();
 	private int hauteurEcran = (int)Toolkit.getDefaultToolkit().getScreenSize().getHeight();
+	protected int simHeight;
+	protected int simWidth;
 	private boolean timerOn;
 	private int[] delais = {50,100,200,500,1000,2000,5000};
 	private int posActuelle;
@@ -52,6 +54,8 @@ public class Simulation extends JFrame implements ActionListener {
 	public Simulation(int x, int y) {
 		super("Simulation d'epidemie");
 		
+		simWidth = 1100*largeurEcran/1366;
+		simHeight = 670*hauteurEcran/768;
 		posActuelle = delais.length-3;
 		temps = new Timer(1, this); //1 correspond ici au délai par défaut pour les changement de vitesse, et non le délai initial
 		delaiRef = delais[posActuelle];
@@ -275,14 +279,13 @@ public class Simulation extends JFrame implements ActionListener {
 	 * Cela va lancer la simu en remplaçant les JPanels */
 	public void creerVirus() {
 		maladie = new Virus(this.getVirulence(),this.getDuree(),this.getLethaliteJournaliere(),this.getNomVirus());
-		System.out.println(maladie);
-		System.out.println(largeurEcran +"  "+ hauteurEcran);		
+		System.out.println(maladie);		
 		this.remove(pCreationVirus);
 		this.remove(pLancerSimu);
 		this.add(pValInfect, BorderLayout.NORTH);
 		this.add(pCarte, BorderLayout.CENTER);
 		this.add(pAffInfect, BorderLayout.SOUTH);
-		this.setSize(1100*largeurEcran/1366,670*hauteurEcran/768 );
+		this.setSize(simWidth,simHeight);
 		this.setTitle("Simulation d'epidemie : "+maladie.getNom());
 		this.validate();
 		this.repaint();
