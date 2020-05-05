@@ -12,6 +12,8 @@ public class Simulation extends JFrame implements ActionListener {
 	protected int jourSimu;
 	protected boolean mondeInfect;
 	
+	private int largeurEcran =(int)Toolkit.getDefaultToolkit().getScreenSize().getWidth();
+	private int hauteurEcran = (int)Toolkit.getDefaultToolkit().getScreenSize().getHeight();
 	private boolean timerOn;
 	private int[] delais = {50,100,200,500,1000,2000,5000};
 	private int posActuelle;
@@ -274,12 +276,13 @@ public class Simulation extends JFrame implements ActionListener {
 	public void creerVirus() {
 		maladie = new Virus(this.getVirulence(),this.getDuree(),this.getLethaliteJournaliere(),this.getNomVirus());
 		System.out.println(maladie);
+		System.out.println(largeurEcran +"  "+ hauteurEcran);		
 		this.remove(pCreationVirus);
 		this.remove(pLancerSimu);
 		this.add(pValInfect, BorderLayout.NORTH);
 		this.add(pCarte, BorderLayout.CENTER);
 		this.add(pAffInfect, BorderLayout.SOUTH);
-		this.setSize(1100,670);
+		this.setSize(1100*largeurEcran/1366,670*hauteurEcran/768 );
 		this.setTitle("Simulation d'epidemie : "+maladie.getNom());
 		this.validate();
 		this.repaint();
