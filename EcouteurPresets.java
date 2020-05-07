@@ -11,6 +11,9 @@ public class EcouteurPresets implements ActionListener{
         nomPreset = n;
     }
 
+	/* Chaque bouton est identifié par le nom de sa maladie (covid, polio...)
+	 * Lorsque l'on clique sur un bouton, cela va récupérer les attributs de la maladie de la différence méthode et
+	 * aller mettre à jour les valeurs de létalité, virulence... dans la Simulation*/
     public void actionPerformed(ActionEvent e){
        double tab[];
        switch(nomPreset) {
