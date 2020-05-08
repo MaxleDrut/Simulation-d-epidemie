@@ -12,7 +12,7 @@ public class Simulation extends JFrame implements ActionListener {
 	protected int jourSimu;
 	protected boolean mondeInfect;
 	
-	private int largeurEcran =(int)Toolkit.getDefaultToolkit().getScreenSize().getWidth();
+	private int largeurEcran = (int) Toolkit.getDefaultToolkit().getScreenSize().getWidth();
 	private int hauteurEcran = (int)Toolkit.getDefaultToolkit().getScreenSize().getHeight();
 	protected int simHeight;
 	protected int simWidth;
@@ -56,6 +56,7 @@ public class Simulation extends JFrame implements ActionListener {
 		
 		simWidth = 1100*largeurEcran/1366;
 		simHeight = 670*hauteurEcran/768;
+		
 		posActuelle = delais.length-3;
 		temps = new Timer(1, this); //1 correspond ici au délai par défaut pour les changement de vitesse, et non le délai initial
 		delaiRef = delais[posActuelle];
@@ -63,7 +64,7 @@ public class Simulation extends JFrame implements ActionListener {
 		timerOn = false;
 		jourSimu = 0;
 		zone = new Monde();
-		paysSelectionne = null; // Par défaut, on ne passe le curseur sur aucun pays.
+		paysSelectionne = null; // Par défaut, on ne passe le curseur sur aucun pays. Est utilisé pour dire quel pays on sélectionne dans les stats.
 		mondeInfect = false; // Deviendra true lorsque l'on aura infecté au moins une pers dans le monde.
 		
 		//Panel d'affichage de l'infection initiale
@@ -146,6 +147,7 @@ public class Simulation extends JFrame implements ActionListener {
 		pSliders = new JPanel(new GridLayout(9,1));
 		titSliders = new Label("Definition des parametres du virus");
 
+		//On définit des changeListeners aux JSliders, pour mettre à jour l'affichage des valeurs sélectionné lorsqu'on les bouge.
 		sVirulence = new JSlider(0,100,50);
 		valVirulence = new Label("Indice de virulence : "+sVirulence.getValue()/100.0);
 		sVirulence.setPaintTicks(true);
@@ -154,7 +156,7 @@ public class Simulation extends JFrame implements ActionListener {
 		sVirulence.addChangeListener(new ChangeListener() {
 			public void stateChanged(ChangeEvent event) {
 				double viru =((JSlider)event.getSource()).getValue()/100.0;
-				valVirulence.setText("Incice de virulence : "+viru);
+				valVirulence.setText("Indice de virulence : "+viru);
 			}
 		});
 		
@@ -170,13 +172,13 @@ public class Simulation extends JFrame implements ActionListener {
 		});
 		
 		sLethalite = new JSlider(0,1000,5);
-		valLethalite = new Label("Taux de lethalite : "+sLethalite.getValue()/10.0+"%");
+		valLethalite = new Label("Taux de letalite : "+sLethalite.getValue()/10.0+"%");
 		sLethalite.setPaintTicks(true);
 		sLethalite.setMinorTickSpacing(50);
 		sLethalite.setMajorTickSpacing(100);
 		sLethalite.addChangeListener(new ChangeListener() {
 			public void stateChanged(ChangeEvent event) {
-				valLethalite.setText("Taux de lethalite : "+((JSlider)event.getSource()).getValue()/10.0+"%");
+				valLethalite.setText("Taux de letalite : "+((JSlider)event.getSource()).getValue()/10.0+"%");
 			}
 		});
 		
@@ -202,7 +204,7 @@ public class Simulation extends JFrame implements ActionListener {
 		pSliders.setBorder(BorderFactory.createLineBorder(Color.black));
 		
 		//Sous-panel des presets :
-		
+		//Les presets sont organisés selon une BoxLayout centrée.
 		pPresets = new JPanel();
 		pPresets.setLayout(new BoxLayout(pPresets, BoxLayout.Y_AXIS));
 		
@@ -291,6 +293,7 @@ public class Simulation extends JFrame implements ActionListener {
 		this.repaint();
 	}
 	
+	//Permet à l'utilisateur de terminer la phase d'infection et de passer à la phase de simulation.
 	public void validerInfection() {
 		long[] stats = zone.getStatsMonde();
 		if(stats[1]!=0) { //Il faut qu'il y ait au moins 1 infecté dans le monde pour lancer la simu !
@@ -317,8 +320,12 @@ public class Simulation extends JFrame implements ActionListener {
 		this.repaint();
 	}
 	
-	public void changerVitesse(int commande) { //Accélérer envoie -1, ralentir envoie +1
-		if(!(commande==1 && posActuelle==delais.length-1) && !(commande==-1 && posActuelle==0)) { //Pour éviter les outOfBounds
+	/*Les vitesses sont gérees par le tableau d'int[] délais. Il contient la liste des différents délais (en ms) proposés au timer.
+	 *La variable posActuelle conserve quel délai du tableau est actuellement sélectionné.
+	 *L'écouteurVitesse va envoyer -1 si l'on clique sur accélérer, on va donc descendre vers un délai plus rapide.
+	 *Il enverra donc +1 pour ralentir, montant vers un délai plus lent.*/
+	public void changerVitesse(int commande) {
+		if(!(commande==1 && posActuelle==delais.length-1) && !(commande==-1 && posActuelle==0)) { //Pour éviter les outOfBounds.
 			posActuelle+=commande;
 			temps.setDelay(delais[posActuelle]);
 			if(timerOn) {
@@ -328,7 +335,8 @@ public class Simulation extends JFrame implements ActionListener {
 		}
 	}
 	
-	/* Rapport des vitesse = 1/rapport des delais = delai de reference/delai actuel
+	/* Affiche la vitesse relative à la vitesse de base (x1 = 1 jours/seconde donc délaiRef = 1000ms).
+	 * Rapport des vitesse = 1/rapport des delais = delai de reference/delai actuel
 	 * Donc vitesse x2 veut dire délai 2 fois plus faible que celui de référence
 	 */
 	
@@ -350,6 +358,7 @@ public class Simulation extends JFrame implements ActionListener {
 	 * De plus, on met aussi à jour les chiffres du label.
 	 * Si l'utilisateur a sélectionné un pays dans Carte, on ira afficher ce pays.
 	 * Sinon, on affiche le monde par défaut.*/
+	 
 	public void afficherStatistiques() {
 		long[] stats = new long[4];
 		if(paysSelectionne == null) {
