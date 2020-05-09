@@ -37,7 +37,6 @@ public class Simulation extends JFrame implements ActionListener {
 	
 	private JSlider sVirulence,sDuree,sLethalite;
 	
-	private TextField afficheurVit, afficheurDate;
 	private TextField nomDuVirus;
 	
 	private Label valVirulence, valDuree, valLethalite;
@@ -48,6 +47,7 @@ public class Simulation extends JFrame implements ActionListener {
 	private Label entetePaysStats, nomPaysStats;
 	private Label[] separateurs;
 	private Label infectIni;
+	private Label afficheurVit, afficheurDate;
 	
 	private Font gras;
 	
@@ -82,11 +82,9 @@ public class Simulation extends JFrame implements ActionListener {
 		//Panel de commande
 		pCommande = new JPanel(new BorderLayout());
 		pBoutonsCommande = new JPanel();
-		afficheurVit = new TextField();
-		afficheurVit.setEditable(false);
+		afficheurVit = new Label();
 		afficherVitesse();
-		afficheurDate = new TextField();
-		afficheurDate.setEditable(false);
+		afficheurDate = new Label();
 		afficherDate();
 		
 		bPause = new JButton("Start");
