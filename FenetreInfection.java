@@ -9,6 +9,7 @@ public class FenetreInfection extends JFrame{
 	private TextField nbInfect;
 	private JButton validerInfect;
 	
+	//Fenêtre qui s'ouvre quand on souhaite infecter un pays au début de la simulation.
 	public FenetreInfection(Pays p) {
 		super("Infecter le pays : "+p.getNomPays());
 		pays = p;
@@ -27,9 +28,9 @@ public class FenetreInfection extends JFrame{
 		this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 	}
 	
+	//Permet de récupérer la valeur du TextField où l'on renseigne le nombre de personnes à infecter.
 	public int getValeurInfect() {
 		if(nbInfect.getText().equals("max") || nbInfect.getText().equals("Max") || nbInfect.getText().equals("MAX")) { //Prise en compte des trois écritures possibles de max
-			System.out.println("Bloup");
 			return pays.getSains();
 		}
 		try { 

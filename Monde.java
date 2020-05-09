@@ -220,7 +220,9 @@ public class Monde {
 		}
 	}
 
-	/*Pourquoi utilise-t-on des long ?
+	/* La méthode afficheMonde était utilisée pour nos premiers tests : elle imprimait l'état de chaque pays (infectés, morts...)
+	 * chaque jour, ainsi que celui du monde. Elle n'est pas utilisée dans la version finale.
+	 * Pourquoi utilise-t-on des long ?
 	 *La réponse : on fait appel à la somme des populations de tous les pays.
 	 *En 2020, la population mondiale dépasse les 7.5 milliards d'habitants. Or, la valeur max d'un int est d'environ 2.1 milliards.
 	 *Il faut donc passer en long ! */
@@ -261,6 +263,9 @@ public class Monde {
 		return r;
 	}
 	
+	/*Renvoie un tableau avec dans l'ordre le nombre de sains, d'infectés, de rétablis et de morts.
+	 *On l'utilise pour afficher les statistiques du monde dans simulation.*/
+	 
 	public long[] getStatsMonde() {
 			long totSain = 0;
 			long totInf = 0;

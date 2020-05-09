@@ -53,6 +53,7 @@ public class Pays {
 	public int getRetablis() { return retablis; }
 	public int getMorts() { return morts; }
 
+	//Utilisé pour les statistiques de Simulation, renvoie un tableau avec dans l'ordre les sains, infectés, rétablis et morts du pays.
 	public long[] getStatsPays() {
 		long[] stats = {sains,infectes,retablis,morts};
 		return stats;
@@ -80,7 +81,8 @@ public class Pays {
 		popTotale=total;
 	}
 
-	/* Si le nombre renseigné de personne à infecter est supérieur à la population totale
+	/* Méthode utilisée au moment du choix des pays à infecter, elle rajoute i infectés au pays et retire i sains. 
+	 * Si le nombre renseigné de personne à infecter est supérieur à la population totale
 	 * Alors on va simplement infecter tout le pays !*/
 	
 	public void infectionInitale(int i) {
@@ -121,7 +123,7 @@ public class Pays {
 		jours.add(jour);
 	}
 	
-	//Renvoie les stats de la ville.
+	//Renvoie les statistiques du pays, utilisé pour les premiers tests mais désormais ignoré.
 	public String toString(){
 		String message= "La Pays de "+nom+" a ces statistiques : \n PopulationTotale:"+popTotale+"\n Sains:"+sains+" \n Infectés:"+infectes+"\n Retablis:"+retablis+"\n Morts:"+morts;
 		return message;
