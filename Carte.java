@@ -37,7 +37,9 @@ public Carte( Simulation f , String s) {
 
 public void paintComponent(Graphics g) {
 
-	Graphics2D g1 = (Graphics2D) g;
+	Graphics2D g1 = (Graphics2D) g; /* La méthode setStroke permet de changer la taille du trait utiliser pour dessiner
+									*Cependant cette méthode ne s'applique que sur le type Graphics2D c'est pourquoi il faut 
+									* réaliser un downcast sur g*/
 	BasicStroke line = new BasicStroke(3.0f);
 	g1.setStroke(line);
 
@@ -46,6 +48,7 @@ public void paintComponent(Graphics g) {
 
 	for( PolygonePays p : listePolygonePays){
 		if(p!=null){
+			//la variable couleur va changer de valeur selon la population infectée et le nombre de mort
 			Color couleur = new Color((int) ((double) (p.getPays().getInfectes())/p.getPays().popInit*255),230 - (int) ((double)(p.getPays().getInfectes())/(p.getPays().popInit)*230), (int)((double) (p.getPays().getMorts())/p.getPays().popInit*255));
 		if(passage && p == polygonePaysSurbrillance){
 			g.setColor(couleur.brighter().brighter());
@@ -367,6 +370,7 @@ public void mouseMoved(MouseEvent e){
 			} else { //Sinon on affiche les stats du pays à infecter
 				fen.afficherInfection();
 			}
+			validate();
 			repaint();
 			i++;
 		}
@@ -379,6 +383,7 @@ public void mouseMoved(MouseEvent e){
 		} else {
 			fen.afficherInfection();
 		}
+		validate();
 		repaint();
 	}
 }
