@@ -1,0 +1,35 @@
+Brazil,214623627
+Argentina,81532875
+Canada,37757765
+CAmerica,49280971
+Mexico,152044222
+USA,326687501
+Equateur,127592493
+Greenland,56025
+North Africa,194924933
+Sahel,391976271
+Ethiopia,277955205
+Congo,267414907
+South Africa,109661306
+Madagascar,27191452
+Arabia,164605681
+India,1795782929
+Kazakstan,18632200
+China,1480768479
+S.E Asia,270361468
+Turkey,99546424
+Central Asia,170166960
+Japon,149610903
+Indonesia,387872081
+New Zealand,5534698
+Australia,25464116
+Independant Nation of Reunion Island,2125434
+Russia,148123520
+Northen Lands,26921765
+Balkans,64658052
+Islande,364134
+Center Europe,224487353
+France,67101550
+Spain,57377013
+Italy,60351376
+UK,70835881

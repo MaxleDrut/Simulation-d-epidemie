@@ -30,42 +30,22 @@ public class Monde {
 	public Monde() {
 		ArrayList<Pays> listeTempo = new ArrayList<Pays>();
 		
-		// Définitions des pays et de leurs populations. Il s'agit en réalité de regroupement de Pays et donc de populations. Il s'agit des chiffres de population de 2019
-		listeTempo.add(new Pays("Brazil",214273627));
-		listeTempo.add(new Pays("Argentina",81532875));
-		listeTempo.add(new Pays("Canada",37057765));
-		listeTempo.add(new Pays("CAmerica",49280971));
-		listeTempo.add(new Pays("Mexico",152044222));
-		listeTempo.add(new Pays("USA",326687501));
-		listeTempo.add(new Pays("Equateur",127592493));
-		listeTempo.add(new Pays("Greenland",56025));
-		listeTempo.add(new Pays("North Africa",194924933));
-		listeTempo.add(new Pays("Sahel",391976271));
-		listeTempo.add(new Pays("Ethiopia",272085235));
-		listeTempo.add(new Pays("Congo",267414907));
-		listeTempo.add(new Pays("South Africa",109661306));
-		listeTempo.add(new Pays("Madagascar",27191452));
-		listeTempo.add(new Pays("Arabia",164605681));
-		listeTempo.add(new Pays("India",1795782929));
-		listeTempo.add(new Pays("Kazakstan",18632200));
-		listeTempo.add(new Pays("China",1480768479));
-		listeTempo.add(new Pays("S.E Asia",270361468));
-		listeTempo.add(new Pays("Turkey",99546424));
-		listeTempo.add(new Pays("Central Asia",170166960));
-		listeTempo.add(new Pays("Japon",149610903));
-		listeTempo.add(new Pays("Indonesia",387872081));
-		listeTempo.add(new Pays("New Zealand",5534698));
-		listeTempo.add(new Pays("Australia",25464116));
-		listeTempo.add(new Pays("Independant Nation of Reunion Island",2125434));
-		listeTempo.add(new Pays("Russia",148123520));
-		listeTempo.add(new Pays("Northen Lands",26921765));
-		listeTempo.add(new Pays("Balkans",64658052));
-		listeTempo.add(new Pays("Islande",364134));
-		listeTempo.add(new Pays("Center Europe",224487353));
-		listeTempo.add(new Pays("France",67101550));
-		listeTempo.add(new Pays("Spain",57377013));
-		listeTempo.add(new Pays("Italy",60351376));
-		listeTempo.add(new Pays("UK",70835881));
+		try {
+			int i = 0;
+			BufferedReader br =new BufferedReader(new FileReader(new File("listepays.txt")));
+			
+			String l;
+			/* lecture du fichier listepays.txt
+			 * permet de créer la liste des pays sous forme de ArrayList<Pays>
+			 * */ 
+			while ((l= br.readLine()) !=null) {
+				String[] splitArray = null; //tableau de chaînes
+				String str = l;
+				splitArray = str.split(",");
+				listeTempo.add(new Pays(splitArray[0],Integer.parseInt(splitArray[1])));
+				
+		}br.close(); 
+		} catch (IOException e) { e.printStackTrace(); }
 	
 		// set des pourcentage de population sortant en fonction du type de liaisons. 
 		frontFaible = 0.0001;
