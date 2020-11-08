@@ -1,7 +1,9 @@
 # Simulation-d-epidemie
 
 Simulation dynamique et graphique d'une épidémie selon le modèle SIR réalisée en Java.
-Pour utiliser le programme, compiler et exécuter la classe Simulation.java
+Pour utiliser le programme, compiler et exécuter la classe Simulation.java avec la bibliothèque XChart :
+> javac -cp ".;xchart-3.5.2.jar" "Simulation.java"
+> java -cp ".;xchart-3.5.2.jar" "Simulation"
 
 UML de classe : https://drive.google.com/file/d/1SSXwitXbaTq3B2QnlS0_1cqFGZRYUayi/view?usp=sharing
 Projet d'interface graphique : https://drive.google.com/file/d/1jBO4sy8Vg6tRfVczISIA4q0A7qWagcxY/view?usp=sharing
