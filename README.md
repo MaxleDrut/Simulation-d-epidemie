@@ -1,18 +1,15 @@
 # Simulation-d-epidemie
 
-Simulation dynamique d'une épidémie selon le modèle SIR réalisée en Java.
+Simulation dynamique et graphique d'une épidémie selon le modèle SIR réalisée en Java.
+Pour utiliser le programme, compiler et exécuter la classe Simulation.java
 
-J'espère que le coronavirus va gagner.
+UML de classe : https://drive.google.com/file/d/1SSXwitXbaTq3B2QnlS0_1cqFGZRYUayi/view?usp=sharing
+Projet d'interface graphique : https://drive.google.com/file/d/1jBO4sy8Vg6tRfVczISIA4q0A7qWagcxY/view?usp=sharing
+Matrice d'adjacence mondiale : https://docs.google.com/spreadsheets/d/1V4MqJJkmcMB7VqllnY6_Yh6n_44gbsr8_WzuP3ZPz6s/edit?usp=sharing
+Le modèle SIR : https://interstices.info/modeliser-la-propagation-dune-epidemie/
+Photos de chats : https://pixabay.com/fr/images/search/cat/ 
 
-Lien vers l'UML de classe : https://drive.google.com/file/d/1SSXwitXbaTq3B2QnlS0_1cqFGZRYUayi/view?usp=sharing
+By Dimitri LAZAREVIC, Maxence DRUTEL, Nicolas LENGANEY et Vincent LEBON
 
-Lien interface graphique : https://drive.google.com/file/d/1jBO4sy8Vg6tRfVczISIA4q0A7qWagcxY/view?usp=sharing
-
-Lien matrice adj https://docs.google.com/spreadsheets/d/1V4MqJJkmcMB7VqllnY6_Yh6n_44gbsr8_WzuP3ZPz6s/edit?usp=sharing
-
-Lien vers le modèle SIR : https://interstices.info/modeliser-la-propagation-dune-epidemie/
-
-Lien vers des photos de chats : https://pixabay.com/fr/images/search/cat/ 
-
-By Dimitri, Maxence, Nicolas et Vincent 
+INSA LYON - 2020
 
